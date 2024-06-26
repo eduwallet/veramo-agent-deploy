@@ -1,0 +1,25 @@
+# Builder stage
+FROM node:lts-bookworm AS builder
+SHELL ["/bin/bash", "-c"]
+RUN npm -g install pnpm && SHELL=bash pnpm setup && source /root/.bashrc && pnpm add -g pnpm
+RUN pnpm add typescript tslib
+WORKDIR /opt/app
+
+COPY /. .
+RUN rm -rf /root/.local/share/pnpm/store
+ENV GENERATE_SOURCEMAP=false
+RUN pnpm install -r
+RUN pnpm build
+
+# Final stage
+FROM node:lts-bookworm
+ARG PACKAGE_PATH
+ARG NODE_SCRIPT
+ENV NODE_SCRIPT=${NODE_SCRIPT}
+ENV GENERATE_SOURCEMAP=false
+COPY --from=builder /opt/app/${PACKAGE_PATH} /opt/app/${PACKAGE_PATH}
+# package node_modules has symlinks to root node_modules
+COPY --from=builder /opt/app/node_modules /opt/app/node_modules
+
+WORKDIR /opt/app/${PACKAGE_PATH}
+ENTRYPOINT npm run-script ${NODE_SCRIPT}

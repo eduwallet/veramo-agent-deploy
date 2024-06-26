@@ -1,0 +1,30 @@
+---
+- name: Ensure Docker directory exists
+  file:
+    state: directory
+    path: "{{ docker.dir }}"
+    mode: 0755
+  become: yes
+
+- name: Install Agent configuration
+  include_tasks: agent.yml
+
+- name: Push Dockerfile
+  template:
+    src: dockerfile.j2
+    dest: "{{ docker.dir }}/Dockerfile"
+  become: yes
+
+- name: Push Docker Env file
+  template:
+    src: docker.env.j2
+    dest: "{{ docker.dir }}/.env"
+  become: yes
+
+
+- name: Push Docker Compose configuration
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ docker.dir }}/docker-compose.yml"
+  become: yes
+

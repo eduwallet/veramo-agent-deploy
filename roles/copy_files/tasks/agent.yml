@@ -1,0 +1,19 @@
+---
+- name: Ensure the Agent directory exists
+  file:
+    state: directory
+    path: "{{ agent.dir }}"
+    mode: 0755
+  become: yes
+
+- name: Push Agent Env file
+  template:
+    src: agent.env.j2
+    dest: "{{ agent.dir }}/.env"
+  become: yes
+
+- name: Overwrite the metadata
+  template:
+    src: issuer_meta.json.j2
+    dest: "{{ agent.dir }}/conf/{{ ecosystem }}/oid4vci_metadata/{{ ecosystem }}.json"
+  become: yes

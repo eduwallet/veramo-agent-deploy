@@ -1,0 +1,6 @@
+---
+- name: Run the docker containers using docker-compose
+  community.docker.docker_compose_v2:
+    project_src: "{{ docker.dir }}"
+    project_name: eduwallet_agent
+    state: present
