@@ -36,16 +36,9 @@ services:
 
   agent:
     build:
-      # the context is set to the root to allow access to each package source files
-      context: "{{ oid4vc.dest }}"
       dockerfile: "{{ docker.dir }}/Dockerfile"
-      args:
-        PACKAGE_PATH: {{ agent.path }}
-        NODE_SCRIPT: {{ agent.script }}
     volumes:
-      # this maps the specific configurations assembled for the instance
-      - "{{ agent.dir }}/conf:/opt/app/{{ agent.path }}/conf:ro"
-      - "{{ agent.dir }}/.env.local:/opt/app/{{ agent.path }}/.env.local:ro"
+      - "{{ agent.dir }}:/opt/app"
     ports:
       - {{ agent.port }}:5000
     restart: unless-stopped
@@ -72,7 +65,7 @@ services:
     networks:
       - eduwallet_agent
     ports:
-      - ${DB_PORT}:5432
+      - {{ database.port }}:5432
     volumes:
       - type: bind
         source: {{ database.dir }}
@@ -80,6 +73,7 @@ services:
       - type: bind
         source: {{ database.scripts }}
         target: /docker-entrypoint-initdb.d
+    # no Traefik configuration, the database is not publicly available
 
 networks:
   eduwallet_agent:

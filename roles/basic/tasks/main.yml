@@ -13,23 +13,26 @@
     name: docker
     description: Docker CentOS repo
     baseurl: https://download.docker.com/linux/centos/$releasever/$basearch/stable
+  become: yes
 
 - name: Update installation cache
   ansible.builtin.dnf:
     name: "*"
     state: latest
     update_cache: true
+  become: yes
 
 - name: Install basic applications
   ansible.builtin.dnf:
     name: "{{ basic_applications }}"
     state: present
+  become: yes
 
 - name: Create base directory
   file:
     state: directory
     path: "{{ basedir }}"
-    mode: 0755
+    mode: 0777
   become: yes
 
 - name: Start the Docker daemon
