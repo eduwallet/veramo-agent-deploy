@@ -1,0 +1,79 @@
+services:
+{% if traefik.enabled %}
+  traefik:
+    image: "traefik:v3.0"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+{% if traefik.secure == 'true' %}
+      # {{ traefik.secure }}
+      - "--entryPoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.myresolver.acme.email={{ traefik.postmaster }}"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+{% else %}
+      - "--entryPoints.web.address=:80"
+{% endif %}
+    ports:
+{% if traefik.secure == 'true' %}
+      - 443:443
+{% else %}
+      - 80:80
+{% endif %}
+{% if traefik.expose %}
+      - 8080:8080
+{% endif %}
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+{% if traefik.secure %}
+      - "./letsencrypt:/letsencrypt"
+{% endif %}
+{% endif %}
+
+  agent:
+    build:
+      dockerfile: "{{ docker.dir }}/Dockerfile"
+    volumes:
+      - "{{ agent.dir }}:/opt/app"
+    ports:
+      - {{ agent.port }}:5000
+    restart: unless-stopped
+{% if traefik.enabled %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.agent.rule=Host(`{{ agent.hostname }}`)"
+{% if traefik.secure == 'true' %}
+      - "traefik.http.routers.agent.entrypoints=websecure"
+      - "traefik.http.routers.agent.tls.certresolver=myresolver"
+{% else %}
+      - "traefik.http.routers.agent.entrypoints=web"
+{% endif %}
+{% endif %}
+
+  db:
+    image: postgres:16-bookworm
+    restart: unless-stopped
+    shm_size: 128mb
+    environment:
+      - POSTGRES_DB={{ database.name }}
+      - POSTGRES_USER={{ database.user }}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    networks:
+      - eduwallet_agent
+    ports:
+      - {{ database.port }}:5432
+    volumes:
+      - type: bind
+        source: {{ database.dir }}
+        target: /var/lib/pgsql/data
+      - type: bind
+        source: {{ database.scripts }}
+        target: /docker-entrypoint-initdb.d
+    # no Traefik configuration, the database is not publicly available
+
+networks:
+  eduwallet_agent:

@@ -1,0 +1,88 @@
+#!/bin/bash
+
+NAME=$1
+DOHELP="0"
+DOENCRYPT="0"
+FILE=""
+VAULTID='./ansible_vault_id'
+
+case "$NAME" in
+"-h")
+    DOHELP="1"
+    ;;
+"--help")
+    DOHELP="1"
+    ;;
+"-d")
+    # see if we need to parse the file
+    FILE=$2
+    FILE2="/tmp/.vlt.$$"
+    if [[ "x$FILE" = "x" ]]
+    then
+        # read from stdin
+        #echo "reading from stdin"
+        FILE="/tmp/.vlt2.$$"
+        cat > $FILE
+    fi
+
+    cat $FILE | grep -v "!vault" | sed 's/^ *//' > $FILE2
+    #cat $FILE2
+    OUTPUT=`cat $FILE2 | ansible-vault decrypt --vault-password-file $VAULTID --output - 2>/dev/null`
+    echo "$OUTPUT"
+    rm -f /tmp/.vlt.$$ /tmp/.vlt2.$$
+    ;;
+"-f")
+    FILE=$2
+    DOENCRYPT="1"
+    ;;
+*)
+    DOENCRYPT="1"
+    ;;
+esac
+
+if [[ "$DOHELP" = "1" ]]
+then
+    echo "Ansible Vault Encryption"
+    echo ""
+    echo "usage:"
+    echo "  Encrypt a string: encrypt <string>"
+    echo "  Encrypt a file: encrypt -f <file>"
+    echo "  Encrypt stdin: encrypt"
+    echo "  Decrypt a file: encrypt -d <file>"
+    echo "  Decrypt stdin: encrypt -d"
+    echo ""
+    echo "Normal usage: "
+    echo "encrypt <string> > <file>"
+    echo "encrypt -d <file>"
+    exit 0
+fi
+
+if [[ "$DOENCRYPT" = "1" ]]
+then
+    FILE2="/tmp/.vlt.$$"
+    FILE3="/tmp/.vlt2.$$"
+    if [[ "x$NAME" = "x" ]]
+    then
+        # encrypt a file
+        #echo "reading from stdin"
+        cat > $FILE3
+        FILE=$FILE3
+    fi
+    
+    if [[ ! "x$FILE" = "x" ]]
+    then
+        #echo "encrypting a file"
+        ansible-vault encrypt $FILE --vault-password-file $VAULTID --output - > $FILE2 2>/dev/null
+    else
+        echo "$NAME" | ansible-vault encrypt_string --vault-password-file $VAULTID 2>/dev/null | grep -v "vault" > $FILE2        
+    fi   
+    #cat $FILE2
+    # keep the first line
+    HEADER=`head -1 $FILE2 | sed 's/^ *//'`
+    # remove newlines in the rest
+    cat $FILE2 | grep -v "ANSIBLE_VAULT" > $FILE3
+    REST=`cat $FILE3 | sed 's/^ *//' | sed ':a;N;$!ba;s/\n//g'`
+        
+    echo -e "$HEADER\n$REST"
+    rm -f $FILE3 $FILE2
+fi

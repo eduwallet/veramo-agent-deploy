@@ -1,0 +1,43 @@
+---
+- name: Download Docker GPG key
+  get_url:
+    url: https://download.docker.com/linux/centos/gpg
+    dest: /tmp/gpg.key
+
+- name: Install Docker GPG key
+  shell: rpm --import /tmp/gpg.key
+  become: yes
+
+- name: Add Docker repository
+  ansible.builtin.yum_repository:
+    name: docker
+    description: Docker CentOS repo
+    baseurl: https://download.docker.com/linux/centos/$releasever/$basearch/stable
+  become: yes
+
+- name: Update installation cache
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+    update_cache: true
+  become: yes
+
+- name: Install basic applications
+  ansible.builtin.dnf:
+    name: "{{ basic_applications }}"
+    state: present
+  become: yes
+
+- name: Create base directory
+  file:
+    state: directory
+    path: "{{ basedir }}"
+    mode: 0777
+  become: yes
+
+- name: Start the Docker daemon
+  service:
+    name: docker.service
+    state: started
+    enabled: yes
+  become: yes

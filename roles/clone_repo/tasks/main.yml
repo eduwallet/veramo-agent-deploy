@@ -1,0 +1,8 @@
+---
+- name: Clone the Agent repository
+  ansible.builtin.git:
+    repo: "{{ sources.agent.repo }}"
+    dest: "{{ agent.dir }}"
+    version: "{{ sources.agent.version }}"
+    force: yes
+

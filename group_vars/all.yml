@@ -1,0 +1,47 @@
+basic_applications:
+  - nano
+  - git
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-compose-plugin
+
+basedir: /opt/agent
+
+traefik:
+  enabled: true
+  secure: "{{ enablehttps }}"
+  postmaster: certbot@muisit.nl
+  expose: true
+
+sources:
+  agent:
+    repo: https://github.com/muisit/veramo-agent.git
+    version: HEAD
+
+docker:
+  dir: "{{ basedir }}/docker"
+
+agent:
+  dir: "{{ basedir }}/agent"
+  script: "start:dev"
+  port: 5000
+  hostname: "agent.{{ basedomain }}"
+  host: "{{ protocol }}://agent.{{ basedomain }}"
+  encryptionkey: secret
+  signingkey: secret
+
+database:
+  dir: "{{ basedir }}/database"
+  port: 5001
+  user: postgres
+  name: agent
+  scripts: "{{ basedir }}/agent/scripts/dbinit"
+  password: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            66313864663833396432616161393030656162313539613734653662383837313130643063343038646662
+            3262663937313933393130333263653234313837650a363366613361313731346430303133643231386161
+            30623462343739316531333161303462653137323065633633646534303233626232613561656238656564
+            0a653839386231333366353361633032636262353333306132393437313032653664643337623734323366
+            61393161386436353736343836353162616338353930326131363162323832393463343863633332656237
+            3764396162346236623534

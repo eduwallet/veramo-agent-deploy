@@ -1,0 +1,37 @@
+#!/bin/bash
+set -e
+
+ansible-galaxy collection install community.docker
+
+PROV="agent"
+INV="eduwallet"
+if [[ ! "x$1" = "x" ]]
+then
+    INV=$1
+    shift
+fi
+
+declare -a ansible_args
+#ansible_args+=("-vvv")
+
+while [ $# -gt 0 ]
+do
+    arg=$1
+    shift
+    ansible_args+=($arg)
+done
+
+ansible_args+=("-K")
+ansible_args+=("-i")
+ansible_args+=("environments/$INV/inventory")
+
+# all systems currently seem to have python3 installed
+#ansible_args+=("--extra-vars")
+#ansible_args+=("ansible_python_interpreter=/usr/bin/python3")
+ansible_args+=("--vault-password-file")
+ansible_args+=("./ansible_vault_id")
+ansible_args+=("$PROV.yml")
+
+#export ANSIBLE_DEBUG=1
+echo "ansible-playbook  ${ansible_args[*]}"
+ansible-playbook  ${ansible_args[*]}

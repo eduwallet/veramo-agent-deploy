@@ -1,0 +1,44 @@
+---
+- name: Ensure database directory exists
+  file:
+    state: directory
+    path: "{{ database.dir }}"
+    mode: 0755
+  become: yes
+
+- name: Prebuilding all docker containers
+  ansible.builtin.shell:
+    cmd: docker compose -p eduwallet_agent build
+    chdir: "{{ docker.dir }}"
+  become: yes
+
+- name: Install NPM modules
+  ansible.builtin.shell:
+    cmd:  "docker run --rm -v {{ agent.dir }}:/opt/app --entrypoint npm eduwallet_agent-agent:latest install"
+    chdir: "{{ docker.dir }}"
+  become: yes
+
+- name: Dedupe NPM modules to minimize version dependencies
+  ansible.builtin.shell:
+    cmd:  "docker run --rm -v {{ agent.dir }}:/opt/app --entrypoint npm eduwallet_agent-agent:latest dedupe"
+    chdir: "{{ docker.dir }}"
+  become: yes
+
+- name: Pruning stopped containers
+  ansible.builtin.shell:
+    cmd: docker container prune -f
+    chdir: "{{ docker.dir }}"
+  become: yes
+
+- name: Pruning unused images
+  ansible.builtin.shell:
+    cmd: docker image prune -f
+    chdir: "{{ docker.dir }}"
+  become: yes
+
+- name: Run the docker containers using docker-compose
+  community.docker.docker_compose_v2:
+    project_src: "{{ docker.dir }}"
+    project_name: eduwallet_agent
+    state: present
+  become: yes
