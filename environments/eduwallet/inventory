@@ -1,0 +1,7 @@
+[staging]
+poc5.eduwallet.nl
+
+[staging:vars]
+basedomain=agent.dev.eduwallet.nl
+enablehttps=true
+protocol=https

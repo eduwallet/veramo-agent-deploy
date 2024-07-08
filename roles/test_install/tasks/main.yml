@@ -1,0 +1,6 @@
+---
+- name: Loop over all installed configurations
+  include_tasks: test_install.yml
+  loop: "{{ installations }}"
+  loop_control:
+    loop_var: installation

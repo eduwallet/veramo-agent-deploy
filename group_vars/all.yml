@@ -8,6 +8,12 @@ basic_applications:
 
 basedir: /opt/agent
 
+installations:
+  - name: mbob
+    preauthcode: 9slAxx0AgJjHtS2hChULnPvExeYsLLpu
+  - name: thun
+    preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
+
 traefik:
   enabled: true
   secure: "{{ enablehttps }}"
