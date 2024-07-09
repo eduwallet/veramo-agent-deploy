@@ -1,24 +1,24 @@
 ---
-- name: "{{ installation }}: Testing well knowns"
+- name: "{{ installation.name }}: Testing well knowns"
   ansible.builtin.uri:
     url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/.well-known/openid-credential-issuer"
     method: GET
 
-- name: "{{ installation }}: Testing create offer"
+- name: "{{ installation.name }}: Testing create offer"
   ansible.builtin.uri:
     url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/api/create-offer"
     body_format: json
-    body: "{\"credentials\":[\"{{ installation.credential }}\"],\"grants\":{\"urn:ietf:params:oauth:grant-type:pre-authorized_code\":{\"pre-authorized_code\":\"{{ installation.preauthcode }}\",\"user_pin_required\":false}\},\"credentialDataSupplierInput\":{\"firstName\":\"a\",\"lastName\":\"b\",\"emailAddress\":\"a@b.nl\",\"dateOfBirth\":\"anytime\"}\}"
+    body: "{\"credentials\":[\"{{ installation.credential }}\"],\"grants\":{\"urn:ietf:params:oauth:grant-type:pre-authorized_code\":{\"pre-authorized_code\":\"{{ installation.preauthcode }}\",\"user_pin_required\":false}},\"credentialDataSupplierInput\":{\"firstName\":\"a\",\"lastName\":\"b\",\"emailAddress\":\"a@b.nl\",\"dateOfBirth\":\"anytime\"}}"
     method: POST
 
-- name: "{{ installation }}: testing get offer"
+- name: "{{ installation.name }}: testing get offer"
   ansible.builtin.uri:
     url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/api/get-offer/{{ installation.preauthcode}}"
     method: GET
 
-- name: "{{ installation }}: testing check offer"
+- name: "{{ installation.name }}: testing check offer"
   ansible.builtin.uri:
     url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/api/check-offer"
     body_format: json
-    body: "{\"id\":\"{{ installation.preauthcode\"}"
+    body: "{\"id\":\"{{ installation.preauthcode}}\"}"
     method: POST

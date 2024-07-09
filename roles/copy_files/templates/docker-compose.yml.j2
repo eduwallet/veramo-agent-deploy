@@ -3,6 +3,8 @@ services:
   traefik:
     image: "traefik:v3.0"
     container_name: "traefik"
+    hostname: traefik
+    restart: unless-stopped
     command:
       #- "--log.level=DEBUG"
       - "--api.insecure=true"
@@ -32,16 +34,23 @@ services:
 {% if traefik.secure %}
       - "./letsencrypt:/letsencrypt"
 {% endif %}
+    networks:
+      - eduwallet_agent
 {% endif %}
 
   agent:
     build:
       dockerfile: "{{ docker.dir }}/Dockerfile"
+    hostname: agent
     volumes:
       - "{{ agent.dir }}:/opt/app"
     ports:
       - {{ agent.port }}:5000
     restart: unless-stopped
+    networks:
+      - eduwallet_agent
+    links:
+      - "db:db"
 {% if traefik.enabled %}
     labels:
       - "traefik.enable=true"
@@ -56,6 +65,7 @@ services:
 
   db:
     image: postgres:16-bookworm
+    hostname: db
     restart: unless-stopped
     shm_size: 128mb
     environment:
@@ -69,7 +79,7 @@ services:
     volumes:
       - type: bind
         source: {{ database.dir }}
-        target: /var/lib/pgsql/data
+        target: /var/lib/postgresql/data
       - type: bind
         source: {{ database.scripts }}
         target: /docker-entrypoint-initdb.d

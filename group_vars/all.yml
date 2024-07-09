@@ -11,8 +11,10 @@ basedir: /opt/agent
 installations:
   - name: mbob
     preauthcode: 9slAxx0AgJjHtS2hChULnPvExeYsLLpu
+    credential: MBOBUniversityCard
   - name: thun
     preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
+    credential: ThunUniversityCard
 
 traefik:
   enabled: true
@@ -20,9 +22,18 @@ traefik:
   postmaster: certbot@muisit.nl
   expose: true
 
+deployuser: gitlab+deploy-token-43
+deploytoken: !vault |
+             $ANSIBLE_VAULT;1.1;AES256
+             66356166626332356561643739626332363230316538356563653366643166383461343237363562383937333138313561
+             6661303166613335363262656636360a663932626432353561653237646164393732643865333064353439636162666332
+             663234633536623832343338336564353265656665386462343936396263310a3237363562656264326335613264316231
+             3432623561313666316537366634366662643239633432643830363138393234646364343563363737646362623032
+
+
 sources:
   agent:
-    repo: https://github.com/muisit/veramo-agent.git
+    repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/veramo-agent.git"
     version: HEAD
 
 docker:
@@ -31,17 +42,24 @@ docker:
 agent:
   dir: "{{ basedir }}/agent"
   script: "start:dev"
+  hostname: "{{ basedomain }}"
   port: 5000
-  hostname: "agent.{{ basedomain }}"
   host: "{{ protocol }}://agent.{{ basedomain }}"
-  encryptionkey: secret
-  signingkey: secret
+  bearerToken: !vault |
+               $ANSIBLE_VAULT;1.1;AES256
+               3761316133653639623063633238316531626266656562353335393632353263613430356437303833
+               33613436623234643365353830316635663537363633650a3834653731356432613734343332663734
+               3837393931663030666564356333333538383765653839623466376663643637613464343230646166
+               3932636138630a62353734356561656465613664346666303662663365313131643064373030386630
+               3864613434623061346665343735366135343833376364313666646166613364306636353134613532
+               343934303565323832636163396539333830386535
 
 database:
   dir: "{{ basedir }}/database"
   port: 5001
   user: postgres
-  name: agent
+  name: postgres
+  schema: agent
   scripts: "{{ basedir }}/agent/scripts/dbinit"
   password: !vault |
             $ANSIBLE_VAULT;1.1;AES256

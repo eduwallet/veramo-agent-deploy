@@ -5,4 +5,5 @@
     dest: "{{ agent.dir }}"
     version: "{{ sources.agent.version }}"
     force: yes
+  become: yes
 
