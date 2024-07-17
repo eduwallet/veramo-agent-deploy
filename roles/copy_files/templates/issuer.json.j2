@@ -1,0 +1,16 @@
+{
+  "baseUrl": "{{ protocol }}://{{ basedomain }}/{{ instance.name }}",
+  "enableCreateCredentials": true,
+  "options": {
+    "correlationId": "{{ instance.name }}",
+    "definitionId": "{{ instance.name }}",
+    "issuerOpts": {
+      "didOpts": {
+        "checkLinkedDomains": "if_present",
+        "identifierOpts": {
+          "kid": "did:web:{{ instance.domain }}"
+        }
+      }
+    }
+  }
+}

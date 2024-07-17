@@ -1,0 +1,12 @@
+{
+  "did": "did:web:{{ instance.domain }}",
+  "did_vm": "did:web:{{ instance.domain }}#auth-key",
+  "createArgs": {
+    "provider": "did:web",
+    "alias": "{{ instance.domain }}",
+    "options": {
+      "kid": "auth-key",
+      "keyType": "Secp256r1"
+    }
+  }
+}
