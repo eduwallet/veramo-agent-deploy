@@ -11,10 +11,19 @@ basedir: /opt/agent
 installations:
   - name: mbob
     preauthcode: 9slAxx0AgJjHtS2hChULnPvExeYsLLpu
-    credential: MBOBUniversityCard
-  - name: thun
+    credential: BaseAcademicCredential
+    domain: "mbob.{{ deploydomain }}"
+    pubName: "MBO Beek"
+  - name: tun
     preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
-    credential: ThunUniversityCard
+    credential: BaseAcademicCredential
+    domain: "tun.{{ deploydomain }}"
+    pubName: "Theed University of Naboo"
+  - name: uvh
+    preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
+    credential: BaseAcademicCredential
+    domain: "uvh.{{ deploydomain }}"
+    pubName: "University of Harderwijk"
 
 traefik:
   enabled: true

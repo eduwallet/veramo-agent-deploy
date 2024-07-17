@@ -1,13 +1,44 @@
 ---
-- name: Ensure the Agent directory exists
+- name: Ensure the Agent configuration directories exists
   file:
     state: directory
-    path: "{{ agent.dir }}"
+    path: "{{ agent.dir }}/conf/{{ item }}"
     mode: 0755
+  loop:
+    - issuer
+    - dids
+    - metadata
   become: yes
 
 - name: Push Agent Env file
   template:
     src: agent.env.j2
     dest: "{{ agent.dir }}/.env"
+  become: yes
+
+- name: Install issuer DID specifications
+  template:
+    src: did.json.j2
+    dest: "{{ agent.dir }}/conf/dids/{{ instance.name }}.json"
+  loop: "{{ installations }}"
+  loop_control:
+    loop_var: instance
+  become: yes
+
+- name: Install issuer configurations
+  template:
+    src: issuer.json.j2
+    dest: "{{ agent.dir }}/conf/issuer/{{ instance.name }}.json"
+  loop: "{{ installations }}"
+  loop_control:
+    loop_var: instance
+  become: yes
+
+- name: Install metadata configurations
+  template:
+    src: metadata.json.j2
+    dest: "{{ agent.dir }}/conf/metadata/{{ instance.name }}.json"
+  loop: "{{ installations }}"
+  loop_control:
+    loop_var: instance
   become: yes

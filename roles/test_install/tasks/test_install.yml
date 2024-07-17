@@ -8,7 +8,7 @@
   ansible.builtin.uri:
     url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/api/create-offer"
     body_format: json
-    body: "{\"credentials\":[\"{{ installation.credential }}\"],\"grants\":{\"urn:ietf:params:oauth:grant-type:pre-authorized_code\":{\"pre-authorized_code\":\"{{ installation.preauthcode }}\",\"user_pin_required\":false}},\"credentialDataSupplierInput\":{\"firstName\":\"a\",\"lastName\":\"b\",\"emailAddress\":\"a@b.nl\",\"dateOfBirth\":\"anytime\"}}"
+    body: "{\"credentials\":[\"{{ installation.credential }}\"],\"grants\":{\"urn:ietf:params:oauth:grant-type:pre-authorized_code\":{\"pre-authorized_code\":\"{{ installation.preauthcode }}\",\"user_pin_required\":false}},\"credentialDataSupplierInput\":{\"organization\":\"a\",\"personName\":\"b\",\"emailAddress\":\"a@b.nl\",\"affiliation\":\"student\"}}"
     method: POST
 
 - name: "{{ installation.name }}: testing get offer"

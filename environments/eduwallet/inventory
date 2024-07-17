@@ -2,6 +2,7 @@
 poc5.eduwallet.nl
 
 [staging:vars]
-basedomain=agent.dev.eduwallet.nl
+deploydomain=dev.eduwallet.nl
+basedomain="agent.{{ deploydomain }}"
 enablehttps=true
 protocol=https

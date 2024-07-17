@@ -21,7 +21,6 @@
     dest: "{{ docker.dir }}/.env"
   become: yes
 
-
 - name: Push Docker Compose configuration
   template:
     src: docker-compose.yml.j2
