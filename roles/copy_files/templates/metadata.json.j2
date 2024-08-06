@@ -4,6 +4,9 @@
   "metadata": {
     "credential_issuer": "{{ protocol }}://{{ basedomain }}/{{ instance.name }}",
     "credential_endpoint": "{{ protocol }}://{{ basedomain }}/{{ instance.name }}/credentials",
+{% if instance.as is defined %}
+    "authorization_server": "{{ instance.as }}",
+{% endif %}    
     "display": [
       {
         "name": "{{ instance.pubName }}",

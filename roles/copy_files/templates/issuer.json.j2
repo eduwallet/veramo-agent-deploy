@@ -1,6 +1,12 @@
 {
   "baseUrl": "{{ protocol }}://{{ basedomain }}/{{ instance.name }}",
   "enableCreateCredentials": true,
+{% if instance.clientId is defined %}
+  "clientId": "{{ instance.clientId }}",
+{% endif %}
+{% if instance.clientSecret is defined %}
+  "clientSecret": "{{ instance.clientSecret }}",
+{% endif %}
   "options": {
     "correlationId": "{{ instance.name }}",
     "definitionId": "{{ instance.name }}",
@@ -8,7 +14,8 @@
       "didOpts": {
         "checkLinkedDomains": "if_present",
         "identifierOpts": {
-          "kid": "did:web:{{ instance.domain }}"
+          "identifier": "did:web:{{ instance.domain }}",
+          "kid": "did:web:{{ instance.domain }}#{{ instance.hash }}"
         }
       }
     }

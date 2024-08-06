@@ -24,6 +24,12 @@
     chdir: "{{ docker.dir }}"
   become: yes
 
+- name: Stop the existing setup
+  ansible.builtin.shell:
+    cmd: docker compose -p eduwallet_agent down
+    chdir: "{{ docker.dir }}"
+  become: yes
+
 - name: Pruning stopped containers
   ansible.builtin.shell:
     cmd: docker container prune -f
