@@ -13,34 +13,52 @@ installations:
     preauthcode: 9slAxx0AgJjHtS2hChULnPvExeYsLLpu
     credential: BaseAcademicCredential
     domain: "mbob.{{ deploydomain }}"
-    hash: "03d10620d61580033c5aee96b929eb2b5830bc6e47f9c49fcd5c0b18af400ac7f5"
+    hash: "bf698b7dadb7ca6ed8334dbad87a4a4a95a3fda988ee837b44ed5fce387b0261"
     pubName: "MBO Beek"
+    branding:
+      logo: https://mbob.dev.eduwallet.nl/images/mbob_credential_logo.png
+      logo_alttext: "MBO Beek"
+      card: https://mbob.dev.eduwallet.nl/images/mbob_credential_bg.png
+      color: '#ffffff'
+      background_color: '#8f0f12'
   - name: tun
     preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
     credential: BaseAcademicCredential
     domain: "tun.{{ deploydomain }}"
-    hash: "02a4de5c9a81aa8bb426643b10fb5fa923745603a8d6eed1e8089e8abd0ea9adc4"
+    hash: "095260b0509b1ef98fc0e0bafb07038013eb9f875e7674cc3d80e66ffba7b367"
     pubName: "Theed University of Naboo"
+    branding:
+      logo: https://tun.dev.eduwallet.nl/images/tun_credential_logo.png
+      logo_alttext: "Theed University of Naboo with a partial planet image"
+      card: https://tun.dev.eduwallet.nl/images/tun_credential_bg.png
+      color: '#ffffff'
+      background_color: '#0501ed'
   - name: uvh
     preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
     credential: BaseAcademicCredential
     domain: "uvh.{{ deploydomain }}"
-    hash: "021ff3c7a6411770aa65e4c82cc91f41cf3e9274714fb05394bb4a862b3c098f7a"
+    hash: "70f164a46dc22e767e410c0bba14b6aa7cb2e53b9f7b81f0171d04dd7d0ed785"
     pubName: "University of Harderwijk"
-  - name: mbobauth
-    as: https://accounts.google.com/o/oauth2/v2/auth
-    clientId: 360647652784-plphvvi20k2ot1t3esjj1890sdnkhciu.apps.googleusercontent.com
-    clientSecret: !vault |
-                  $ANSIBLE_VAULT;1.1;AES256
-                  65306261653661633436643163653432373162336630633266323762363336333938663130636364666637633433646337363
-                  7653435623437323436376537620a643230353135653635356166326132373739623264356231376366366434653766643238
-                  363836636638616262383565373564666336666637663732616565660a3466353239373362363030383032636265356132306
-                  56336326535633731383761373535346330346434663430356136336361663138366431393137396639333964626437353036
-                  343566653536363362646634396632373364343338376532
-    credential: BaseAcademicCredential
-    domain: "uvh.{{ deploydomain }}"
-    hash: "03d10620d61580033c5aee96b929eb2b5830bc6e47f9c49fcd5c0b18af400ac7f5"
-    pubName: "MBO Beek"
+    branding:
+      logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
+      logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
+      card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
+      color: '#ffffff'
+      background_color: '#4779aa'
+#  - name: mbobauth
+#    as: https://accounts.google.com/o/oauth2/v2/auth
+#    clientId: 360647652784-plphvvi20k2ot1t3esjj1890sdnkhciu.apps.googleusercontent.com
+#    clientSecret: !vault |
+#                  $ANSIBLE_VAULT;1.1;AES256
+#                  65306261653661633436643163653432373162336630633266323762363336333938663130636364666637633433646337363
+#                  7653435623437323436376537620a643230353135653635356166326132373739623264356231376366366434653766643238
+#                  363836636638616262383565373564666336666637663732616565660a3466353239373362363030383032636265356132306
+#                  56336326535633731383761373535346330346434663430356136336361663138366431393137396639333964626437353036
+#                  343566653536363362646634396632373364343338376532
+#    credential: BaseAcademicCredential
+#    domain: "mbob.{{ deploydomain }}"
+#    hash: "02ad6064f20905decbcf4a45ba7aabb3c035749121e7de0791f08f84bfb7b97d83"
+#    pubName: "MBO Beek"
 
 traefik:
   enabled: true

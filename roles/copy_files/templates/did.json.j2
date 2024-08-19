@@ -6,7 +6,8 @@
     "alias": "{{ instance.domain }}",
     "options": {
       "kid": "auth-key",
-      "keyType": "Secp256r1"
+      "keyType": "Ed25519",
+      "keys": [{"type": "Ed25519", "isController": true }]
     }
   }
 }

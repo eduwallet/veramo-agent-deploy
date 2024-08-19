@@ -3,181 +3,81 @@
   "overwriteExisting": true,
   "metadata": {
     "credential_issuer": "{{ protocol }}://{{ basedomain }}/{{ instance.name }}",
-    "credential_endpoint": "{{ protocol }}://{{ basedomain }}/{{ instance.name }}/credentials",
-{% if instance.as is defined %}
-    "authorization_server": "{{ instance.as }}",
+    "credential_endpoint": "{{ protocol }}://{{ basedomain }}/{{ instance.name }}/credentials",{% if instance.as is defined %}
+    "authorization_servers": ["{{ instance.as }}"],
 {% endif %}    
     "display": [
       {
         "name": "{{ instance.pubName }}",
-        "description": "{{ instance.pubName }}"
+        "client_name": "{{ instance.pubName }}",
+        "description": "{{ instance.pubName }}",
+        "logo": {
+          "uri": "{{ instance.branding.logo }}",
+          "url": "{{ instance.branding.logo }}",
+          "alt_text": "{ instance.branding.logo_alttext }}"
+        }
       }
     ],
-    "credential_configurations_supported": [
-      {
+    "credential_configurations_supported": {
+      "BaseAcademicCredential": {
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": ["did:jwk", "did:key"],
+        "format": "jwt_vc_json",
+        "cryptographic_suites_supported": ["ES256"],
+        "proof_types_supported": {
+          "jwt": {
+            "proof_signing_alg_values_supported": ["ES256"]
+          }
+        },
+        "scope": "BaseAcademicCredential",{%if false %}
+        "order": ["personName", "emailAddress", "organization", "affiliation", "assurance", "uid"],
+{% endif %}
         "display": [
           {
             "name": "Base Academic Credential",
             "description": "Basic credential indicating affiliation with an academic institute",
-            "text_color": "#FFFFFF",
-            "background_image": {
-              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
-              "alt_text": "Black and white photo of tulips with one red tulip"
-            },
+            "text_color": "{{ instance.branding.color }}",
             "logo": {
-              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
-              "alt_text": "Red square depicting Sphereon logo."
+              "uri": "{{ instance.branding.logo }}",
+              "url": "{{ instance.branding.logo }}",
+              "alt_text": "{{ instance.branding.logo_alttext }}"
+            },
+            "background_color": "{{ instance.branding.background_color }}",
+            "background_image": {
+              "uri": "{{ instance.branding.card }}",
+              "url": "{{ instance.branding.card }}"
             }
-          },
-          {
-            "locale": "en-US",
-            "name": "Base Academic Credential",
-            "description": "Basic credential indicating affiliation with an academic institute",
-            "text_color": "#FFFFFF",
-            "background_image": {
-              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
-              "alt_text": "Black and white photo of tulips with one red tulip"
+          }],
+        "credential_definition": {
+          "type": ["VerifiableCredential", "BaseAcademicCredential"],
+          "credentialSubject": {
+            "uid": {
+              "value_type": "string",
+              "display": [{"name": "User ID"}]
             },
-            "logo": {
-              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
-              "alt_text": "Red square depicting Sphereon logo."
-            }
-          },
-          {
-            "locale": "nl-NL",
-            "name": "Basis Academische Identiteit",
-            "description": "Basis identiteit in relatie tot een academisch instituut",
-            "text_color": "#FFFFFF",
-            "background_image": {
-              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
-              "alt_text": "Zwart-wit foto van tulpen met 1 rode tulp"
+            "organization": {
+              "value_type": "string",
+              "display": [{"name": "Organization"}]
             },
-            "logo": {
-              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
-              "alt_text": "Rood vlak met Sphereon logo"
+            "personName": {
+              "value_type": "string",
+              "display": [{"name": "Organization"}]
+            },
+            "emailAddress": {
+              "value_type": "string",
+              "display": [{"name": "E-mail address"}]
+            },
+            "affiliation": {
+              "value_type": "string",
+              "display": [{"name": "Affiliation"}]
+            },
+            "assurance": {
+              "value_type": "string",
+              "display": [{"name": "Assurance"}]
             }
           }
-        ],
-        "order": [
-            "uid",
-            "organization",
-            "personName",
-            "emailAddress",
-            "affiliation",
-            "assurance"
-        ],
-        "credentialSubject": {
-          "uid": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "User ID"
-              },
-              {
-                "name": "User ID",
-                "locale": "en-US"
-              },
-              {
-                "name": "Gebruikers ID",
-                "locale": "nl-NL"
-              }
-            ]
-          },
-          "organization": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "Organization"
-              },
-              {
-                "name": "Organization",
-                "locale": "en-US"
-              },
-              {
-                "name": "Organisatie",
-                "locale": "nl-NL"
-              }
-            ]
-          },
-          "personName": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "Organization"
-              },
-              {
-                "name": "Organization",
-                "locale": "en-US"
-              },
-              {
-                "name": "Organisatie",
-                "locale": "nl-NL"
-              }
-            ]
-          },
-          "emailAddress": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "E-mail address"
-              },
-              {
-                "name": "E-mail address",
-                "locale": "en-US"
-              },
-              {
-                "name": "E-mail adres",
-                "locale": "nl-NL"
-              }
-            ]
-          },
-          "affiliation": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "Affiliation"
-              },
-              {
-                "name": "Affiliation",
-                "locale": "en-US"
-              },
-              {
-                "name": "Betrekking",
-                "locale": "nl-NL"
-              }
-            ]
-          },
-          "assurance": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "Assurance"
-              },
-              {
-                "name": "Assurance",
-                "locale": "en-US"
-              },
-              {
-                "name": "Bevestiging",
-                "locale": "nl-NL"
-              }
-            ]
-          }
-        },
-        "id": "BaseAcademicCredential",
-        "types": [
-          "VerifiableCredential",
-          "BaseAcademicCredential"
-        ],
-        "format": "jwt_vc_json",
-        "cryptographic_binding_methods_supported": [
-          "did:web",
-          "did:jwk"
-        ],
-        "cryptographic_suites_supported": [
-          "ES256"
-        ]
+        }
       }
-    ]
+    }
   }
 }

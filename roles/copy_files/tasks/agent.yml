@@ -25,10 +25,28 @@
     loop_var: instance
   become: yes
 
+- name: Check DID specifications
+  ansible.builtin.shell:
+    cmd: "cat {{ agent.dir }}/conf/dids/{{ instance.name }}.json | jq '.'"
+    chdir: "{{ docker.dir }}"
+  loop: "{{ installations }}"
+  loop_control:
+    loop_var: instance
+  become: yes
+
 - name: Install issuer configurations
   template:
     src: issuer.json.j2
     dest: "{{ agent.dir }}/conf/issuer/{{ instance.name }}.json"
+  loop: "{{ installations }}"
+  loop_control:
+    loop_var: instance
+  become: yes
+
+- name: Check issuer configuration
+  ansible.builtin.shell:
+    cmd: "cat {{ agent.dir }}/conf/issuer/{{ instance.name }}.json | jq '.'"
+    chdir: "{{ docker.dir }}"
   loop: "{{ installations }}"
   loop_control:
     loop_var: instance
@@ -42,3 +60,14 @@
   loop_control:
     loop_var: instance
   become: yes
+
+- name: Check metadata configuration
+  ansible.builtin.shell:
+    cmd: "cat {{ agent.dir }}/conf/metadata/{{ instance.name }}.json | jq '.'"
+    chdir: "{{ docker.dir }}"
+  loop: "{{ installations }}"
+  loop_control:
+    loop_var: instance
+  become: yes
+
+    

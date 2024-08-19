@@ -9,6 +9,16 @@
     url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/.well-known/did.json"
     method: GET
 
+- name: "{{ installation.name }}: Testing well knowns - openid-configuration"
+  ansible.builtin.uri:
+    url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/.well-known/openid-configuration"
+    method: GET
+
+- name: "{{ installation.name }}: Testing well knowns - oauth-authorization-server"
+  ansible.builtin.uri:
+    url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/.well-known/oauth-authorization-server"
+    method: GET
+
 - name: "{{ installation.name }}: Testing create offer"
   ansible.builtin.uri:
     url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/api/create-offer"
@@ -18,7 +28,7 @@
 
 - name: "{{ installation.name }}: Testing get offer"
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/api/get-offer/{{ installation.preauthcode}}"
+    url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/get-credential-offer/{{ installation.preauthcode}}"
     method: GET
 
 - name: "{{ installation.name }}: Testing check offer"

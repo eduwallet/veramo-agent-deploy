@@ -12,15 +12,9 @@
     chdir: "{{ docker.dir }}"
   become: yes
 
-- name: Install NPM modules
+- name: Install Node modules
   ansible.builtin.shell:
-    cmd:  "docker run --rm -v {{ agent.dir }}:/opt/app --entrypoint npm eduwallet_agent-agent:latest install"
-    chdir: "{{ docker.dir }}"
-  become: yes
-
-- name: Dedupe NPM modules to minimize version dependencies
-  ansible.builtin.shell:
-    cmd:  "docker run --rm -v {{ agent.dir }}:/opt/app --entrypoint npm eduwallet_agent-agent:latest dedupe"
+    cmd:  "docker run --rm -v {{ agent.dir }}:/opt/app --entrypoint yarn eduwallet_agent-agent:latest install"
     chdir: "{{ docker.dir }}"
   become: yes
 
