@@ -1,6 +1,7 @@
 {
   "baseUrl": "{{ protocol }}://{{ basedomain }}/{{ instance.name }}",
   "enableCreateCredentials": true,
+  "adminToken": "{{ instance.adminToken }}",
 {% if instance.clientId is defined %}
   "clientId": "{{ instance.clientId }}",
 {% endif %}
