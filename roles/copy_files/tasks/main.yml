@@ -6,6 +6,12 @@
     mode: 0755
   become: yes
 
+- name: Install DID configuration
+  include_tasks: dids.yml
+
+- name: Install Credentials configuration
+  include_tasks: credentials.yml
+
 - name: Install Agent configuration
   include_tasks: agent.yml
 

@@ -19,23 +19,11 @@
       }
     ],
     "credential_configurations_supported": {
-      "BaseAcademicCredential": {
-        "format": "jwt_vc_json",
-        "cryptographic_binding_methods_supported": ["did:jwk", "did:key"],
-        "format": "jwt_vc_json",
-        "cryptographic_suites_supported": ["ES256"],
-        "proof_types_supported": {
-          "jwt": {
-            "proof_signing_alg_values_supported": ["ES256"]
-          }
-        },
-        "scope": "BaseAcademicCredential",{%if false %}
-        "order": ["personName", "emailAddress", "organization", "affiliation", "assurance", "uid"],
-{% endif %}
+      "AcademicBaseCredential": {
         "display": [
           {
             "name": "Base Academic Credential",
-            "description": "Basic credential indicating affiliation with an academic institute",
+            "description": "Basic credential indicating affiliation with {{ instance.pubName }}",
             "text_color": "{{ instance.branding.color }}",
             "logo": {
               "uri": "{{ instance.branding.logo }}",
@@ -47,36 +35,8 @@
               "uri": "{{ instance.branding.card }}",
               "url": "{{ instance.branding.card }}"
             }
-          }],
-        "credential_definition": {
-          "type": ["VerifiableCredential", "BaseAcademicCredential"],
-          "credentialSubject": {
-            "uid": {
-              "value_type": "string",
-              "display": [{"name": "User ID"}]
-            },
-            "organization": {
-              "value_type": "string",
-              "display": [{"name": "Organization"}]
-            },
-            "personName": {
-              "value_type": "string",
-              "display": [{"name": "Organization"}]
-            },
-            "emailAddress": {
-              "value_type": "string",
-              "display": [{"name": "E-mail address"}]
-            },
-            "affiliation": {
-              "value_type": "string",
-              "display": [{"name": "Affiliation"}]
-            },
-            "assurance": {
-              "value_type": "string",
-              "display": [{"name": "Assurance"}]
-            }
           }
-        }
+        ]
       }
     }
   }

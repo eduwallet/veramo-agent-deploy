@@ -6,7 +6,6 @@
     mode: 0755
   loop:
     - issuer
-    - dids
     - metadata
   become: yes
 
@@ -14,24 +13,6 @@
   template:
     src: agent.env.j2
     dest: "{{ agent.dir }}/.env"
-  become: yes
-
-- name: Install issuer DID specifications
-  template:
-    src: did.json.j2
-    dest: "{{ agent.dir }}/conf/dids/{{ instance.name }}.json"
-  loop: "{{ installations }}"
-  loop_control:
-    loop_var: instance
-  become: yes
-
-- name: Check DID specifications
-  ansible.builtin.shell:
-    cmd: "cat {{ agent.dir }}/conf/dids/{{ instance.name }}.json | jq '.'"
-    chdir: "{{ docker.dir }}"
-  loop: "{{ installations }}"
-  loop_control:
-    loop_var: instance
   become: yes
 
 - name: Install issuer configurations
