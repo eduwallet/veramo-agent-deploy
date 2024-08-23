@@ -1,0 +1,8 @@
+[staging]
+poc4.eduwallet.nl
+
+[staging:vars]
+deploydomain=poc4.eduwallet.nl
+basedomain="agent.{{ deploydomain }}"
+enablehttps=true
+protocol=https
