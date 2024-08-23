@@ -41,6 +41,8 @@ installations:
     hash: "bf698b7dadb7ca6ed8334dbad87a4a4a95a3fda988ee837b44ed5fce387b0261"
     pubName: "MBO Beek"
     branding:
+      name: "Academic Base Credential"
+      description: "Basic credential indicating affiliation with MBO Beek"
       logo: https://mbob.dev.eduwallet.nl/images/mbob_credential_logo.png
       logo_alttext: "MBO Beek"
       card: https://mbob.dev.eduwallet.nl/images/mbob_credential_bg.png
@@ -60,6 +62,8 @@ installations:
     hash: "095260b0509b1ef98fc0e0bafb07038013eb9f875e7674cc3d80e66ffba7b367"
     pubName: "Theed University of Naboo"
     branding:
+      name: "Academic Base Credential"
+      description: "Basic credential indicating affiliation with the Theed University of Naboo"
       logo: https://tun.dev.eduwallet.nl/images/tun_credential_logo.png
       logo_alttext: "Theed University of Naboo with a partial planet image"
       card: https://tun.dev.eduwallet.nl/images/tun_credential_bg.png
@@ -79,6 +83,8 @@ installations:
     hash: "70f164a46dc22e767e410c0bba14b6aa7cb2e53b9f7b81f0171d04dd7d0ed785"
     pubName: "University of Harderwijk"
     branding:
+      name: "Academic Base Credential"
+      description: "Basic credential indicating affiliation with the University of Harderwijk"
       logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
       logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
       card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
@@ -95,9 +101,11 @@ installations:
                 33323263313639326534643164663532643864633431323664353233643934646537643164333938
     credential: PID
     domain: "nl.gov.{{ deploydomain }}"
-    hash: "70f164a46dc22e767e410c0bba14b6aa7cb2e53b9f7b81f0171d04dd7d0ed785"
+    hash: "731c51bfaa95271f35e472afd59e1a4ab9dc70519ed8836f3bb5e163cd8bdda9"
     pubName: "Kingdom of the Netherlands"
     branding:
+      name: "Principal ID"
+      description: "Principal Identity Document of the Kingdom of the Netherlands"
       logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
       logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
       card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
@@ -114,9 +122,11 @@ installations:
                 33323263313639326534643164663532643864633431323664353233643934646537643164333938
     credential: PID
     domain: "nb.gov.{{ deploydomain }}"
-    hash: "70f164a46dc22e767e410c0bba14b6aa7cb2e53b9f7b81f0171d04dd7d0ed785"
+    hash: "0debce0ffee8724769a3f487b3145d9432785520f5d00b47c4a18c33a8ecaeb8"
     pubName: "Galactic Republic of Naboo"
     branding:
+      name: "Principal ID"
+      description: "Principal Identity Document of the Galactic Republic of Naboo"
       logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
       logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
       card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png

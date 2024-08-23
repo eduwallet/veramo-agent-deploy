@@ -19,11 +19,11 @@
       }
     ],
     "credential_configurations_supported": {
-      "AcademicBaseCredential": {
+      "{{ instance.credential }}": {
         "display": [
           {
-            "name": "Base Academic Credential",
-            "description": "Basic credential indicating affiliation with {{ instance.pubName }}",
+            "name": "{{ instance.branding.name }}",
+            "description": "{{ instance.branding.description }}",
             "text_color": "{{ instance.branding.color }}",
             "logo": {
               "uri": "{{ instance.branding.logo }}",
