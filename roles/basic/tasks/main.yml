@@ -35,6 +35,20 @@
     mode: 0777
   become: yes
 
+- name: Ensure the Docker group exists
+  group:
+    name: docker
+    state: present
+  become: yes
+
+- name: Add sysadmins to docker group
+  user:
+    name: "{{ item }}"
+    groups: docker
+    append: yes
+  with_items: "{{ sysadmins }}"
+  become: yes
+
 - name: Start the Docker daemon
   service:
     name: docker.service

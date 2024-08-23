@@ -8,6 +8,13 @@ basic_applications:
 
 basedir: /opt/agent
 
+sysadmins: # TODO: where can we get this from, so we don't have to hardcode it?
+  - "ber"
+  - "daniel"
+  - "frans"
+  - "niels"
+  - "ronald"
+
 dids:
   - name: mbob
     domain: "mbob.{{ deploydomain }}"
