@@ -3,6 +3,13 @@ set -e
 
 ansible-galaxy collection install community.docker
 
+declare -a ansible_args
+if [[ ! "x$DEBUG" = "x" ]]
+then
+    set -x
+    ansible_args+=("-vvv")
+fi
+
 PROV="agent"
 INV="eduwallet"
 if [[ ! "x$1" = "x" ]]
@@ -10,9 +17,6 @@ then
     INV=$1
     shift
 fi
-
-declare -a ansible_args
-#ansible_args+=("-vvv")
 
 while [ $# -gt 0 ]
 do
