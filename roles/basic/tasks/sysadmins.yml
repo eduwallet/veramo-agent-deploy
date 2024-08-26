@@ -1,0 +1,12 @@
+- name: "List all users in group {{ group }}"
+  shell: "getent group | grep {{ group }} | cut -d: -f4 | tr ',' ' '"
+  become: yes
+  register: sudoerusers
+
+- name: Add sysadmins to docker group
+  user:
+    name: "{{ item }}"
+    groups: docker
+    append: yes
+  with_items: "{{ sudoerusers.stdout | split(' ') }}"
+  become: yes
