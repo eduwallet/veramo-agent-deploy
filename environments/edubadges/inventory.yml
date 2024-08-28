@@ -6,16 +6,8 @@ staging:
       enablehttps: 'true'
       protocol: https
       dids:
-        - domain: mbob.{{ deploydomain }}
-          name: mbob
-        - domain: uvh.{{ deploydomain }}
-          name: uvh
-        - domain: tun.{{ deploydomain }}
-          name: tun
-        - domain: nl.gov.{{ deploydomain }}
-          name: nlgov
-        - domain: nb.gov.{{ deploydomain }}
-          name: nbgov
+        - domain: edubadges.{{ deploydomain }}
+          name: edubadges
 
       credential_configurations:
         - name: AcademicBaseCredential
