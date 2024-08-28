@@ -1,0 +1,7 @@
+staging:
+  hosts:
+    poc5.eduwallet.nl:
+      deploydomain: "dev.eduwallet.nl"
+      basedomain: "agent.{{ deploydomain }}"
+      enablehttps: "true"
+      protocol: "https"

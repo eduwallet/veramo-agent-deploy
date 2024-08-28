@@ -49,7 +49,7 @@ else
 fi
 
 ansible_args+=("-i")
-ansible_args+=("environments/$INV/inventory")
+ansible_args+=("environments/$INV/inventory.yml")
 
 # all systems currently seem to have python3 installed
 #ansible_args+=("--extra-vars")
