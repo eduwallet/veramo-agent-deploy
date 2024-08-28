@@ -25,7 +25,16 @@ do
     ansible_args+=($arg)
 done
 
-ansible_args+=("-K")
+# if ANSIBLE_BECOME_PASS is set and not empty, use it instead of the -K flag
+if [[ ! "x$ANSIBLE_BECOME_PASS" = "x" ]]
+then
+  ansible_args+=("--extra-vars")
+  ansible_args+=("ansible_become_pass=$ANSIBLE_BECOME_PASS")
+else
+  echo "ANSIBLE_BECOME_PASS env is not set, prompting for BECOME password"
+  ansible_args+=("-K")
+fi
+
 ansible_args+=("-i")
 ansible_args+=("environments/$INV/inventory")
 
