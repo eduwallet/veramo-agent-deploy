@@ -20,7 +20,7 @@ dids:
   - name: nbgov
     domain: "nb.gov.{{ deploydomain }}"
 
-credentials:
+credential_configurations:
   - name: AcademicBaseCredential
     template: abc.json.j2
   - name: PID

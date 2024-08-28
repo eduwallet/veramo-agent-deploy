@@ -10,7 +10,7 @@
   include_tasks: dids.yml
 
 - name: Install Credentials configuration
-  include_tasks: credentials.yml
+  include_tasks: credential_configurations.yml
 
 - name: Install Agent configuration
   include_tasks: agent.yml
