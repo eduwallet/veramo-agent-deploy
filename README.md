@@ -1,6 +1,9 @@
 # Veramo Agent Ansible Deploy
 
-This Ansible playbook deploys a single Veramo based agent for use in the Eduwallet Proof-of-Concept setup. It clones and configures the github code using the configurations defined in the group_vars settings.
+This Ansible playbook deploys a single Veramo based agent for use in the
+Eduwallet Proof-of-Concept setup. It clones and configures the
+[veramo-agent](https://github.com/muisit/veramo-agent) using the configurations
+defined in the group_vars settings.
 
 The end result is a docker-compose configuration containing 3 docker containers:
 
@@ -9,6 +12,33 @@ The end result is a docker-compose configuration containing 3 docker containers:
 - a Postgres database
 
 The Ansible playbook creates the docker-compose file, builds the docker containers, provides a convenient start/stop script and runs the latter to start-up the containers.
+
+## Concepts
+
+### DIDs
+
+A list of Decentralized Identifiers found in group\_vars all. One for each
+Installation (see below). We use did:web, so we provide a domain. See [the
+spec](https://w3c-ccg.github.io/did-method-web/) for how to define ports and
+paths and such. Don't add fragments (#something), though as these are added by
+ansible templates where needed. 
+
+### Credential Configurations
+
+A list of credential configurations found in group\_vars all. One for each
+credential configuration that an issuer can offer credentials for.
+
+### Installations
+
+A list found in group_vars all. This contains the configurations for all issuers.
+For each issuer, a *configuration* and *metadata* file is generated in the conf
+directory as json file.
+
+The agent (in a docker container) then picks up these config files on boot, and
+provides API endpoints and well-known endpoints for each issuer using these files.
+
+We provide a single credential, as set up in Credential Configurations, that this issuer
+can issue credentials from.
 
 ## Invocation
 
