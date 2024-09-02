@@ -45,10 +45,14 @@
 
 - name: Wait for the certificate to settle
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ basedomain }}/mbob/.well-known/openid-credential-issuer"
+    url: "{{ protocol }}://{{ basedomain }}/{{ did.name }}/.well-known/openid-credential-issuer"
     follow_redirects: none
     method: GET
   register: _result
   until: _result.status == 200
   retries: 720 # 720 * 5 seconds = 1hour (60*60/5)
   delay: 5 
+  loop: "{{ dids }}"
+  loop_control:
+    loop_var: did
+
