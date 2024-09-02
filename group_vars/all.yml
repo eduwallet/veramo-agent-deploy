@@ -20,6 +20,13 @@ dids:
   - name: nbgov
     domain: "nb.gov.{{ deploydomain }}"
 
+# All domains that we must generate ssl certificates for. The deploy domain and any domain listed
+# in dids
+ssl_domains: "{{ [basedomain] + dids | map(attribute='domain') }}"
+# SSL domains turned into a string for docker-compose traefik labels:
+# Host(`sub.example.com`) || Host(`foo.sub.example.ecom`) etc. Note the backtick.
+traefik_hosts_string:  "{{ ssl_domains | map('regex_replace', '(.+)', 'Host(`\\1`)') | join(' || ') }}"
+
 credential_configurations:
   - name: AcademicBaseCredential
     template: abc.json.j2
