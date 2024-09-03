@@ -11,12 +11,25 @@ then
 fi
 
 PROV="agent"
-INV="eduwallet"
-if [[ ! "x$1" = "x" ]]
+
+if [[ "x$INV" = "x" ]]
 then
+  if [[ "x$1" = "x" ]]
+  then
+    # Inv not provided via INV or argument
+    echo "set \$INV or provide as argument"
+    echo "Usage: $0 <inventory>"
+    echo "  inventory: the name of the inventory to use."
+    echo "valid values are eduwallet or edubadges"
+    exit 1
+  else
+    # Inv provided as argument
     INV=$1
     shift
+  fi
 fi
+
+echo "Using inventory: environments/$INV/inventory"
 
 while [ $# -gt 0 ]
 do
@@ -36,7 +49,7 @@ else
 fi
 
 ansible_args+=("-i")
-ansible_args+=("environments/$INV/inventory")
+ansible_args+=("environments/$INV/inventory.yml")
 
 # all systems currently seem to have python3 installed
 #ansible_args+=("--extra-vars")
