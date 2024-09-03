@@ -1,0 +1,190 @@
+deploydomain: "dev.eduwallet.nl"
+basedomain: "agent.{{ deploydomain }}"
+enablehttps: "true"
+protocol: "https"
+
+# For identifying the issuers and signing the credentials, this deployment uses did:web keys
+# associated with specific issuer domains, based on the front-end facing application that
+# initiates the issuance flow.
+# Different configurations can reuse the same did:web, for example if there is a need for two
+# different credential metadata configurations (one with pre-auth only, one with authorization_code
+# only) that are both linked to the same front-end-facing application.
+#
+# In theory, all configurations could use the same single did:web key
+#
+dids:
+  - name: mbob
+    domain: "mbob.{{ deploydomain }}"
+  - name: uvh
+    domain: "uvh.{{ deploydomain }}"
+  - name: tun
+    domain: "tun.{{ deploydomain }}"
+  - name: nlgov
+    domain: "nl.gov.{{ deploydomain }}"
+  - name: nbgov
+    domain: "nb.gov.{{ deploydomain }}"
+  - name: epi
+    domain: "epi.{{ deploydomain }}"
+
+# This defines the list of credential configurations that the agent can potentially supply inside
+# the credential metadata. These configuration files are referenced in the metadata specifications
+# for easy reuse and ensuring that all configurations are constituted in the same way.
+credential_configurations:
+  - name: AcademicBaseCredential
+    template: abc.json.j2
+  - name: PID
+    template: pid.json.j2
+
+# The list of installations defines the subpaths on the veramo-agent that the agent will listen to.
+# Each installation comes with its own credential metadata and well-known endpoints.
+# The name of the installation is used as the router path as well as the issuer configuration name
+# and the correlation-id to match issuer configuration with metadata configuration
+# preauthcode is used in the testing phase as a pre-configured but random token
+# adminToken is the bearer token that needs to be provided by the front-end issuer when calling create-offer
+# credential is the specific credential this issuer will provide. TODO: support multiple credentials
+# domain is used to determine the did:web key name. TODO: fix this with a proper did name
+# hash is the key identifier of the did:web used and must be manually retrieved from the database after
+#   first deployment. TODO: fix the agent to get the key based on the identifier instead
+# pubName is the public name of the issuer, used in the metadata
+# branding is the issuer specific branding for the one credential that is issued. TODO: support multiple credentials
+installations:
+  - name: mbob
+    preauthcode: 9slAxx0AgJjHtS2hChULnPvExeYsLLpu
+    adminToken: !vault |
+                $ANSIBLE_VAULT;1.1;AES256
+                396132323461653037356437363166343135663530633939376566653132653636636431656264386538666431343
+                966333237623263346532616238663938340a63666138653664323833613761356162366661633630393333613264
+                6534646535643966323733663264326330333635346266303164633564643738313239320a6136626231376539326
+                563303863346662356638326234646235653566336136643866356239666338646332626437323139326632646662
+                33323263313639326534643164663532643864633431323664353233643934646537643164333938
+    credential: AcademicBaseCredential
+    domain: "mbob.{{ deploydomain }}"
+    hash: "bf698b7dadb7ca6ed8334dbad87a4a4a95a3fda988ee837b44ed5fce387b0261"
+    pubName: "MBO Beek"
+    branding:
+      name: "Academic Base Credential"
+      description: "Basic credential indicating affiliation with MBO Beek"
+      logo: https://mbob.dev.eduwallet.nl/images/mbob_credential_logo.png
+      logo_alttext: "MBO Beek"
+      card: https://mbob.dev.eduwallet.nl/images/mbob_credential_bg.png
+      color: '#ffffff'
+      background_color: '#8f0f12'
+  - name: tun
+    preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
+    adminToken: !vault |
+                $ANSIBLE_VAULT;1.1;AES256
+                396132323461653037356437363166343135663530633939376566653132653636636431656264386538666431343
+                966333237623263346532616238663938340a63666138653664323833613761356162366661633630393333613264
+                6534646535643966323733663264326330333635346266303164633564643738313239320a6136626231376539326
+                563303863346662356638326234646235653566336136643866356239666338646332626437323139326632646662
+                33323263313639326534643164663532643864633431323664353233643934646537643164333938
+    credential: AcademicBaseCredential
+    domain: "tun.{{ deploydomain }}"
+    hash: "095260b0509b1ef98fc0e0bafb07038013eb9f875e7674cc3d80e66ffba7b367"
+    pubName: "Theed University of Naboo"
+    branding:
+      name: "Academic Base Credential"
+      description: "Basic credential indicating affiliation with the Theed University of Naboo"
+      logo: https://tun.dev.eduwallet.nl/images/tun_credential_logo.png
+      logo_alttext: "Theed University of Naboo with a partial planet image"
+      card: https://tun.dev.eduwallet.nl/images/tun_credential_bg.png
+      color: '#ffffff'
+      background_color: '#0501ed'
+  - name: uvh
+    preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
+    adminToken: !vault |
+                $ANSIBLE_VAULT;1.1;AES256
+                396132323461653037356437363166343135663530633939376566653132653636636431656264386538666431343
+                966333237623263346532616238663938340a63666138653664323833613761356162366661633630393333613264
+                6534646535643966323733663264326330333635346266303164633564643738313239320a6136626231376539326
+                563303863346662356638326234646235653566336136643866356239666338646332626437323139326632646662
+                33323263313639326534643164663532643864633431323664353233643934646537643164333938
+    credential: AcademicBaseCredential
+    domain: "uvh.{{ deploydomain }}"
+    hash: "70f164a46dc22e767e410c0bba14b6aa7cb2e53b9f7b81f0171d04dd7d0ed785"
+    pubName: "University of Harderwijk"
+    branding:
+      name: "Academic Base Credential"
+      description: "Basic credential indicating affiliation with the University of Harderwijk"
+      logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
+      logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
+      card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
+      color: '#ffffff'
+      background_color: '#4779aa'
+  - name: nlgov
+    preauthcode: G0WAuJwHxtv2dqAMfoDsopRBjTpavttJ
+    adminToken: !vault |
+                $ANSIBLE_VAULT;1.1;AES256
+                396132323461653037356437363166343135663530633939376566653132653636636431656264386538666431343
+                966333237623263346532616238663938340a63666138653664323833613761356162366661633630393333613264
+                6534646535643966323733663264326330333635346266303164633564643738313239320a6136626231376539326
+                563303863346662356638326234646235653566336136643866356239666338646332626437323139326632646662
+                33323263313639326534643164663532643864633431323664353233643934646537643164333938
+    credential: PID
+    domain: "nl.gov.{{ deploydomain }}"
+    hash: "731c51bfaa95271f35e472afd59e1a4ab9dc70519ed8836f3bb5e163cd8bdda9"
+    pubName: "Kingdom of the Netherlands"
+    branding:
+      name: "Principal ID"
+      description: "Principal Identity Document of the Kingdom of the Netherlands"
+      logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
+      logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
+      card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
+      color: '#ffffff'
+      background_color: '#4779aa'
+  - name: nbgov
+    preauthcode: WrBAlTNCBfUHDWHtYF0nkV9aJqBVIP5z
+    adminToken: !vault |
+                $ANSIBLE_VAULT;1.1;AES256
+                396132323461653037356437363166343135663530633939376566653132653636636431656264386538666431343
+                966333237623263346532616238663938340a63666138653664323833613761356162366661633630393333613264
+                6534646535643966323733663264326330333635346266303164633564643738313239320a6136626231376539326
+                563303863346662356638326234646235653566336136643866356239666338646332626437323139326632646662
+                33323263313639326534643164663532643864633431323664353233643934646537643164333938
+    credential: PID
+    domain: "nb.gov.{{ deploydomain }}"
+    hash: "2290bb57a2b501730db6610e0a6e371f3d3d4c8e174bf9f76e1dc7244f4ae409"
+    pubName: "Galactic Republic of Naboo"
+    branding:
+      name: "Principal ID"
+      description: "Principal Identity Document of the Galactic Republic of Naboo"
+      logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
+      logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
+      card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
+      color: '#ffffff'
+      background_color: '#4779aa'
+  - name: epi
+    preauthcode: 4GOmhdYyDWfGXT7R21iQ0qB8aBFhYAc9
+    adminToken: !vault |
+                $ANSIBLE_VAULT;1.1;AES256
+                396132323461653037356437363166343135663530633939376566653132653636636431656264386538666431343
+                966333237623263346532616238663938340a63666138653664323833613761356162366661633630393333613264
+                6534646535643966323733663264326330333635346266303164633564643738313239320a6136626231376539326
+                563303863346662356638326234646235653566336136643866356239666338646332626437323139326632646662
+                33323263313639326534643164663532643864633431323664353233643934646537643164333938
+    credential: AcademicBaseCredential
+    domain: "epi.{{ deploydomain }}"
+    hash: "0debce0ffee8724769a3f487b3145d9432785520f5d00b47c4a18c33a8ecaeb8"
+    pubName: "Educational Public Issuer"
+    branding:
+      name: "Academic Base Credential"
+      description: "Academic Base Credential"
+      logo: ''
+      logo_alttext: "None"
+      card: ''
+      color: '#ffffff'
+      background_color: '#4779aa'
+#  - name: mbobauth
+#    as: https://accounts.google.com/o/oauth2/v2/auth
+#    clientId: 360647652784-plphvvi20k2ot1t3esjj1890sdnkhciu.apps.googleusercontent.com
+#    clientSecret: !vault |
+#                  $ANSIBLE_VAULT;1.1;AES256
+#                  65306261653661633436643163653432373162336630633266323762363336333938663130636364666637633433646337363
+#                  7653435623437323436376537620a643230353135653635356166326132373739623264356231376366366434653766643238
+#                  363836636638616262383565373564666336666637663732616565660a3466353239373362363030383032636265356132306
+#                  56336326535633731383761373535346330346434663430356136336361663138366431393137396639333964626437353036
+#                  343566653536363362646634396632373364343338376532
+#    credential: BaseAcademicCredential
+#    domain: "mbob.{{ deploydomain }}"
+#    hash: "02ad6064f20905decbcf4a45ba7aabb3c035749121e7de0791f08f84bfb7b97d83"
+#    pubName: "MBO Beek"
