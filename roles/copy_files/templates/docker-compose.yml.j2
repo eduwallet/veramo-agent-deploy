@@ -40,7 +40,7 @@ services:
 
   agent:
     build:
-      dockerfile: "{{ docker.dir }}/Dockerfile"
+      dockerfile: "{{ docker.dir }}/agent/Dockerfile"
     hostname: agent
     volumes:
       - "{{ agent.dir }}:/opt/app"
@@ -60,6 +60,33 @@ services:
       - "traefik.http.routers.agent.tls.certresolver=myresolver"
 {% else %}
       - "traefik.http.routers.agent.entrypoints=web"
+{% endif %}
+{% endif %}
+
+{% if enableverifier %}
+  verifier:
+    build:
+      dockerfile: "{{ docker.dir }}/verifier/Dockerfile"
+    hostname: verifier
+    volumes:
+      - "{{ verifier.dir }}:/opt/app"
+    ports:
+      - {{ verifier.port }}:5002
+    restart: unless-stopped
+    networks:
+      - eduwallet_agent
+    links:
+      - "db:db"
+{% if traefik.enabled %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.verifier.rule={{ traefik_hosts_verifier_string }}"
+{% if traefik.secure == 'true' %}
+      - "traefik.http.routers.verifier.entrypoints=websecure"
+      - "traefik.http.routers.verifier.tls.certresolver=myresolver"
+{% else %}
+      - "traefik.http.routers.verifier.entrypoints=web"
+{% endif %}
 {% endif %}
 {% endif %}
 

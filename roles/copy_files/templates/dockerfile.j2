@@ -5,7 +5,6 @@ RUN npm -g install pnpm && SHELL=bash pnpm setup && source /root/.bashrc && pnpm
 RUN pnpm add typescript tslib
 WORKDIR /opt/app
 
-ENV GENERATE_SOURCEMAP=false
 ENV NODE_SCRIPT={{ agent.script }}
 ENV GENERATE_SOURCEMAP=false
 ENTRYPOINT npm run-script {{ agent.script }}

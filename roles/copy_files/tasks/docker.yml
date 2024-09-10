@@ -1,0 +1,45 @@
+- name: Ensure Docker directory exists
+  file:
+    state: directory
+    path: "{{ docker.dir }}"
+    mode: 0755
+  become: yes
+
+- name: Ensure Docker Agent directory exists
+  file:
+    state: directory
+    path: "{{ docker.dir }}/agent"
+    mode: 0755
+  become: yes
+
+- name: Ensure Docker Verifier directory exists
+  file:
+    state: directory
+    path: "{{ docker.dir }}/verifier"
+    mode: 0755
+  become: yes
+
+- name: Push Dockerfile
+  template:
+    src: dockerfile.j2
+    dest: "{{ docker.dir }}/agent/Dockerfile"
+  become: yes
+
+- name: Push Dockerfile
+  template:
+    src: dockerfile_verifier.j2
+    dest: "{{ docker.dir }}/verifier/Dockerfile"
+  become: yes
+  when: enableverifier
+
+- name: Push Docker Env file
+  template:
+    src: docker.env.j2
+    dest: "{{ docker.dir }}/.env"
+  become: yes
+
+- name: Push Docker Compose configuration
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ docker.dir }}/docker-compose.yml"
+  become: yes

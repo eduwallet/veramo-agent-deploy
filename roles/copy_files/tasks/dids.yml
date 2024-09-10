@@ -1,12 +1,12 @@
 ---
-- name: Ensure the Dids configuration directories exists
+- name: Agent - Ensure the Dids configuration directories exists
   file:
     state: directory
     path: "{{ agent.dir }}/conf/dids"
     mode: 0755
   become: yes
 
-- name: Install issuer DID specifications
+- name: Agent - Install issuer DID specifications
   template:
     src: did.json.j2
     dest: "{{ agent.dir }}/conf/dids/{{ instance.name }}.json"
@@ -15,7 +15,7 @@
     loop_var: instance
   become: yes
 
-- name: Check DID specifications
+- name: Agent - Check DID specifications
   ansible.builtin.shell:
     cmd: "cat {{ agent.dir }}/conf/dids/{{ instance.name }}.json | jq '.'"
     chdir: "{{ docker.dir }}"
@@ -23,3 +23,31 @@
   loop_control:
     loop_var: instance
   become: yes
+
+- name: Verifier - Ensure the Dids configuration directories exists
+  file:
+    state: directory
+    path: "{{ verifier.dir }}/conf/dids"
+    mode: 0755
+  become: yes
+  when: enableverifier
+
+- name: Verifier - Install verifier DID specifications
+  template:
+    src: didkey.json.j2
+    dest: "{{ verifier.dir }}/conf/dids/{{ instance.name }}.json"
+  loop: "{{ verifier_dids }}"
+  loop_control:
+    loop_var: instance
+  become: yes
+  when: enableverifier
+
+- name: Verifier - Check DID specifications
+  ansible.builtin.shell:
+    cmd: "cat {{ verifier.dir }}/conf/dids/{{ instance.name }}.json | jq '.'"
+    chdir: "{{ docker.dir }}"
+  loop: "{{ verifier_dids }}"
+  loop_control:
+    loop_var: instance
+  become: yes
+

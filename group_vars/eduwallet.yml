@@ -1,7 +1,9 @@
 deploydomain: "dev.eduwallet.nl"
 basedomain: "agent.{{ deploydomain }}"
+verifierdomain: "verifier.{{deploydomain }}"
 enablehttps: "true"
 protocol: "https"
+enableverifier: true
 
 # For identifying the issuers and signing the credentials, this deployment uses did:web keys
 # associated with specific issuer domains, based on the front-end facing application that
@@ -26,6 +28,13 @@ dids:
   - name: epi
     domain: "epi.{{ deploydomain }}"
 
+# For identifying the verifiers and signing the authorization requests, we use did:keys
+# instead of did:web values. This keeps the verifiers nimble and relocatable without
+# having to configure reverse proxies. New verifiers can be easily added regardless of
+# the domain name. We only require a name for each key.
+verifier_dids:
+  - name: demovp
+
 # This defines the list of credential configurations that the agent can potentially supply inside
 # the credential metadata. These configuration files are referenced in the metadata specifications
 # for easy reuse and ensuring that all configurations are constituted in the same way.
@@ -34,6 +43,19 @@ credential_configurations:
     template: abc.json.j2
   - name: PID
     template: pid.json.j2
+
+# This defines the list of Presentation Definitions. Each definition is a way to request a certain
+# credential-with-attributes. As long as we do not have SD-JWT credentials, we will always get the
+# entire credential anyway, so the list is short at first
+presentation_configurations:
+  - id: ABC
+    name: "Academic Base Credential"
+    template: pres_abc.json.j2
+    purpose: "We need to establish your base Academic relation"
+  - id: PID
+    name: "Personal ID"
+    template: pres_pid.json.j2
+    purpose: "We need to establish your basic identity"
 
 # The list of installations defines the subpaths on the veramo-agent that the agent will listen to.
 # Each installation comes with its own credential metadata and well-known endpoints.
@@ -188,3 +210,18 @@ installations:
 #    domain: "mbob.{{ deploydomain }}"
 #    hash: "02ad6064f20905decbcf4a45ba7aabb3c035749121e7de0791f08f84bfb7b97d83"
 #    pubName: "MBO Beek"
+
+
+verifiers:
+  - name: demovp
+    path: "/demovp"
+    presentations:
+      - ABC
+      - PID
+    token: !vault |
+           $ANSIBLE_VAULT;1.1;AES256
+           3965356364643262653030356633366461343763373963383965646361373430323331646232656632343861633863396536
+           63323666366238363736343832640a6262613365343330623433623633396337343239656363333837323265356330393137
+           63303763383434313633646131343664376330353033353931373866650a6530336630663362386136616339656333363437
+           3866323439353663653862376638393135303031393236313766303266623232323163643465663863616136383137363736
+           6564396638633665386537616562663730313232326461653237

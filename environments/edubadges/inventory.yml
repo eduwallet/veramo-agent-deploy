@@ -5,6 +5,7 @@ staging:
       basedomain: agent.{{ deploydomain }}
       enablehttps: 'true'
       protocol: https
+      enableverifier: false
       dids:
         - domain: edubadges.{{ deploydomain }}
           name: edubadges

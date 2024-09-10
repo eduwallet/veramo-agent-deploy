@@ -7,3 +7,12 @@
     force: yes
   become: yes
 
+- name: Clone the Verifier repository
+  ansible.builtin.git:
+    repo: "{{ sources.verifier.repo }}"
+    dest: "{{ verifier.dir }}"
+    version: "{{ sources.verifier.version }}"
+    force: yes
+  become: yes
+  when: enableverifier
+

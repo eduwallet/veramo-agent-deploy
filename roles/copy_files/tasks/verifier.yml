@@ -1,0 +1,56 @@
+---
+- name: Ensure the Presentation configuration directory exists
+  file:
+    state: directory
+    path: "{{ verifier.dir }}/conf/presentations"
+    mode: 0755
+  become: yes
+
+- name: Install presentation definitions
+  template:
+    src: "{{ instance.template }}"
+    dest: "{{ verifier.dir }}/conf/presentations/{{ instance.id }}.json"
+  loop: "{{ presentation_configurations }}"
+  loop_control:
+    loop_var: instance
+  become: yes
+
+- name: Check presentation definitions
+  ansible.builtin.shell:
+    cmd: "cat {{ verifier.dir }}/conf/presentations/{{ instance.id }}.json | jq '.'"
+    chdir: "{{ docker.dir }}"
+  loop: "{{ presentation_configurations }}"
+  loop_control:
+    loop_var: instance
+  become: yes
+
+- name: Push Verifier Env file
+  template:
+    src: verifier.env.j2
+    dest: "{{ verifier.dir }}/.env"
+  become: yes
+
+- name: Ensure the Verifiers configuration directory exists
+  file:
+    state: directory
+    path: "{{ verifier.dir }}/conf/verifiers"
+    mode: 0755
+  become: yes
+
+- name: Install verifier configurations
+  template:
+    src: verifier.json.j2
+    dest: "{{ verifier.dir }}/conf/verifiers/{{ instance.name }}.json"
+  loop: "{{ verifiers }}"
+  loop_control:
+    loop_var: instance
+  become: yes
+
+- name: Check verifier configurations
+  ansible.builtin.shell:
+    cmd: "cat {{ verifier.dir }}/conf/verifiers/{{ instance.name }}.json | jq '.'"
+    chdir: "{{ docker.dir }}"
+  loop: "{{ verifiers }}"
+  loop_control:
+    loop_var: instance
+  become: yes

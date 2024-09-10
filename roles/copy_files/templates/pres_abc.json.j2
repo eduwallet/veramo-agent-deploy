@@ -1,0 +1,39 @@
+{
+    "id": "{{ instance.id }}",
+    "name": "{{ instance.name }}",
+    "purpose": "{{ instance.purpose }}",
+    "input_descriptors": [{
+        "id": "{{ instance.id }}",
+        "name": "{{ instance.name }}",
+        "purpose": "{{ instance.purpose }}",
+        "schema": [
+            {
+                "uri": "AcademicBaseCredential"
+            }
+        ],
+        "constraints": {
+            "fields": [
+                {
+                    "path": [
+                        "$.credentialSubject.name"
+                    ]
+                },
+                {
+                    "path": [
+                        "$.credentialSubject.given_name"
+                    ]
+                },
+                {
+                    "path": [
+                        "$.credentialSubject.family_name"
+                    ]
+                },
+                {
+                    "path": [
+                        "$.credentialSubject.email"
+                    ]
+                }
+            ]
+        }
+    }]
+}

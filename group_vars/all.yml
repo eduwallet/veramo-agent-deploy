@@ -8,12 +8,11 @@ basic_applications:
 
 basedir: /opt/agent
 
-# All domains that we must generate ssl certificates for. The deploy domain and any domain listed
-# in dids
-ssl_domains: "{{ [basedomain] + dids | map(attribute='domain') }}"
 # SSL domains turned into a string for docker-compose traefik labels:
 # Host(`sub.example.com`) || Host(`foo.sub.example.ecom`) etc. Note the backtick.
-traefik_hosts_string:  "{{ ssl_domains | map('regex_replace', '(.+)', 'Host(`\\1`)') | join(' || ') }}"
+traefik_hosts_string:  "{{ [basedomain] | map('regex_replace', '(.+)', 'Host(`\\1`)') | join(' || ') }}"
+traefik_hosts_verifier_string:  "{{ [verifierdomain] | map('regex_replace', '(.+)', 'Host(`\\1`)') | join(' || ') }}"
+
 
 traefik:
   enabled: true
@@ -35,6 +34,9 @@ sources:
   agent:
     repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/veramo-agent.git"
     version: HEAD
+  verifier:
+    repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/veramo-verifier.git"
+    version: HEAD
 
 docker:
   dir: "{{ basedir }}/docker"
@@ -45,6 +47,7 @@ agent:
   hostname: "{{ basedomain }}"
   port: 5000
   host: "{{ protocol }}://agent.{{ basedomain }}"
+  schema: agent
   dbkey: !vault |
          $ANSIBLE_VAULT;1.1;AES256
          613138333438633365356562313765626263373936373561623332333236353735343636633062376463623231353365386632
@@ -53,12 +56,26 @@ agent:
          646334343834623734643834316635386662316136393035376261353933626337383232383964393665663731313865303462
          38343065623530646162336236656339663564663131
 
+verifier:
+  dir: "{{ basedir }}/verifier"
+  script: "dev"
+  hostname: "{{ verifierdomain }}"
+  port: 5002
+  host: "{{ protocol }}://agent.{{ verifierdomain }}"
+  schema: verifier
+  dbkey: !vault |
+         $ANSIBLE_VAULT;1.1;AES256
+         643935353937353239303937623639653538376630663932306636646530653732643238383063636264306264666231623061
+         613262663135393562333537650a31626466633835313063613837613635343338393138653563623536393434646234353331
+         3261643931656137326531363238643463306130386135643662310a6332613134336639636261346464646139366434363663
+         393063316331356466663036623364646364313636646139363831386565663438393530323536653262626663396364393937
+         62643035646664343539383630373733383930656562
+
 database:
   dir: "{{ basedir }}/database"
   port: 5001
   user: postgres
   name: postgres
-  schema: agent
   scripts: "{{ basedir }}/agent/scripts/dbinit"
   password: !vault |
             $ANSIBLE_VAULT;1.1;AES256

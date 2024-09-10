@@ -4,3 +4,10 @@
   loop: "{{ installations }}"
   loop_control:
     loop_var: installation
+
+- name: Loop over the verifier installations
+  include_tasks: test_verifier.yml
+  loop: "{{ verifiers }}"
+  loop_control:
+    loop_var: installation
+  when: enableverifier

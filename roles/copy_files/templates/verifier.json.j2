@@ -1,0 +1,7 @@
+{
+    "name": "{{ instance.name }}",
+    "did": "did:key:{{ instance.name }}",
+    "adminToken": "{{ instance.token }}",
+    "path": "{{ instance.path }}",
+    "presentations": {{ instance.presentations | to_json }}
+}
