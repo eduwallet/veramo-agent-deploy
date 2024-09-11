@@ -1,16 +1,20 @@
 ---
-- name: "{{ installation.name }}: Testing create authorization
+- name: "{{ installation.name }}: Testing create authorization"
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ verifierdomain }}{{ installation.path }}/api/create-offer"
+    url: "{{ protocol }}://{{ verifierdomain }}{{ installation.path }}/api/create-offer/{{ installation.testPresentation}}"
     body_format: json
     headers:
       Content-type: 'application/json'
-      Authorization: "Bearer {{ installation.adminToken }}"
-    body: "'{}'"
+      Authorization: "Bearer {{ installation.token }}"
+    body: "{\"dummy\":1}"
     method: POST
+  register: createoutput
 
 - name: "{{ installation.name }}: Testing get offer"
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ verifierdomain }}{{ installation.path }}/api/get-credential-offer/{{ installation.preauthcode}}"
+    url: "{{ createoutput.json.checkUri }}"
+    headers:
+      Content-type: 'application/json'
+      Authorization: "Bearer {{ installation.token }}"
     method: GET
 

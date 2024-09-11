@@ -147,13 +147,13 @@ installations:
     hash: "731c51bfaa95271f35e472afd59e1a4ab9dc70519ed8836f3bb5e163cd8bdda9"
     pubName: "Kingdom of the Netherlands"
     branding:
-      name: "Principal ID"
-      description: "Principal Identity Document of the Kingdom of the Netherlands"
-      logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
-      logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
-      card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
+      name: "Personal ID"
+      description: "Personal Identity Document of the Kingdom of the Netherlands"
+      logo: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_logo.png
+      logo_alttext: "Weapon of the Kingdom with two lions and the text Digitale Zaken"
+      card: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_bg.png
       color: '#ffffff'
-      background_color: '#4779aa'
+      background_color: '#DFF4FF'
   - name: nbgov
     preauthcode: WrBAlTNCBfUHDWHtYF0nkV9aJqBVIP5z
     adminToken: !vault |
@@ -168,13 +168,13 @@ installations:
     hash: "2290bb57a2b501730db6610e0a6e371f3d3d4c8e174bf9f76e1dc7244f4ae409"
     pubName: "Galactic Republic of Naboo"
     branding:
-      name: "Principal ID"
-      description: "Principal Identity Document of the Galactic Republic of Naboo"
-      logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
-      logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
-      card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
+      name: "Personal ID"
+      description: "Personal Identity Document of the Galactic Republic of Naboo"
+      logo: https://nb.gov.dev.eduwallet.nl/images/nbgov_credential_logo.png
+      logo_alttext: "French tulip like logo with Digital Affairs subtitle"
+      card: https://nb.gov.dev.eduwallet.nl/images/nbgov_credential_bg.png
       color: '#ffffff'
-      background_color: '#4779aa'
+      background_color: '#B1A77F'
   - name: epi
     preauthcode: 4GOmhdYyDWfGXT7R21iQ0qB8aBFhYAc9
     adminToken: !vault |
@@ -218,6 +218,7 @@ verifiers:
     presentations:
       - ABC
       - PID
+    testPresentation: PID
     token: !vault |
            $ANSIBLE_VAULT;1.1;AES256
            3965356364643262653030356633366461343763373963383965646361373430323331646232656632343861633863396536
