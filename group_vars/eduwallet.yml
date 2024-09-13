@@ -34,6 +34,7 @@ dids:
 # the domain name. We only require a name for each key.
 verifier_dids:
   - name: demovp
+  - name: proxy
 
 # This defines the list of credential configurations that the agent can potentially supply inside
 # the credential metadata. These configuration files are referenced in the metadata specifications
