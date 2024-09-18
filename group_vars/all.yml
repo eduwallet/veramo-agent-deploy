@@ -8,12 +8,6 @@ basic_applications:
 
 basedir: /opt/agent
 
-# SSL domains turned into a string for docker-compose traefik labels:
-# Host(`sub.example.com`) || Host(`foo.sub.example.ecom`) etc. Note the backtick.
-traefik_hosts_string:  "{{ [basedomain] | map('regex_replace', '(.+)', 'Host(`\\1`)') | join(' || ') }}"
-traefik_hosts_verifier_string:  "{{ [verifierdomain] | map('regex_replace', '(.+)', 'Host(`\\1`)') | join(' || ') }}"
-
-
 traefik:
   enabled: true
   secure: "{{ enablehttps }}"
@@ -48,6 +42,7 @@ agent:
   port: 5000
   host: "{{ protocol }}://agent.{{ basedomain }}"
   schema: agent
+  extra_docker_compose_labels: [] # To add o.o additional traefik configuration in docker compose
   dbkey: !vault |
          $ANSIBLE_VAULT;1.1;AES256
          613138333438633365356562313765626263373936373561623332333236353735343636633062376463623231353365386632
@@ -63,6 +58,7 @@ verifier:
   port: 5002
   host: "{{ protocol }}://agent.{{ verifierdomain }}"
   schema: verifier
+  extra_docker_compose_labels: [] # To add o.o additional traefik configuration in docker compose
   dbkey: !vault |
          $ANSIBLE_VAULT;1.1;AES256
          643935353937353239303937623639653538376630663932306636646530653732643238383063636264306264666231623061
