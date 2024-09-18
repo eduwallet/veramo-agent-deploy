@@ -1,14 +1,53 @@
 staging:
   hosts:
     poc4.eduwallet.nl:
-      deploydomain: poc4.eduwallet.nl
-      basedomain: agent.{{ deploydomain }}
+      deploydomain: "poc4.eduwallet.nl"
+      basedomain: "agent.{{ deploydomain }}"
+      verifierdomain: "verifier.{{ deploydomain }}"
       enablehttps: 'true'
       protocol: https
       enableverifier: false
+ 
+      # Temporary override to use the features/open-badge-credential branch untill we finalize this and
+      # have it merged
+      sources:
+        agent:
+          repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/veramo-agent.git"
+          version: "feature/open-badge-credential"
+
+      agent:
+        dir: "{{ basedir }}/agent"
+        script: "start:dev"
+        hostname: "{{ basedomain }}"
+        port: 5000
+        host: "{{ protocol }}://agent.{{ basedomain }}"
+        schema: agent
+        dbkey: !vault |
+               $ANSIBLE_VAULT;1.1;AES256
+               613138333438633365356562313765626263373936373561623332333236353735343636633062376463623231353365386632
+               626534646336363265386539620a66636131333232353464303834363639306239373363393832346235653735363564383131
+               6638373737363863363835623264343633623866646337653436640a3730653334646265306633353930623430303031666533
+               646334343834623734643834316635386662316136393035376261353933626337383232383964393665663731313865303462
+               38343065623530646162336236656339663564663131
+        extra_docker_compose_labels:
+          # Add an extra route that proxies to the agent for our did domain.
+          # See under 'dids'. Append a did name to the path. 
+          # The agent then serves did files at:
+          #   https://agent.example.com/foobar/.well-known/did.json
+          # But the did:web expects it at:
+          #   https://foobar.example.com/.well-known/did.json
+          - "traefik.http.routers.edubadges.rule=Host(`edubadges.{{ deploydomain }}`)"
+          - "traefik.http.routers.edubadges.entrypoints=websecure"
+          - "traefik.http.routers.edubadges.tls.certresolver=myresolver"
+          - "traefik.http.middlewares.edubadges-addprefix.addprefix.prefix=/edubadges"
+          - "traefik.http.routers.edubadges.middlewares=edubadges-addprefix"
+
       dids:
         - domain: edubadges.{{ deploydomain }}
           name: edubadges
+
+      verifier_dids:
+        - name: demovp
 
       credential_configurations:
         - name: AcademicBaseCredential
