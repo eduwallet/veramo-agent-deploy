@@ -231,6 +231,7 @@ verifiers:
     path: "/proxy"
     presentations:
       - ABC
+      - PID
     testPresentation: ABC
     token: !vault |
            $ANSIBLE_VAULT;1.1;AES256
