@@ -90,6 +90,33 @@ services:
 {% endif %}
 {% endif %}
 
+{% if verifierdeploy and verifierdeploy.install %}
+{% for installation in verifierdeploy.installations %}
+  {{ installation.name }}:
+    build:
+      dockerfile: "{{ verifierdeploy.dir }}/{{ installation.path }}/docker/Dockerfile"
+    hostname: {{ installation.name }}
+    volumes:
+      - "{{ verifierdeploy.dir }}/{{ installation.path }}/app:/var/www/html"
+    ports:
+      - {{ installation.port }}:80
+    restart: unless-stopped
+    networks:
+      - eduwallet_agent
+{% if traefik.enabled %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.verifier.rule=Host(`{{ installation.domain }}`)"
+{% if traefik.secure == 'true' %}
+      - "traefik.http.routers.verifier.entrypoints=websecure"
+      - "traefik.http.routers.verifier.tls.certresolver=myresolver"
+{% else %}
+      - "traefik.http.routers.verifier.entrypoints=web"
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
   db:
     image: postgres:16-bookworm
     hostname: db

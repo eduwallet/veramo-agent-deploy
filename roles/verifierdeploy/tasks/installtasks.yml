@@ -1,0 +1,31 @@
+---
+- name: Build the docker container
+  ansible.builtin.shell:
+    cmd:  "docker compose -p eduwallet_agent build"
+    chdir: "{{ verifierdeploy.dir }}/{{ deploy.path }}/docker"
+  become: yes
+
+- name: Get composer
+  ansible.builtin.shell:
+    cmd:  "docker run -v .:/var/www/html --entrypoint /usr/local/bin/php eduwallet_agent-{{ deploy.name }} -r 'copy(\"https://getcomposer.org/installer\", \"composer-setup.php\");'"
+    chdir: "{{ verifierdeploy.dir }}/{{ deploy.path }}/app"
+  become: yes
+
+- name: Configure composer
+  ansible.builtin.shell:
+    cmd:  "docker run -v .:/var/www/html --entrypoint /usr/local/bin/php eduwallet_agent-{{ deploy.name }} composer-setup.php"
+    chdir: "{{ verifierdeploy.dir }}/{{ deploy.path }}/app"
+  become: yes
+
+- name: Install composer requirements
+  ansible.builtin.shell:
+    cmd:  "docker run -v .:/var/www/html --entrypoint /usr/local/bin/php eduwallet_agent-{{ deploy.name }} composer.phar install"
+    chdir: "{{ verifierdeploy.dir }}/{{ deploy.path }}/app"
+  become: yes
+
+- name: Push environment file
+  template:
+    src: "{{ deploy.envtemplate }}"
+    dest: "{{ verifierdeploy.dir }}/{{ deploy.path }}/app/.env"
+  become: yes
+

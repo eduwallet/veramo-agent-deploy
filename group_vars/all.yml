@@ -37,6 +37,9 @@ sources:
   verifier:
     repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/veramo-verifier.git"
     version: HEAD
+  verifierdeploy:
+    repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/verifier-deploy.git"
+    version: HEAD
 
 docker:
   dir: "{{ basedir }}/docker"

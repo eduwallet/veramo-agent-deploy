@@ -4,6 +4,7 @@
   roles:
     - { role: basic, tags: ['basic', 'install'] }
     - { role: clone_repo, tags: ['clone', 'install'] }
+    - { role: verifierdeploy, tags: ['verifierdeploy', 'install'] }
     - { role: copy_files, tags: ['copy', 'install'] }
     - { role: run_docker, tags: ['docker', 'run'] }
     - { role: test_install, tags: ['test']}
