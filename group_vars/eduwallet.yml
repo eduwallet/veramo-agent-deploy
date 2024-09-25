@@ -247,7 +247,7 @@ verifierdeploy:
   installations:
     - name: democv
       port: 8001
-      domain: "demo-vp.verifier.{{ deploydomain }}"
+      domain: "demo-cv.verifier.{{ deploydomain }}"
       path: demo-cv
       envtemplate: democv.env.j2
       verifier: demovp
