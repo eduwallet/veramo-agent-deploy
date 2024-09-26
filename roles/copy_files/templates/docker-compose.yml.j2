@@ -51,6 +51,7 @@ services:
       - eduwallet_agent
     links:
       - "db:db"
+      - "log:log"
 {% if traefik.enabled %}
     labels:
       - "traefik.enable=true"
@@ -77,6 +78,7 @@ services:
       - eduwallet_agent
     links:
       - "db:db"
+      - "log:log"
 {% if traefik.enabled %}
     labels:
       - "traefik.enable=true"
@@ -138,6 +140,35 @@ services:
         source: {{ database.scripts }}
         target: /docker-entrypoint-initdb.d
     # no Traefik configuration, the database is not publicly available
+
+  log:
+    image: public.ecr.aws/zinclabs/openobserve:latest
+    hostname: log
+    restart: unless-stopped
+    ports:
+      - 5080:5080
+    networks:
+      - eduwallet_agent
+    volumes:
+      - type: bind
+        source: {{ openobserver.datadir }}
+        target: /data
+    environment:
+      - ZO_DATA_DIR=/data
+      - ZO_ROOT_USER_EMAIL={{ openobserver.adminEmail }}
+      - ZO_ROOT_USER_PASSWORD={{ openobserver.adminPassword }}
+      - ZO_INGEST_FLATTEN_LEVEL=1
+{% if traefik.enabled %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.openobserver.rule=Host(`{{ openobserver.hostname }}`)"
+{% if traefik.secure == 'true' %}
+      - "traefik.http.routers.openobserver.entrypoints=websecure"
+      - "traefik.http.routers.openobserver.tls.certresolver=myresolver"
+{% else %}
+      - "traefik.http.routers.openobserver.entrypoints=web"
+{% endif %}
+{% endif %}
 
 networks:
   eduwallet_agent:

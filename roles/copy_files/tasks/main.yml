@@ -9,4 +9,10 @@
   include_tasks: verifier.yml
   when: enableverifier
 
+- name: Ensure the OpenObserver log directory exists
+  file:
+    state: directory
+    path: "{{ openobserver.datadir }}"
+    mode: 0755
+  become: yes
 

@@ -1,6 +1,7 @@
 deploydomain: "dev.eduwallet.nl"
 basedomain: "agent.{{ deploydomain }}"
 verifierdomain: "verifier.{{deploydomain }}"
+logdomain: "logs.{{ deploydomain }}"
 enablehttps: "true"
 protocol: "https"
 enableverifier: true
