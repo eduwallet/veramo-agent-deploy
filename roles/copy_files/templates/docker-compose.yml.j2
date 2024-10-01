@@ -119,6 +119,33 @@ services:
 {% endfor %}
 {% endif %}
 
+{% if statuslists and statuslists.install %}
+  statuslist:
+    build:
+      dockerfile: "{{ statuslists.dir }}/docker/Dockerfile"
+    hostname: statuslist
+    volumes:
+      - "{{ statuslists.dir }}:/opt/app"
+    restart: unless-stopped
+    links:
+      - "db:db"
+    ports:
+      - 7001:80
+    networks:
+      - eduwallet_agent
+{% if traefik.enabled %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.statuslist.rule=Host(`{{ statuslists.domain }}`)"
+{% if traefik.secure == 'true' %}
+      - "traefik.http.routers.statuslist.entrypoints=websecure"
+      - "traefik.http.routers.statuslist.tls.certresolver=myresolver"
+{% else %}
+      - "traefik.http.routers.statuslist.entrypoints=web"
+{% endif %}
+{% endif %}
+{% endif %}
+
   db:
     image: postgres:16-bookworm
     hostname: db

@@ -40,6 +40,9 @@ sources:
   verifierdeploy:
     repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/verifier-deploy.git"
     version: HEAD
+  statuslist:
+    repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/statuslist-agent.git"
+    version: HEAD
 
 docker:
   dir: "{{ basedir }}/docker"

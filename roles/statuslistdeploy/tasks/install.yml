@@ -1,0 +1,59 @@
+---
+- name: Clone the StatusList agent repository
+  ansible.builtin.git:
+    repo: "{{ sources.statuslist.repo }}"
+    dest: "{{ statuslists.dir }}"
+    version: "{{ sources.statuslist.version }}"
+    force: yes
+  become: yes
+
+- name: Push Env
+  template:
+    src: env.j2
+    dest: "{{ statuslists.dir }}/.env"
+  become: yes
+
+- name: Build the docker container
+  ansible.builtin.shell:
+    cmd: "docker build -t eduwallet_agent-statuslist ."
+    chdir: "{{ statuslists.dir }}/docker"
+  become: yes
+
+- name: Install node modules
+  ansible.builtin.shell:
+    cmd: "docker run -v {{ statuslists.dir }}:/opt/app --entrypoint /usr/local/bin/yarn eduwallet_agent-statuslist install"
+  become: yes
+
+- name: Create a random key
+  shell: "docker run -v {{ statuslists.dir }}:/opt/app --entrypoint /usr/local/bin/npm eduwallet_agent-statuslist run key {{statuslists.keytype }} | tail -1"
+  register: keyoutput
+
+- name: Search for existing key file
+  stat:
+    path: "{{ statuslists.dir }}/local.key"
+  register: existingkey
+
+- name: Push key configuration
+  template:
+    src: local.key.j2
+    dest: "{{ statuslists.dir }}/local.key"
+    mode: 0600
+  become: yes
+  when: not existingkey.stat.exists
+
+- name: Ensure List configuration directory exists
+  file:
+    state: directory
+    path: "{{ statuslists.dir }}/conf/lists"
+    mode: 0755
+  become: yes
+
+- name: Copy statuslist configurations
+  template:
+    src: statuslist.json.j2
+    dest: "{{statuslists.dir }}/conf/lists/{{ item.name }}.json"
+  loop: "{{ statuslists.installations }}"
+  loop_control:
+    loop_var: item
+
+
