@@ -270,6 +270,7 @@ statuslists:
   keytype: "ed25519"
   installations:
     - name: abcrevoke
+      credential: AcademicBaseCredential
       purpose: revocation
       size: 131072
       token: !vault |
@@ -280,6 +281,7 @@ statuslists:
              61383866323537623738343539313138366562346366316437613438326332333465333136353239613864346634346531
              346630303233373330623832623461343839616362626136323336393937
     - name: pidrevoke
+      credential: PID
       purpose: revocation
       size: 131072
       token: !vault |
