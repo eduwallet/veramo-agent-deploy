@@ -18,7 +18,7 @@ traefik:
   enabled: true
   secure: "{{ enablehttps }}"
   postmaster: certbot@muisit.nl
-  expose: true
+  expose: false
 
 # This is a generic deploy token for the veramo-agent gitlab application. As long as this ansible only deploys
 # exactly that gitlab repository, the token can be used by all environments
