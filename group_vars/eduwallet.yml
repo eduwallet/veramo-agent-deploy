@@ -113,6 +113,29 @@ tokens:
             303964653832313630333930356630663930383538343334346638613465383638310a3935366163666537303939636
             56238616462393763633065303763623661333039396363356665343932336464323532356661633664363463306639
             376466663665303263306432383066313264386566383636663038316634363335353631
+  dashboard:
+    admin:  !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            65313036356563386238633039313761303364613066613036663836636263303662303062373762376137363761386
+            1303862363831626361353339646331370a333339633263343736326234303735646535656563653638613235343235
+            396166636134653062316666366430316236663931343264643263393038613839350a6439613735643532616530336
+            16131663133323866383266353333396136343637383030613362383762313930636463323330616137613263333031
+            633636333135666665396466326465323239383734313833666635656430396565343062
+    status: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            33376165623430626530386466313165336430363937323937356633663431656233666666623130356330633964376
+            6366163323634613333343332643338310a366330623231383036323839353630393037316632663334313362646634
+            366665313135643739663930633633363036386331653234643232653731663235640a6438386662383234346137353
+            63163353933636465653264653230366237663831643537386633623330333964333161323366333064393235366430
+            653164663463373439373864336538396337383234626230323930396537333635376434
+    verAdmin: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            38303565386362373837333531343638356631316135343335663361303966393265383961326330366137393234373
+            2316366613761663263646266336665390a343132333239666264373165613939306634386665666639333639366364
+            336232613530383363343466613263313537303963343163323135316135663231620a6361323731323532633435623
+            23038326562663137333737323634356536653232666638316339366265643833373061663766366532623330643139
+            356332316636656534373030663666323266643132343236316534343061613365333930
+
 
 # For identifying the issuers and signing the credentials, this deployment uses did:web keys
 # associated with specific issuer domains, based on the front-end facing application that
@@ -136,6 +159,8 @@ dids:
     domain: "nb.gov.{{ deploydomain }}"
   - name: epi
     domain: "epi.{{ deploydomain }}"
+  - name: dashboard
+    domain: "dashboard.{{ deploydomain }}"
 
 # For identifying the verifiers and signing the authorization requests, we use did:keys
 # instead of did:web values. This keeps the verifiers nimble and relocatable without
@@ -144,6 +169,7 @@ dids:
 verifier_dids:
   - name: demovp
   - name: proxy
+  - name: dashboard
 
 # This defines the list of credential configurations that the agent can potentially supply inside
 # the credential metadata. These configuration files are referenced in the metadata specifications
@@ -184,98 +210,132 @@ installations:
     preauthcode: 9slAxx0AgJjHtS2hChULnPvExeYsLLpu
     adminToken: "{{ tokens.mbob.admin }}"
     statusToken: "{{ tokens.mbob.status }}"
-    credential: AcademicBaseCredential
+    credentials: 
+      AcademicBaseCredential:
+        id: AcademicBaseCredential
+        first: true
+        name: "Academic Base Credential"
+        description: "Basic credential indicating affiliation with MBO Beek"
+        logo: https://mbob.dev.eduwallet.nl/images/mbob_credential_logo.png
+        logo_alttext: "MBO Beek"
+        card: https://mbob.dev.eduwallet.nl/images/mbob_credential_bg.png
+        color: '#ffffff'
+        background_color: '#8f0f12'
     domain: "mbob.{{ deploydomain }}"
     hash: "bf698b7dadb7ca6ed8334dbad87a4a4a95a3fda988ee837b44ed5fce387b0261"
     pubName: "MBO Beek"
-    branding:
-      name: "Academic Base Credential"
-      description: "Basic credential indicating affiliation with MBO Beek"
-      logo: https://mbob.dev.eduwallet.nl/images/mbob_credential_logo.png
-      logo_alttext: "MBO Beek"
-      card: https://mbob.dev.eduwallet.nl/images/mbob_credential_bg.png
-      color: '#ffffff'
-      background_color: '#8f0f12'
   - name: tun
     preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
     adminToken: "{{ tokens.tun.admin }}"
     statusToken: "{{ tokens.tun.status }}"
-    credential: AcademicBaseCredential
+    credentials:
+      AcademicBaseCredential:
+        id: AcademicBaseCredential
+        first: true
+        name: "Academic Base Credential"
+        description: "Basic credential indicating affiliation with the Theed University of Naboo"
+        logo: https://tun.dev.eduwallet.nl/images/tun_credential_logo.png
+        logo_alttext: "Theed University of Naboo with a partial planet image"
+        card: https://tun.dev.eduwallet.nl/images/tun_credential_bg.png
+        color: '#ffffff'
+        background_color: '#0501ed'
     domain: "tun.{{ deploydomain }}"
     hash: "095260b0509b1ef98fc0e0bafb07038013eb9f875e7674cc3d80e66ffba7b367"
     pubName: "Theed University of Naboo"
-    branding:
-      name: "Academic Base Credential"
-      description: "Basic credential indicating affiliation with the Theed University of Naboo"
-      logo: https://tun.dev.eduwallet.nl/images/tun_credential_logo.png
-      logo_alttext: "Theed University of Naboo with a partial planet image"
-      card: https://tun.dev.eduwallet.nl/images/tun_credential_bg.png
-      color: '#ffffff'
-      background_color: '#0501ed'
   - name: uvh
     preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
     adminToken: "{{ tokens.uvh.admin }}"
     statusToken: "{{ tokens.uvh.status }}"
-    credential: AcademicBaseCredential
+    credentials:
+      AcademicBaseCredential:
+        id: AcademicBaseCredential
+        first: true
+        name: "Academic Base Credential"
+        description: "Basic credential indicating affiliation with the University of Harderwijk"
+        logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
+        logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
+        card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
+        color: '#ffffff'
+        background_color: '#4779aa'
     domain: "uvh.{{ deploydomain }}"
     hash: "70f164a46dc22e767e410c0bba14b6aa7cb2e53b9f7b81f0171d04dd7d0ed785"
     pubName: "University of Harderwijk"
-    branding:
-      name: "Academic Base Credential"
-      description: "Basic credential indicating affiliation with the University of Harderwijk"
-      logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
-      logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
-      card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
-      color: '#ffffff'
-      background_color: '#4779aa'
   - name: nlgov
     preauthcode: G0WAuJwHxtv2dqAMfoDsopRBjTpavttJ
     adminToken: "{{ tokens.nlgov.admin }}"
     statusToken: "{{ tokens.nlgov.status }}"
-    credential: PID
+    credentials:
+      PID:
+        id: PID
+        first: true
+        name: "Personal ID"
+        description: "Personal Identity Document of the Kingdom of the Netherlands"
+        logo: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_logo.png
+        logo_alttext: "Weapon of the Kingdom with two lions and the text Digitale Zaken"
+        card: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_bg.png
+        color: '#ffffff'
+        background_color: '#DFF4FF'
     domain: "nl.gov.{{ deploydomain }}"
     hash: "731c51bfaa95271f35e472afd59e1a4ab9dc70519ed8836f3bb5e163cd8bdda9"
     pubName: "Kingdom of the Netherlands"
-    branding:
-      name: "Personal ID"
-      description: "Personal Identity Document of the Kingdom of the Netherlands"
-      logo: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_logo.png
-      logo_alttext: "Weapon of the Kingdom with two lions and the text Digitale Zaken"
-      card: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_bg.png
-      color: '#ffffff'
-      background_color: '#DFF4FF'
   - name: nbgov
     preauthcode: WrBAlTNCBfUHDWHtYF0nkV9aJqBVIP5z
     adminToken: "{{ tokens.nbgov.admin }}"
     statusToken: "{{ tokens.nbgov.status }}"
-    credential: PID
+    credentials:
+      PID:
+        id: PID
+        first: true
+        name: "Personal ID"
+        description: "Personal Identity Document of the Galactic Republic of Naboo"
+        logo: https://nb.gov.dev.eduwallet.nl/images/nbgov_credential_logo.png
+        logo_alttext: "French tulip like logo with Digital Affairs subtitle"
+        card: https://nb.gov.dev.eduwallet.nl/images/nbgov_credential_bg.png
+        color: '#ffffff'
+        background_color: '#B1A77F'
     domain: "nb.gov.{{ deploydomain }}"
     hash: "2290bb57a2b501730db6610e0a6e371f3d3d4c8e174bf9f76e1dc7244f4ae409"
     pubName: "Galactic Republic of Naboo"
     branding:
-      name: "Personal ID"
-      description: "Personal Identity Document of the Galactic Republic of Naboo"
-      logo: https://nb.gov.dev.eduwallet.nl/images/nbgov_credential_logo.png
-      logo_alttext: "French tulip like logo with Digital Affairs subtitle"
-      card: https://nb.gov.dev.eduwallet.nl/images/nbgov_credential_bg.png
-      color: '#ffffff'
-      background_color: '#B1A77F'
   - name: epi
     preauthcode: 4GOmhdYyDWfGXT7R21iQ0qB8aBFhYAc9
     adminToken: "{{ tokens.epi.admin }}"
     statusToken: "{{ tokens.epi.status }}"
-    credential: AcademicBaseCredential
-    domain: "epi.{{ deploydomain }}"
+    credentials:
+      AcademicBaseCredential:
+        id: AcademicBaseCredential
+        first: true
+        name: "Academic Base Credential"
+        description: "Academic Base Credential"
+        logo: ''
+        logo_alttext: "None"
+        card: ''
+        color: '#ffffff'
+        background_color: '#4779aa'   domain: "epi.{{ deploydomain }}"
     hash: "0debce0ffee8724769a3f487b3145d9432785520f5d00b47c4a18c33a8ecaeb8"
-    pubName: "Educational Public Issuer"
-    branding:
-      name: "Academic Base Credential"
-      description: "Academic Base Credential"
-      logo: ''
-      logo_alttext: "None"
-      card: ''
-      color: '#ffffff'
-      background_color: '#4779aa'
+    pubName: "Educational Public Issuer" 
+  - name: dashboard
+    preauthcode: bffy0TXajRTnoujKCIhfOnIUYjqmucRa
+    adminToken: "{{ tokens.dashboard.admin }}"
+    statusToken: "{{ tokens.dashboard.status }}"
+    credentials:
+      AcademicBaseCredential:
+        id: AcademicBaseCredential
+        first: true
+        name: "Academic Base Credential"
+        description: "Academic Base Credential"
+        color: '#ffffff'
+        background_color: '#4779aa'
+      PID:
+        id: PID
+        first: false
+        name: "Personal ID"
+        description: "Personal Identity Document"
+        color: '#ffffff'
+        background_color: '#B1A77F'
+    domain: "dashboard.{{ deploydomain }}"
+    hash: "0debce0ffee8724769a3f487b3145d9432785520f5d00b47c4a18c33a8ecaeb8"
+    pubName: "Dashboard Test Issuer"
 
 verifiers:
   - name: demovp
@@ -292,6 +352,13 @@ verifiers:
       - PID
     testPresentation: ABC
     token: "{{ tokens.proxy.admin }}"
+  - name: dashboard
+    path: "/dashboard"
+    presentations:
+      - ABC
+      - PID
+    testPresentation: ABC
+    token: "{{ tokens.dashboard.verAdmin }}"
 
 verifierdeploy:
   install: true
@@ -305,7 +372,6 @@ verifierdeploy:
       verifier: demovp
       presentations: ABC,PID
       token: "{{ tokens.demovp.admin }}"
-
 
 # Statuslists
 statuslists:
@@ -323,6 +389,7 @@ statuslists:
         - "{{ tokens.tun.status }}"
         - "{{ tokens.uvh.status }}"
         - "{{ tokens.epi.status }}"
+        - "{{ tokens.dashboard.status }}"
     - name: pidrevoke
       credential: PID
       purpose: revocation
@@ -330,4 +397,5 @@ statuslists:
       tokens:
         - "{{ tokens.nlgov.status }}" 
         - "{{ tokens.nbgov.status }}"
+        - "{{ tokens.dashboard.status }}"
  

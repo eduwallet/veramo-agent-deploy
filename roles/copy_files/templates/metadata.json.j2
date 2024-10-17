@@ -19,25 +19,32 @@
       }
     ],
     "credential_configurations_supported": {
-      "{{ instance.credential }}": {
+{% for credential in instance.credentials %}
+{% if credential.first %},{% endif %}
+      "{{ credential.id }}": {
         "display": [
           {
-            "name": "{{ instance.branding.name }}",
-            "description": "{{ instance.branding.description }}",
-            "text_color": "{{ instance.branding.color }}",
+            "name": "{{ credential.name }}",
+            "description": "{{ credential.description }}",
+            "text_color": "{{ credential.color }}",
+{% if credential.logo %}            
             "logo": {
-              "uri": "{{ instance.branding.logo }}",
-              "url": "{{ instance.branding.logo }}",
-              "alt_text": "{{ instance.branding.logo_alttext }}"
+              "uri": "{{ credential.logo }}",
+              "url": "{{ credential.logo }}",
+              "alt_text": "{{ credential.logo_alttext }}"
             },
-            "background_color": "{{ instance.branding.background_color }}",
+{% endif %}
+            "background_color": "{{ credential.background_color }}",
+{% if credential.card %}
             "background_image": {
-              "uri": "{{ instance.branding.card }}",
-              "url": "{{ instance.branding.card }}"
+              "uri": "{{ credential.card }}",
+              "url": "{{ credential.card }}"
             }
+{% endif %}
           }
         ]
       }
+{% endfor %}
     }
   }
 }
