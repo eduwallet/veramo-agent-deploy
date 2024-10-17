@@ -1,6 +1,6 @@
 {
   "name": "{{ item.name }}",
-  "token": "{{ item.token }}",
+  "tokens": {{ item.tokens | to_json }},
   "size": {{ item.size }},
   "purpose": "{{ item.purpose }}"
 }

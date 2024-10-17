@@ -24,15 +24,14 @@
 {% if statuslists and statuslists.install %}
   ,"statusLists": {
 {% for statuslist in statuslists.installations %}
-    "{{ statuslist.credential }}": {
-      "url": "https://{{ statuslists.domain }}/{{ statuslist.name }}",
-      "purpose": "{{ statuslist.purpose }}",
-      "size": {{ statuslist.size }},
-      "token": "{{ statuslist.token }}",
-      "revocationUrl": "https://{{ statuslists.domain }}/{{ statuslist.name }}/api/revoke"
-    },
+{% if statuslist.credential == instance.credential %}
+    "{{ instance.credential }}": {
+      "url": "https://{{ statuslists.domain }}/{{ statuslist.name }}/api/index",
+      "revoke": "https://{{ statuslists.domain }}/{{ statuslist.name }}/api/revoke",
+      "token": "{{ instance.statusToken }}"
+    }
+{% endif %}
 {% endfor %}
-    "dummy": {}
   }
 {% endif %}
 }
