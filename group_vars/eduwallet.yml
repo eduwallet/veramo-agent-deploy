@@ -123,11 +123,11 @@ tokens:
             633636333135666665396466326465323239383734313833666635656430396565343062
     status: !vault |
             $ANSIBLE_VAULT;1.1;AES256
-            33376165623430626530386466313165336430363937323937356633663431656233666666623130356330633964376
-            6366163323634613333343332643338310a366330623231383036323839353630393037316632663334313362646634
-            366665313135643739663930633633363036386331653234643232653731663235640a6438386662383234346137353
-            63163353933636465653264653230366237663831643537386633623330333964333161323366333064393235366430
-            653164663463373439373864336538396337383234626230323930396537333635376434
+            34353136666438393832356465666363313964303234383638336264306465376466356337376330656239613738376
+            4326266303036323138303938333530620a326434666637333765363962343439616430613430303937303639396663
+            663266626266393337613136373837653739666464633464613938383865393131640a3662316438653765346536613
+            33032616661653534346234613866373865613165336431323338626330616661383934383065306532666261626363
+            653035666239356637356565353961313063306131613464306434353731316261353133
     verAdmin: !vault |
             $ANSIBLE_VAULT;1.1;AES256
             38303565386362373837333531343638356631316135343335663361303966393265383961326330366137393234373
@@ -207,13 +207,26 @@ presentation_configurations:
 # branding is the issuer specific branding for the one credential that is issued. TODO: support multiple credentials
 installations:
   - name: mbob
-    preauthcode: 9slAxx0AgJjHtS2hChULnPvExeYsLLpu
+    test:
+      preauthcode: 9slAxx0AgJjHtS2hChULnPvExeYsLLpu
+      credential: AcademicBaseCredential
+      object:
+        sub:
+          - "12"
+        eduperson_unique_id:
+          - "abracadabra"
+        given_name:
+          - "test"
+        family_name:
+          - "janssen"
+        email:
+          - "test@example.org"
     adminToken: "{{ tokens.mbob.admin }}"
     statusToken: "{{ tokens.mbob.status }}"
+    logo: https://mbob.dev.eduwallet.nl/images/mbob_credential_logo.png
+    logo_alttext: "MBO Beek"
     credentials: 
       AcademicBaseCredential:
-        id: AcademicBaseCredential
-        first: true
         name: "Academic Base Credential"
         description: "Basic credential indicating affiliation with MBO Beek"
         logo: https://mbob.dev.eduwallet.nl/images/mbob_credential_logo.png
@@ -225,13 +238,27 @@ installations:
     hash: "bf698b7dadb7ca6ed8334dbad87a4a4a95a3fda988ee837b44ed5fce387b0261"
     pubName: "MBO Beek"
   - name: tun
-    preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
+    test:
+      preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
+      credential: AcademicBaseCredential
+      object:
+      object:
+        sub:
+          - "12"
+        eduperson_unique_id:
+          - "abracadabra"
+        given_name:
+          - "test"
+        family_name:
+          - "janssen"
+        email:
+          - "test@example.org"
     adminToken: "{{ tokens.tun.admin }}"
     statusToken: "{{ tokens.tun.status }}"
+    logo: https://tun.dev.eduwallet.nl/images/tun_credential_logo.png
+    logo_alttext: "Theed University of Naboo with a partial planet image"
     credentials:
       AcademicBaseCredential:
-        id: AcademicBaseCredential
-        first: true
         name: "Academic Base Credential"
         description: "Basic credential indicating affiliation with the Theed University of Naboo"
         logo: https://tun.dev.eduwallet.nl/images/tun_credential_logo.png
@@ -243,13 +270,26 @@ installations:
     hash: "095260b0509b1ef98fc0e0bafb07038013eb9f875e7674cc3d80e66ffba7b367"
     pubName: "Theed University of Naboo"
   - name: uvh
-    preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
+    test:
+      preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
+      credential: AcademicBaseCredential
+      object:
+        sub:
+          - "12"
+        eduperson_unique_id:
+          - "abracadabra"
+        given_name:
+          - "test"
+        family_name:
+          - "janssen"
+        email:
+          - "test@example.org"
     adminToken: "{{ tokens.uvh.admin }}"
     statusToken: "{{ tokens.uvh.status }}"
+    logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
+    logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
     credentials:
       AcademicBaseCredential:
-        id: AcademicBaseCredential
-        first: true
         name: "Academic Base Credential"
         description: "Basic credential indicating affiliation with the University of Harderwijk"
         logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
@@ -261,17 +301,23 @@ installations:
     hash: "70f164a46dc22e767e410c0bba14b6aa7cb2e53b9f7b81f0171d04dd7d0ed785"
     pubName: "University of Harderwijk"
   - name: nlgov
-    preauthcode: G0WAuJwHxtv2dqAMfoDsopRBjTpavttJ
+    test:
+      preauthcode: G0WAuJwHxtv2dqAMfoDsopRBjTpavttJ
+      credential: PID
+      object:
+        personal_administrative_number: "42"
+        document_number: "1"
+        given_name: "test"
+        family_name: "janssen"
+        nationality: "example"
     adminToken: "{{ tokens.nlgov.admin }}"
     statusToken: "{{ tokens.nlgov.status }}"
+    logo: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_logo.png
+    logo_alttext: "Weapon of the Kingdom with two lions and the text Digitale Zaken"
     credentials:
       PID:
-        id: PID
-        first: true
         name: "Personal ID"
         description: "Personal Identity Document of the Kingdom of the Netherlands"
-        logo: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_logo.png
-        logo_alttext: "Weapon of the Kingdom with two lions and the text Digitale Zaken"
         card: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_bg.png
         color: '#ffffff'
         background_color: '#DFF4FF'
@@ -279,13 +325,21 @@ installations:
     hash: "731c51bfaa95271f35e472afd59e1a4ab9dc70519ed8836f3bb5e163cd8bdda9"
     pubName: "Kingdom of the Netherlands"
   - name: nbgov
-    preauthcode: WrBAlTNCBfUHDWHtYF0nkV9aJqBVIP5z
+    test:
+      preauthcode: WrBAlTNCBfUHDWHtYF0nkV9aJqBVIP5z
+      credential: PID
+      object:
+        personal_administrative_number: "42"
+        document_number: "1"
+        given_name: "test"
+        family_name: "janssen"
+        nationality: "example"
     adminToken: "{{ tokens.nbgov.admin }}"
     statusToken: "{{ tokens.nbgov.status }}"
+    logo: https://nb.gov.dev.eduwallet.nl/images/nbgov_credential_logo.png
+    logo_alttext: "French tulip like logo with Digital Affairs subtitle"
     credentials:
       PID:
-        id: PID
-        first: true
         name: "Personal ID"
         description: "Personal Identity Document of the Galactic Republic of Naboo"
         logo: https://nb.gov.dev.eduwallet.nl/images/nbgov_credential_logo.png
@@ -298,43 +352,56 @@ installations:
     pubName: "Galactic Republic of Naboo"
     branding:
   - name: epi
-    preauthcode: 4GOmhdYyDWfGXT7R21iQ0qB8aBFhYAc9
+    test:
+      preauthcode: 4GOmhdYyDWfGXT7R21iQ0qB8aBFhYAc9
+      credential: AcademicBaseCredential
+      object:
+        sub:
+          - "12"
+        eduperson_unique_id:
+          - "abracadabra"
+        given_name:
+          - "test"
+        family_name:
+          - "janssen"
+        email:
+          - "test@example.org"
     adminToken: "{{ tokens.epi.admin }}"
     statusToken: "{{ tokens.epi.status }}"
     credentials:
       AcademicBaseCredential:
-        id: AcademicBaseCredential
-        first: true
         name: "Academic Base Credential"
         description: "Academic Base Credential"
-        logo: ''
-        logo_alttext: "None"
-        card: ''
         color: '#ffffff'
-        background_color: '#4779aa'   domain: "epi.{{ deploydomain }}"
+        background_color: '#4779aa'
+    domain: "epi.{{ deploydomain }}"
     hash: "0debce0ffee8724769a3f487b3145d9432785520f5d00b47c4a18c33a8ecaeb8"
     pubName: "Educational Public Issuer" 
   - name: dashboard
-    preauthcode: bffy0TXajRTnoujKCIhfOnIUYjqmucRa
+    test:
+      preauthcode: bffy0TXajRTnoujKCIhfOnIUYjqmucRa
+      credential: PID
+      object:
+        personal_administrative_number: "42"
+        document_number: "1"
+        given_name: "test"
+        family_name: "janssen"
+        nationality: "example"
     adminToken: "{{ tokens.dashboard.admin }}"
     statusToken: "{{ tokens.dashboard.status }}"
     credentials:
       AcademicBaseCredential:
-        id: AcademicBaseCredential
-        first: true
         name: "Academic Base Credential"
         description: "Academic Base Credential"
         color: '#ffffff'
         background_color: '#4779aa'
       PID:
-        id: PID
-        first: false
         name: "Personal ID"
         description: "Personal Identity Document"
         color: '#ffffff'
         background_color: '#B1A77F'
     domain: "dashboard.{{ deploydomain }}"
-    hash: "0debce0ffee8724769a3f487b3145d9432785520f5d00b47c4a18c33a8ecaeb8"
+    hash: "c71de82cc1978e38fab434e3abf413919358e986322f05412b34224b4f39d83d"
     pubName: "Dashboard Test Issuer"
 
 verifiers:

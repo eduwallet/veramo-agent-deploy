@@ -10,37 +10,39 @@
       {
         "name": "{{ instance.pubName }}",
         "client_name": "{{ instance.pubName }}",
-        "description": "{{ instance.pubName }}",
-        "logo": {
-          "uri": "{{ instance.branding.logo }}",
-          "url": "{{ instance.branding.logo }}",
-          "alt_text": "{{ instance.branding.logo_alttext }}"
+        "description": "{{ instance.pubName }}"
+{% if instance.logo is defined -%}
+        ,"logo": {
+          "uri": "{{ instance.logo }}",
+          "url": "{{ instance.logo }}",
+          "alt_text": "{{ instance.logo_alttext }}"
         }
+{% endif -%}
       }
     ],
     "credential_configurations_supported": {
-{% for credential in instance.credentials %}
-{% if credential.first %},{% endif %}
-      "{{ credential.id }}": {
+{% for cid,credential in instance.credentials.items() %}
+{% if not loop.first -%},{% endif -%}
+      "{{ cid }}": {
         "display": [
           {
             "name": "{{ credential.name }}",
             "description": "{{ credential.description }}",
             "text_color": "{{ credential.color }}",
-{% if credential.logo %}            
+{% if credential.logo is defined -%}            
             "logo": {
               "uri": "{{ credential.logo }}",
               "url": "{{ credential.logo }}",
               "alt_text": "{{ credential.logo_alttext }}"
             },
-{% endif %}
-            "background_color": "{{ credential.background_color }}",
-{% if credential.card %}
-            "background_image": {
+{% endif -%}
+            "background_color": "{{ credential.background_color }}"
+{% if credential.card is defined -%}
+            ,"background_image": {
               "uri": "{{ credential.card }}",
               "url": "{{ credential.card }}"
             }
-{% endif %}
+{% endif -%}
           }
         ]
       }

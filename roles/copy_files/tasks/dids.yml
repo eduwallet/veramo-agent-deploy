@@ -17,7 +17,7 @@
 
 - name: Agent - Check DID specifications
   ansible.builtin.shell:
-    cmd: "cat {{ agent.dir }}/conf/dids/{{ instance.name }}.json | jq '.'"
+    cmd: "cat {{ agent.dir }}/conf/dids/{{ instance.name }}.json | jq '.' > tmp;mv tmp {{ agent.dir }}/conf/dids/{{ instance.name }}.json"
     chdir: "{{ docker.dir }}"
   loop: "{{ dids }}"
   loop_control:
@@ -44,7 +44,7 @@
 
 - name: Verifier - Check DID specifications
   ansible.builtin.shell:
-    cmd: "cat {{ verifier.dir }}/conf/dids/{{ instance.name }}.json | jq '.'"
+    cmd: "cat {{ verifier.dir }}/conf/dids/{{ instance.name }}.json | jq '.' > tmp;mv tmp {{ verifier.dir }}/conf/dids/{{ instance.name }}.json"
     chdir: "{{ docker.dir }}"
   loop: "{{ verifier_dids }}"
   loop_control:

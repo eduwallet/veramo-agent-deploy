@@ -32,7 +32,7 @@
 
 - name: Check issuer configuration
   ansible.builtin.shell:
-    cmd: "cat {{ agent.dir }}/conf/issuer/{{ instance.name }}.json | jq '.'"
+    cmd: "cat {{ agent.dir }}/conf/issuer/{{ instance.name }}.json | jq '.' > tmp;mv tmp {{ agent.dir }}/conf/issuer/{{ instance.name }}.json"
     chdir: "{{ docker.dir }}"
   loop: "{{ installations }}"
   loop_control:
@@ -50,7 +50,7 @@
 
 - name: Check metadata configuration
   ansible.builtin.shell:
-    cmd: "cat {{ agent.dir }}/conf/metadata/{{ instance.name }}.json | jq '.'"
+    cmd: "cat {{ agent.dir }}/conf/metadata/{{ instance.name }}.json | jq '.' > tmp;mv tmp {{ agent.dir }}/conf/metadata/{{ instance.name }}.json"
     chdir: "{{ docker.dir }}"
   loop: "{{ installations }}"
   loop_control:

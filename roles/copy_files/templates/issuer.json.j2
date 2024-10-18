@@ -23,14 +23,13 @@
   }
 {% if statuslists and statuslists.install %}
   ,"statusLists": {
-{% for statuslist in statuslists.installations %}
-{% if statuslist.credential == instance.credential %}
-    "{{ instance.credential }}": {
+{% for statuslist in statuslists.installations if statuslist.credential in instance.credentials %}
+{% if not loop.first -%},{% endif -%}
+    "{{ statuslist.credential }}": {
       "url": "https://{{ statuslists.domain }}/{{ statuslist.name }}/api/index",
       "revoke": "https://{{ statuslists.domain }}/{{ statuslist.name }}/api/revoke",
       "token": "{{ instance.statusToken }}"
     }
-{% endif %}
 {% endfor %}
   }
 {% endif %}

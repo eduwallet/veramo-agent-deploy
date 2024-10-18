@@ -17,7 +17,7 @@
 
 - name: Check presentation definitions
   ansible.builtin.shell:
-    cmd: "cat {{ verifier.dir }}/conf/presentations/{{ instance.id }}.json | jq '.'"
+    cmd: "cat {{ verifier.dir }}/conf/presentations/{{ instance.id }}.json | jq '.' > tmp;mv tmp {{ verifier.dir }}/conf/presentations/{{ instance.id }}.json"
     chdir: "{{ docker.dir }}"
   loop: "{{ presentation_configurations }}"
   loop_control:
@@ -48,7 +48,7 @@
 
 - name: Check verifier configurations
   ansible.builtin.shell:
-    cmd: "cat {{ verifier.dir }}/conf/verifiers/{{ instance.name }}.json | jq '.'"
+    cmd: "cat {{ verifier.dir }}/conf/verifiers/{{ instance.name }}.json | jq '.' > tmp;mv tmp {{ verifier.dir }}/conf/verifiers/{{ instance.name }}.json"
     chdir: "{{ docker.dir }}"
   loop: "{{ verifiers }}"
   loop_control:
