@@ -48,6 +48,11 @@
     mode: 0755
   become: yes
 
+- name: Clean statuslist configurations
+  ansible.builtin.shell:
+    cmd: "rm {{ statuslists.dir }}/conf/lists/*.json"
+  become: yes
+
 - name: Copy statuslist configurations
   template:
     src: statuslist.json.j2

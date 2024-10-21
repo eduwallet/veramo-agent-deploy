@@ -6,6 +6,12 @@
     mode: 0755
   become: yes
 
+- name: Clean did configurations
+  ansible.builtin.shell:
+    cmd: "rm {{ agent.dir }}/conf/dids/*.json"
+    chdir: "{{ docker.dir }}"
+  become: yes
+
 - name: Agent - Install issuer DID specifications
   template:
     src: did.json.j2
@@ -31,6 +37,11 @@
     mode: 0755
   become: yes
   when: enableverifier
+
+- name: Verifier - Clean did configurations
+  ansible.builtin.shell:
+    cmd: "rm {{ verifier.dir }}/conf/dids/*.json"
+  become: yes
 
 - name: Verifier - Install verifier DID specifications
   template:

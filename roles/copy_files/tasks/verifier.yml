@@ -6,6 +6,12 @@
     mode: 0755
   become: yes
 
+- name: Clean presentation definitions
+  ansible.builtin.shell:
+    cmd: "rm {{ verifier.dir }}/conf/presentations/*.json"
+    chdir: "{{ docker.dir }}"
+  become: yes
+
 - name: Install presentation definitions
   template:
     src: "{{ instance.template }}"
@@ -35,6 +41,12 @@
     state: directory
     path: "{{ verifier.dir }}/conf/verifiers"
     mode: 0755
+  become: yes
+
+- name: Clean verifier configurations
+  ansible.builtin.shell:
+    cmd: "rm {{ verifier.dir }}/conf/verifiers/*.json"
+    chdir: "{{ docker.dir }}"
   become: yes
 
 - name: Install verifier configurations

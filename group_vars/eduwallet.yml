@@ -113,7 +113,7 @@ tokens:
             303964653832313630333930356630663930383538343334346638613465383638310a3935366163666537303939636
             56238616462393763633065303763623661333039396363356665343932336464323532356661633664363463306639
             376466663665303263306432383066313264386566383636663038316634363335353631
-  dashboard:
+  sandbox:
     admin:  !vault |
             $ANSIBLE_VAULT;1.1;AES256
             65313036356563386238633039313761303364613066613036663836636263303662303062373762376137363761386
@@ -159,8 +159,8 @@ dids:
     domain: "nb.gov.{{ deploydomain }}"
   - name: epi
     domain: "epi.{{ deploydomain }}"
-  - name: dashboard
-    domain: "dashboard.{{ deploydomain }}"
+  - name: sandbox
+    domain: "sandbox.{{ deploydomain }}"
 
 # For identifying the verifiers and signing the authorization requests, we use did:keys
 # instead of did:web values. This keeps the verifiers nimble and relocatable without
@@ -169,7 +169,7 @@ dids:
 verifier_dids:
   - name: demovp
   - name: proxy
-  - name: dashboard
+  - name: sandbox
 
 # This defines the list of credential configurations that the agent can potentially supply inside
 # the credential metadata. These configuration files are referenced in the metadata specifications
@@ -377,7 +377,7 @@ installations:
     domain: "epi.{{ deploydomain }}"
     hash: "0debce0ffee8724769a3f487b3145d9432785520f5d00b47c4a18c33a8ecaeb8"
     pubName: "Educational Public Issuer" 
-  - name: dashboard
+  - name: sandbox
     test:
       preauthcode: bffy0TXajRTnoujKCIhfOnIUYjqmucRa
       credential: PID
@@ -387,8 +387,8 @@ installations:
         given_name: "test"
         family_name: "janssen"
         nationality: "example"
-    adminToken: "{{ tokens.dashboard.admin }}"
-    statusToken: "{{ tokens.dashboard.status }}"
+    adminToken: "{{ tokens.sandbox.admin }}"
+    statusToken: "{{ tokens.sandbox.status }}"
     credentials:
       AcademicBaseCredential:
         name: "Academic Base Credential"
@@ -400,9 +400,9 @@ installations:
         description: "Personal Identity Document"
         color: '#ffffff'
         background_color: '#B1A77F'
-    domain: "dashboard.{{ deploydomain }}"
-    hash: "c71de82cc1978e38fab434e3abf413919358e986322f05412b34224b4f39d83d"
-    pubName: "Dashboard Test Issuer"
+    domain: "sandbox.{{ deploydomain }}"
+    hash: "938ad4612061d4897105e816c7ca0deb5857eaa69009767b2aad5d442bed5e49"
+    pubName: "Sandbox Test Issuer"
 
 verifiers:
   - name: demovp
@@ -419,13 +419,13 @@ verifiers:
       - PID
     testPresentation: ABC
     token: "{{ tokens.proxy.admin }}"
-  - name: dashboard
-    path: "/dashboard"
+  - name: sandbox
+    path: "/sandbox"
     presentations:
       - ABC
       - PID
     testPresentation: ABC
-    token: "{{ tokens.dashboard.verAdmin }}"
+    token: "{{ tokens.sandbox.verAdmin }}"
 
 verifierdeploy:
   install: true
@@ -456,7 +456,7 @@ statuslists:
         - "{{ tokens.tun.status }}"
         - "{{ tokens.uvh.status }}"
         - "{{ tokens.epi.status }}"
-        - "{{ tokens.dashboard.status }}"
+        - "{{ tokens.sandbox.status }}"
     - name: pidrevoke
       credential: PID
       purpose: revocation
@@ -464,5 +464,5 @@ statuslists:
       tokens:
         - "{{ tokens.nlgov.status }}" 
         - "{{ tokens.nbgov.status }}"
-        - "{{ tokens.dashboard.status }}"
+        - "{{ tokens.sandbox.status }}"
  
