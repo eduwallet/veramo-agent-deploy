@@ -15,10 +15,10 @@
     - metadata
   become: yes
 
-- name: Push Agent Env file
-  template:
-    src: agent.env.j2
-    dest: "{{ agent.dir }}/.env"
+- name: Delete possible env file
+  file:
+    path: "{{ agent.dir }}/.env"
+    state: absent
   become: yes
 
 - name: Clean issuer configurations

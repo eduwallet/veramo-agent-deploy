@@ -5,6 +5,7 @@ basic_applications:
   - docker-ce-cli
   - containerd.io
   - docker-compose-plugin
+  - postgresql
 
 basedir: /opt/agent
 

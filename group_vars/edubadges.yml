@@ -1,6 +1,7 @@
 deploydomain: "poc4.eduwallet.nl"
 basedomain: "agent.{{ deploydomain }}"
 verifierdomain: "verifier.{{deploydomain }}"
+logdomain: "logs.{{ deploydomain }}"
 enablehttps: "true"
 protocol: "https"
 enableverifier: false
@@ -35,23 +36,13 @@ sources:
 # the credential metadata. These configuration files are referenced in the metadata specifications
 # for easy reuse and ensuring that all configurations are constituted in the same way.
 credential_configurations:
-  - name: AcademicBaseCredential
-    template: abc.json.j2
-  - name: PID
-    template: pid.json.j2
+  - name: OpenBadgeCredential
+    template: obc.json.j2
 
 # This defines the list of Presentation Definitions. Each definition is a way to request a certain
 # credential-with-attributes. As long as we do not have SD-JWT credentials, we will always get the
 # entire credential anyway, so the list is short at first
 presentation_configurations:
-  - id: ABC
-    name: "Academic Base Credential"
-    template: pres_abc.json.j2
-    purpose: "We need to establish your base Academic relation"
-  - id: PID
-    name: "Personal ID"
-    template: pres_pid.json.j2
-    purpose: "We need to establish your basic identity"
 
 # The list of installations defines the subpaths on the veramo-agent that the agent will listen to.
 # Each installation comes with its own credential metadata and well-known endpoints.
@@ -67,7 +58,10 @@ presentation_configurations:
 # branding is the issuer specific branding for the one credential that is issued. TODO: support multiple credentials
 installations:
   - name: edubadges
-    preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
+    test:
+      preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
+      credential: OpenBadgeCredential
+      object: {}
     adminToken: !vault |
                 $ANSIBLE_VAULT;1.1;AES256
                 396132323461653037356437363166343135663530633939376566653132653636636431656264386538666431343
@@ -75,20 +69,24 @@ installations:
                 6534646535643966323733663264326330333635346266303164633564643738313239320a6136626231376539326
                 563303863346662356638326234646235653566336136643866356239666338646332626437323139326632646662
                 33323263313639326534643164663532643864633431323664353233643934646537643164333938
-    credential: AcademicBaseCredential
+    credentials:
+      OpenBadgeCredential:
+        name: "EduCredential"
+        description: "EduCredential imported from SURF Backpack"
+        logo: https://wiki.surfnet.nl/download/attachments/35801321/edubadge-voorbeeld.png
+        logo_alttext: "Icon of a shield with a ribbon, Icon representing edubadges"
+        card: https://images.pexels.com/photos/2292837/pexels-photo-2292837.jpeg?auto=compress&cs=tinysrgb&w=480&h=750&dpr=1
+        color: '#ffffff'
+        background_color: '#11131f'
     domain: "edubadges.{{ deploydomain }}"
     hash: "70f164a46dc22e767e410c0bba14b6aa7cb2e53b9f7b81f0171d04dd7d0ed785"
-    pubName: "Edubadges Issuer"
-    branding:
-      name: "Academic Base Credential"
-      description: "Basic credential indicating affiliation with the Edubadges Issuer"
-      logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
-      logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
-      card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
-      color: '#ffffff'
-      background_color: '#4779aa'
+    pubName: "Edubadges Backpack"
 
 verifiers: []
+verifierdeploy:
+  install: false
+statuslists:
+  install: false
 
 agent:
   dir: "{{ basedir }}/agent"
@@ -106,7 +104,7 @@ agent:
          38343065623530646162336236656339663564663131
   extra_docker_compose_labels:
     # Add an extra route that proxies to the agent for our did domain.
-    # See under 'dids'. Append a did name to the path. 
+    # See under 'dids'. Append a did name to the path.
     # The agent then serves did files at:
     #   https://agent.example.com/foobar/.well-known/did.json
     # But the did:web expects it at:
