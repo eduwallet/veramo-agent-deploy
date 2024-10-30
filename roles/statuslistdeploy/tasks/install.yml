@@ -50,7 +50,7 @@
 
 - name: Clean statuslist configurations
   ansible.builtin.shell:
-    cmd: "rm {{ statuslists.dir }}/conf/lists/*.json"
+    cmd: "rm -f {{ statuslists.dir }}/conf/lists/*.json"
   become: yes
 
 - name: Copy statuslist configurations

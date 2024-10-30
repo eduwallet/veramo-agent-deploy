@@ -23,7 +23,7 @@
 
 - name: Clean issuer configurations
   ansible.builtin.shell:
-    cmd: "rm {{ agent.dir }}/conf/issuer/*.json"
+    cmd: "rm -f {{ agent.dir }}/conf/issuer/*.json"
     chdir: "{{ docker.dir }}"
   become: yes
 
@@ -47,7 +47,7 @@
 
 - name: Clean metadata configurations
   ansible.builtin.shell:
-    cmd: "rm {{ agent.dir }}/conf/metadata/*.json"
+    cmd: "rm -f {{ agent.dir }}/conf/metadata/*.json"
     chdir: "{{ docker.dir }}"
   become: yes
 
