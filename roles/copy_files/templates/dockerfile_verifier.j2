@@ -1,5 +1,5 @@
 # Builder stage
-FROM node:lts-bookworm
+FROM node:21-bookworm
 SHELL ["/bin/bash", "-c"]
 RUN yarn add typescript tslib
 WORKDIR /opt/app

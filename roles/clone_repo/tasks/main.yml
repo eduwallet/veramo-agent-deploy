@@ -7,6 +7,12 @@
     force: yes
   become: yes
 
+- name: Clean up the old cached node_modules of the agent
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ agent.dir }}/node_modules"
+    chdir: "{{ agent.dir }}"
+  become: yes
+
 - name: Clone the Verifier repository
   ansible.builtin.git:
     repo: "{{ sources.verifier.repo }}"
@@ -16,3 +22,8 @@
   become: yes
   when: enableverifier
 
+- name: Clean up the old cached node_modules of the verifier
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ verifier.dir }}/node_modules"
+    chdir: "{{ agent.dir }}"
+  become: yes

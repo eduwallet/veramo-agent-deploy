@@ -242,7 +242,6 @@ installations:
       preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
       credential: AcademicBaseCredential
       object:
-      object:
         sub:
           - "12"
         eduperson_unique_id:
