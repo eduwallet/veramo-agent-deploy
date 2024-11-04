@@ -179,6 +179,8 @@ credential_configurations:
     template: abc.json.j2
   - name: PID
     template: pid.json.j2
+  - name: GenericCredential
+    template: gc.json.j2
 
 # This defines the list of Presentation Definitions. Each definition is a way to request a certain
 # credential-with-attributes. As long as we do not have SD-JWT credentials, we will always get the
@@ -192,6 +194,10 @@ presentation_configurations:
     name: "Personal ID"
     template: pres_pid.json.j2
     purpose: "We need to establish your basic identity"
+  - id: GC
+    name: "Generic Proeftuin Credential"
+    template: pres_gc.json.j2
+    purpose: "Proeftuin requires the credential content"
 
 # The list of installations defines the subpaths on the veramo-agent that the agent will listen to.
 # Each installation comes with its own credential metadata and well-known endpoints.
@@ -399,6 +405,11 @@ installations:
         description: "Personal Identity Document"
         color: '#ffffff'
         background_color: '#B1A77F'
+      GenericCredential:
+        name: "Generic Credential"
+        description: "Generic Proeftuin Credential"
+        color: '#ffffff'
+        background_color: '#888888'
     domain: "sandbox.{{ deploydomain }}"
     hash: "938ad4612061d4897105e816c7ca0deb5857eaa69009767b2aad5d442bed5e49"
     pubName: "Sandbox Test Issuer"
@@ -423,6 +434,7 @@ verifiers:
     presentations:
       - ABC
       - PID
+      - GC
     testPresentation: ABC
     token: "{{ tokens.sandbox.verAdmin }}"
 
