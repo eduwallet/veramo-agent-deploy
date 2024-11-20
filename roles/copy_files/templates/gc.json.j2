@@ -1,0 +1,24 @@
+{
+  "format": "jwt_vc_json",
+  "cryptographic_binding_methods_supported": ["did:jwk", "did:key"],
+  "format": "jwt_vc_json",
+  "cryptographic_suites_supported": ["ES256", "EdDSA"],
+  "proof_types_supported": {
+    "jwt": {
+      "proof_signing_alg_values_supported": ["ES256"]
+    }
+  },
+  "scope": "GenericCredential",
+  "display": [{
+        "name": "Generic Credential",
+        "description": "A generic Proeftuin credential"
+  }],
+  "credential_definition": {
+    "type": [
+      "VerifiableCredential",
+      "GenericCredential"
+    ],
+    "credentialSubject": {
+    }
+  }
+}
