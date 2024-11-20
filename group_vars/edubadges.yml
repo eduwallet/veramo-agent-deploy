@@ -1,0 +1,116 @@
+deploydomain: "poc4.eduwallet.nl"
+basedomain: "agent.{{ deploydomain }}"
+verifierdomain: "verifier.{{deploydomain }}"
+logdomain: "logs.{{ deploydomain }}"
+enablehttps: "true"
+protocol: "https"
+enableverifier: false
+
+# For identifying the issuers and signing the credentials, this deployment uses did:web keys
+# associated with specific issuer domains, based on the front-end facing application that
+# initiates the issuance flow.
+# Different configurations can reuse the same did:web, for example if there is a need for two
+# different credential metadata configurations (one with pre-auth only, one with authorization_code
+# only) that are both linked to the same front-end-facing application.
+#
+# In theory, all configurations could use the same single did:web key
+#
+dids:
+  - domain: edubadges.{{ deploydomain }}
+    name: edubadges
+
+# For identifying the verifiers and signing the authorization requests, we use did:keys
+# instead of did:web values. This keeps the verifiers nimble and relocatable without
+# having to configure reverse proxies. New verifiers can be easily added regardless of
+# the domain name. We only require a name for each key.
+verifier_dids: []
+
+# Temporary override to use the features/open-badge-credential branch untill we finalize this and
+# have it merged
+sources:
+  agent:
+    repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/veramo-agent.git"
+    version: "feature/open-badge-credential"
+
+# This defines the list of credential configurations that the agent can potentially supply inside
+# the credential metadata. These configuration files are referenced in the metadata specifications
+# for easy reuse and ensuring that all configurations are constituted in the same way.
+credential_configurations:
+  - name: OpenBadgeCredential
+    template: obc.json.j2
+
+# This defines the list of Presentation Definitions. Each definition is a way to request a certain
+# credential-with-attributes. As long as we do not have SD-JWT credentials, we will always get the
+# entire credential anyway, so the list is short at first
+presentation_configurations:
+
+# The list of installations defines the subpaths on the veramo-agent that the agent will listen to.
+# Each installation comes with its own credential metadata and well-known endpoints.
+# The name of the installation is used as the router path as well as the issuer configuration name
+# and the correlation-id to match issuer configuration with metadata configuration
+# preauthcode is used in the testing phase as a pre-configured but random token
+# adminToken is the bearer token that needs to be provided by the front-end issuer when calling create-offer
+# credential is the specific credential this issuer will provide. TODO: support multiple credentials
+# domain is used to determine the did:web key name. TODO: fix this with a proper did name
+# hash is the key identifier of the did:web used and must be manually retrieved from the database after
+#   first deployment. TODO: fix the agent to get the key based on the identifier instead
+# pubName is the public name of the issuer, used in the metadata
+# branding is the issuer specific branding for the one credential that is issued. TODO: support multiple credentials
+installations:
+  - name: edubadges
+    test:
+      preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
+      credential: OpenBadgeCredential
+      object: {}
+    adminToken: !vault |
+                $ANSIBLE_VAULT;1.1;AES256
+                396132323461653037356437363166343135663530633939376566653132653636636431656264386538666431343
+                966333237623263346532616238663938340a63666138653664323833613761356162366661633630393333613264
+                6534646535643966323733663264326330333635346266303164633564643738313239320a6136626231376539326
+                563303863346662356638326234646235653566336136643866356239666338646332626437323139326632646662
+                33323263313639326534643164663532643864633431323664353233643934646537643164333938
+    credentials:
+      OpenBadgeCredential:
+        name: "EduCredential"
+        description: "EduCredential imported from SURF Backpack"
+        logo: https://wiki.surfnet.nl/download/attachments/35801321/edubadge-voorbeeld.png
+        logo_alttext: "Icon of a shield with a ribbon, Icon representing edubadges"
+        card: https://images.pexels.com/photos/2292837/pexels-photo-2292837.jpeg?auto=compress&cs=tinysrgb&w=480&h=750&dpr=1
+        color: '#ffffff'
+        background_color: '#11131f'
+    domain: "edubadges.{{ deploydomain }}"
+    hash: "70f164a46dc22e767e410c0bba14b6aa7cb2e53b9f7b81f0171d04dd7d0ed785"
+    pubName: "Edubadges Backpack"
+
+verifiers: []
+verifierdeploy:
+  install: false
+statuslists:
+  install: false
+
+agent:
+  dir: "{{ basedir }}/agent"
+  script: "start:dev"
+  hostname: "{{ basedomain }}"
+  port: 5000
+  host: "{{ protocol }}://agent.{{ basedomain }}"
+  schema: agent
+  dbkey: !vault |
+         $ANSIBLE_VAULT;1.1;AES256
+         613138333438633365356562313765626263373936373561623332333236353735343636633062376463623231353365386632
+         626534646336363265386539620a66636131333232353464303834363639306239373363393832346235653735363564383131
+         6638373737363863363835623264343633623866646337653436640a3730653334646265306633353930623430303031666533
+         646334343834623734643834316635386662316136393035376261353933626337383232383964393665663731313865303462
+         38343065623530646162336236656339663564663131
+  extra_docker_compose_labels:
+    # Add an extra route that proxies to the agent for our did domain.
+    # See under 'dids'. Append a did name to the path.
+    # The agent then serves did files at:
+    #   https://agent.example.com/foobar/.well-known/did.json
+    # But the did:web expects it at:
+    #   https://foobar.example.com/.well-known/did.json
+    - "traefik.http.routers.edubadges.rule=Host(`edubadges.{{ deploydomain }}`)"
+    - "traefik.http.routers.edubadges.entrypoints=websecure"
+    - "traefik.http.routers.edubadges.tls.certresolver=myresolver"
+    - "traefik.http.middlewares.edubadges-addprefix.addprefix.prefix=/edubadges"
+    - "traefik.http.routers.edubadges.middlewares=edubadges-addprefix"

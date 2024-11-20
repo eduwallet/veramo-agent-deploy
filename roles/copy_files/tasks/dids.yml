@@ -8,7 +8,7 @@
 
 - name: Clean did configurations
   ansible.builtin.shell:
-    cmd: "rm {{ agent.dir }}/conf/dids/*.json"
+    cmd: "rm -f {{ agent.dir }}/conf/dids/*.json"
     chdir: "{{ docker.dir }}"
   become: yes
 
@@ -40,7 +40,7 @@
 
 - name: Verifier - Clean did configurations
   ansible.builtin.shell:
-    cmd: "rm {{ verifier.dir }}/conf/dids/*.json"
+    cmd: "rm -f {{ verifier.dir }}/conf/dids/*.json"
   become: yes
 
 - name: Verifier - Install verifier DID specifications

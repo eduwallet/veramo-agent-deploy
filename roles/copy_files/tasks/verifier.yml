@@ -8,7 +8,7 @@
 
 - name: Clean presentation definitions
   ansible.builtin.shell:
-    cmd: "rm {{ verifier.dir }}/conf/presentations/*.json"
+    cmd: "rm -f {{ verifier.dir }}/conf/presentations/*.json"
     chdir: "{{ docker.dir }}"
   become: yes
 
@@ -45,7 +45,7 @@
 
 - name: Clean verifier configurations
   ansible.builtin.shell:
-    cmd: "rm {{ verifier.dir }}/conf/verifiers/*.json"
+    cmd: "rm -f {{ verifier.dir }}/conf/verifiers/*.json"
     chdir: "{{ docker.dir }}"
   become: yes
 

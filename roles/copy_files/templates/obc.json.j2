@@ -1,0 +1,22 @@
+{
+  "format": "jwt_vc_json",
+  "scope": "EduBadge",
+  "cryptographic_binding_methods_supported": ["did:jwk", "did:key"],
+  "cryptographic_suites_supported": ["ES256", "EdDSA"],
+  "proof_types_supported": {
+    "jwt": {
+      "proof_signing_alg_values_supported": ["ES256"]
+    }
+  },
+  "display": [{
+        "name": "Simple OpenBadge Credential",
+        "description": "Simple OpenBadge Credential for test purposes"
+  }],
+
+  "credential_definition": {
+    "type": [
+      "VerifiableCredential",
+      "OpenBadgeCredential"
+    ]
+  }
+}

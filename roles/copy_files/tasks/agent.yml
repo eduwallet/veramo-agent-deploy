@@ -15,15 +15,15 @@
     - metadata
   become: yes
 
-- name: Push Agent Env file
-  template:
-    src: agent.env.j2
-    dest: "{{ agent.dir }}/.env"
+- name: Delete possible env file
+  file:
+    path: "{{ agent.dir }}/.env"
+    state: absent
   become: yes
 
 - name: Clean issuer configurations
   ansible.builtin.shell:
-    cmd: "rm {{ agent.dir }}/conf/issuer/*.json"
+    cmd: "rm -f {{ agent.dir }}/conf/issuer/*.json"
     chdir: "{{ docker.dir }}"
   become: yes
 
@@ -47,7 +47,7 @@
 
 - name: Clean metadata configurations
   ansible.builtin.shell:
-    cmd: "rm {{ agent.dir }}/conf/metadata/*.json"
+    cmd: "rm -f {{ agent.dir }}/conf/metadata/*.json"
     chdir: "{{ docker.dir }}"
   become: yes
 
