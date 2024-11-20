@@ -55,13 +55,16 @@ services:
 {% if traefik.enabled %}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.agent.rule={{ traefik_hosts_string }}"
+      - "traefik.http.routers.agent.rule=Host(`{{ basedomain }}`)"
 {% if traefik.secure == 'true' %}
       - "traefik.http.routers.agent.entrypoints=websecure"
       - "traefik.http.routers.agent.tls.certresolver=myresolver"
 {% else %}
       - "traefik.http.routers.agent.entrypoints=web"
 {% endif %}
+{% for tag in agent.extra_docker_compose_labels %}
+      - "{{ tag }}"
+{% endfor %}
 {% endif %}
 
 {% if enableverifier %}
@@ -82,13 +85,16 @@ services:
 {% if traefik.enabled %}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.verifier.rule={{ traefik_hosts_verifier_string }}"
+      - "traefik.http.routers.verifier.rule=Host(`{{ verifierdomain }})"
 {% if traefik.secure == 'true' %}
       - "traefik.http.routers.verifier.entrypoints=websecure"
       - "traefik.http.routers.verifier.tls.certresolver=myresolver"
 {% else %}
       - "traefik.http.routers.verifier.entrypoints=web"
 {% endif %}
+{%- for tag in agent.extra_docker_compose_labels %}
+      - "{{ tag }}"
+{%- endfor %}
 {% endif %}
 {% endif %}
 
