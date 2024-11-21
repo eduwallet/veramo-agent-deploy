@@ -6,4 +6,5 @@ WORKDIR /opt/app
 
 ENV NODE_SCRIPT={{ verifier.script }}
 ENV GENERATE_SOURCEMAP=false
+ENV DEBUG=*:*
 ENTRYPOINT npm run {{ verifier.script }}

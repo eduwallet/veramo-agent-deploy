@@ -11,7 +11,6 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
 {% if traefik.secure == 'true' %}
-      # {{ traefik.secure }}
       - "--entryPoints.websecure.address=:443"
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
       #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
@@ -100,7 +99,7 @@ services:
 {% if traefik.enabled %}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.verifier.rule=Host(`{{ verifierdomain }})"
+      - "traefik.http.routers.verifier.rule=Host(`{{ verifierdomain }}`)"
 {% if traefik.secure == 'true' %}
       - "traefik.http.routers.verifier.entrypoints=websecure"
       - "traefik.http.routers.verifier.tls.certresolver=myresolver"
