@@ -181,6 +181,8 @@ credential_configurations:
     template: pid.json.j2
   - name: GenericCredential
     template: gc.json.j2
+  - name: AcademicEnrollmentCredential
+    template: aec.json.j2
 
 # This defines the list of Presentation Definitions. Each definition is a way to request a certain
 # credential-with-attributes. As long as we do not have SD-JWT credentials, we will always get the
@@ -235,6 +237,14 @@ installations:
       AcademicBaseCredential:
         name: "Academic Base Credential"
         description: "Basic credential indicating affiliation with MBO Beek"
+        logo: https://mbob.dev.eduwallet.nl/images/mbob_credential_logo.png
+        logo_alttext: "MBO Beek"
+        card: https://mbob.dev.eduwallet.nl/images/mbob_credential_bg.png
+        color: '#ffffff'
+        background_color: '#8f0f12'
+      AcademicEnrollmentCredential:
+        name: "Academic Enrollment Credential"
+        description: "Proof of enrollment in the MBO Beek programme"
         logo: https://mbob.dev.eduwallet.nl/images/mbob_credential_logo.png
         logo_alttext: "MBO Beek"
         card: https://mbob.dev.eduwallet.nl/images/mbob_credential_bg.png
@@ -297,6 +307,14 @@ installations:
       AcademicBaseCredential:
         name: "Academic Base Credential"
         description: "Basic credential indicating affiliation with the University of Harderwijk"
+        logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
+        logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
+        card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
+        color: '#ffffff'
+        background_color: '#4779aa'
+      AcademicEnrollmentCredential:
+        name: "Academic Enrollment Credential"
+        description: "Proof of enrollment in the UvH programme"
         logo: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
         logo_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
         card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
@@ -468,6 +486,13 @@ statuslists:
         - "{{ tokens.uvh.status }}"
         - "{{ tokens.epi.status }}"
         - "{{ tokens.sandbox.status }}"
+    - name: aecrevoke
+      credential: AcademicEnrollmentCredential
+      purpose: revocation
+      size: 131072
+      tokens:
+        - "{{ tokens.mbob.status }}"
+        - "{{ tokens.uvh.status }}"
     - name: pidrevoke
       credential: PID
       purpose: revocation

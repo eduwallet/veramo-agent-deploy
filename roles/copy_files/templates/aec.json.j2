@@ -1,0 +1,158 @@
+{
+  "format": "jwt_vc_json",
+  "cryptographic_binding_methods_supported": ["did:jwk", "did:key"],
+  "format": "jwt_vc_json",
+  "cryptographic_suites_supported": ["ES256", "EdDSA"],
+  "proof_types_supported": {
+    "jwt": {
+      "proof_signing_alg_values_supported": ["ES256"]
+    }
+  },
+  "scope": "AcademicEnrollmentCredential",
+{%if false %}
+  "order": [
+      "sub",
+      "eduperson_unique_id",
+      "schac_home_organization",
+      "name",
+      "given_name",
+      "family_name",
+      "email",
+      "eduperson_affiliation",
+      "eduperson_scoped_affiliation",
+      "eduperson_entitlement",
+      "eduperson_assurance"
+  ],
+{% endif %}
+  "display": [{
+        "name": "Academic Enrollment Credential",
+        "description": "The Enrollment Credential certifies your enrollment into an institute of higher education"
+  }],
+  "credential_definition": {
+    "type": [
+      "VerifiableCredential",
+      "AcademicEnrollmentCredential"
+    ],
+    "credentialSubject": {
+      "crohoCreboCode": {
+        "value_type": "string",
+        "mandatory": true,
+        "display": [
+          {
+            "name": "Central Higher Education code"
+          },
+          {
+            "name": "Central Higher Education code",
+            "locale": "en-US"
+          },
+          {
+            "name": "CrohoCrebo code",
+            "locale": "nl-NL"
+          }
+        ]
+      },
+      "name": {
+        "value_type": "string",
+        "mandatory": true,
+        "display": [
+          {
+            "name": "Major"
+          },
+          {
+            "name": "Major",
+            "locale": "en-US"
+          },
+          {
+            "name": "Opleiding",
+            "locale": "nl-NL"
+          }
+        ]
+      },
+      "phase": {
+        "value_type": "string",
+        "mandatory": true,
+        "display": [
+          {
+            "name": "Phase"
+          },
+          {
+            "name": "Phase",
+            "locale": "en-US"
+          },
+          {
+            "name": "Fase",
+            "locale": "nl-NL"
+          }
+        ]
+      },
+      "modeOfStudy": {
+        "value_type": "string",
+        "mandatory": true,
+        "display": [
+          {
+            "name": "Mode"
+          },
+          {
+            "name": "Mode",
+            "locale": "en-US"
+          },
+          {
+            "name": "Modus",
+            "locale": "nl-NL"
+          }
+        ]
+      },
+      "institutionBRINCode": {
+        "value_type": "string",
+        "mandatory": true,
+        "display": [
+          {
+            "name": "Institute Code"
+          },
+          {
+            "name": "Institute Code",
+            "locale": "en-US"
+          },
+          {
+            "name": "BRIN code",
+            "locale": "nl-NL"
+          }
+        ]
+      },
+      "startDate": {
+        "value_type": "string",
+        "mandatory": true,
+        "display": [
+          {
+            "name": "Start Date"
+          },
+          {
+            "name": "Start Date",
+            "locale": "en-US"
+          },
+          {
+            "name": "Startdatum",
+            "locale": "nl-NL"
+          }
+        ]
+      },
+      "endDate": {
+        "value_type": "string",
+        "mandatory": false,
+        "display": [
+          {
+            "name": "End Date"
+          },
+          {
+            "name": "End Date",
+            "locale": "en-US"
+          },
+          {
+            "name": "Einddatum",
+            "locale": "nl-NL"
+          }
+        ]
+      }
+    }
+  }
+}
