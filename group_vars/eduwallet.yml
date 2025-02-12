@@ -162,6 +162,10 @@ dids:
   - name: sandbox
     domain: "sandbox.{{ deploydomain }}"
 
+contexts:
+  - dest: gcldp.json
+    src: gcldp_context.json.j2
+
 # For identifying the verifiers and signing the authorization requests, we use did:keys
 # instead of did:web values. This keeps the verifiers nimble and relocatable without
 # having to configure reverse proxies. New verifiers can be easily added regardless of
@@ -181,6 +185,8 @@ credential_configurations:
     template: pid.json.j2
   - name: GenericCredential
     template: gc.json.j2
+  - name: GenericCredentialLD
+    template: gc_ldp.json.j2
   - name: AcademicEnrollmentCredential
     template: aec.json.j2
 
@@ -199,6 +205,10 @@ presentation_configurations:
   - id: GC
     name: "Generic Proeftuin Credential"
     template: pres_gc.json.j2
+    purpose: "Proeftuin requires the credential content"
+  - id: GCLDP
+    name: "Generic Proeftuin Credential"
+    template: pres_gc_ldp.json.j2
     purpose: "Proeftuin requires the credential content"
 
 # The list of installations defines the subpaths on the veramo-agent that the agent will listen to.
@@ -428,6 +438,11 @@ installations:
         description: "Generic Proeftuin Credential"
         color: '#ffffff'
         background_color: '#888888'
+      GenericCredentialLD:
+        name: "Generic Credential"
+        description: "Generic Proeftuin Credential"
+        color: '#ffffff'
+        background_color: '#888888'
     domain: "sandbox.{{ deploydomain }}"
     hash: "938ad4612061d4897105e816c7ca0deb5857eaa69009767b2aad5d442bed5e49"
     pubName: "Sandbox Test Issuer"
@@ -453,6 +468,7 @@ verifiers:
       - ABC
       - PID
       - GC
+      - GCLDP
     testPresentation: ABC
     token: "{{ tokens.sandbox.verAdmin }}"
 

@@ -2,6 +2,9 @@
 - name: Install DID configuration
   include_tasks: dids.yml
 
+- name: Install Context configuration
+  include_tasks: contexts.yml
+
 - name: Install Credentials configuration
   include_tasks: credential_configurations.yml
 
