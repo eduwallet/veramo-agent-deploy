@@ -1,0 +1,27 @@
+{
+  "format": "ldp_vc",
+  "cryptographic_binding_methods_supported": ["did:jwk", "did:key"],
+  "cryptographic_suites_supported": ["ES256", "EdDSA"],
+  "proof_types_supported": {
+    "jwt": {
+      "proof_signing_alg_values_supported": ["ES256"]
+    }
+  },
+  "scope": "GenericCredentialLD",
+  "display": [{
+        "name": "Generic Credential",
+        "description": "A generic Proeftuin credential"
+  }],
+  "credential_definition": {
+    "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        "{{ protocol }}://{{ basedomain }}/contexts/gcldp"
+    ],
+    "type": [
+      "VerifiableCredential",
+      "GenericCredentialLD"
+    ],
+    "credentialSubject": {
+    }
+  }
+}
