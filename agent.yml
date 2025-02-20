@@ -6,6 +6,7 @@
     - { role: clone_repo, tags: ['clone', 'install'] }
     - { role: verifierdeploy, tags: ['verifierdeploy', 'install'] }
     - { role: statuslistdeploy, tags: ['statuslistdeploy', 'install'] }
-    - { role: copy_files, tags: ['copy', 'install'] }
+    - { role: copy_files, tags: ['mainconf', 'install'] }
+    - { role: copy_files_verifier, tags: ['verifierconf', 'verifierdeploy', 'install'] }
     - { role: run_docker, tags: ['docker', 'run'] }
     - { role: test_install, tags: ['test']}

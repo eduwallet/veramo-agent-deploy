@@ -1,0 +1,346 @@
+logos:
+  nl:
+    mbob: https://mbob.dev.eduwallet.nl/images/mbob_credential_logo.png
+    mbob_alttext: "MBO Beek"
+    mbob_card: https://mbob.dev.eduwallet.nl/images/mbob_credential_bg.png
+    tun: https://tun.dev.eduwallet.nl/images/tun_credential_logo.png
+    tun_alttext: "Theed Universiteit te Naboo met een gedeeltelijke planeet in de achtergrond"
+    tun_card: https://tun.dev.eduwallet.nl/images/tun_credential_bg.png
+    uvh: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
+    uvh_alttext: "Harderwijk met het logo van de universiteit: een gekroonde dame met staf en schild en de latijnse tekst 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' er rondomheen"
+    uvh_card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
+    nlgov: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_logo.png
+    nlgov_alttext: "Wapenschild van het koninkrijk met twee leeuwen en de tekst 'Digitale Zaken'"
+    nlgov_card: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_bg.png
+    nbgov: https://nb.gov.dev.eduwallet.nl/images/nbgov_credential_logo.png
+    nbgov_alttext: "Logo lijkend op franse tulpen met subtitel 'Digital Affairs'"
+    nbgov_card: https://nb.gov.dev.eduwallet.nl/images/nbgov_credential_bg.png
+    epi: https://epi.dev.eduwallet.nl/images/eduid_credential_logo.png
+    epi_alttext: "edu in wit, ID in blauw op een donkerblauwe achtergrond"
+    epi_card: https://epi.dev.eduwallet.nl/images/eduid_credential_bg.png
+  en:
+    mbob: https://mbob.dev.eduwallet.nl/images/mbob_credential_logo.png
+    mbob_alttext: "MBO Beek"
+    mbob_card: https://mbob.dev.eduwallet.nl/images/mbob_credential_bg.png
+    tun: https://tun.dev.eduwallet.nl/images/tun_credential_logo.png
+    tun_alttext: "Theed University of Naboo with a partial planet image"
+    tun_card: https://tun.dev.eduwallet.nl/images/tun_credential_bg.png
+    uvh: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
+    uvh_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
+    uvh_card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
+    nlgov: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_logo.png
+    nlgov_alttext: "Weapon of the Kingdom with two lions and the text 'Digitale Zaken'"
+    nbgov: https://nb.gov.dev.eduwallet.nl/images/nbgov_credential_logo.png
+    nbgov_alttext: "French tulip like logo with Digital Affairs subtitle"
+    nbgov_card: https://nb.gov.dev.eduwallet.nl/images/nbgov_credential_bg.png
+    epi: https://epi.dev.eduwallet.nl/images/eduid_credential_logo.png
+    epi_alttext: "edu in white, ID in blue on a dark blue background"
+    epi_card: https://epi.dev.eduwallet.nl/images/eduid_credential_bg.png
+  gb:
+    mbob: https://mbob.dev.eduwallet.nl/images/mbob_credential_logo.png
+    mbob_alttext: "MBO Beek"
+
+styling:
+  mbob:
+    color: '#ffffff'
+    background_color: '#8f0f12'
+  tun:
+    color: '#ffffff'
+    background_color: '#0501ed'
+  uvh:
+    color: '#ffffff'
+    background_color: '#4779aa'
+  nlgov:
+    color: '#ffffff'
+    background_color: '#DFF4FF'
+  nbgov:
+    color: '#ffffff'
+    background_color: '#B1A77F'
+  epi:
+    color: '#ffffff'
+    background_color: '#4779aa'
+  sandbox:
+    color: '#ffffff'
+    background_color: '#888888'
+
+branding:
+  nl:
+    mbob:
+      locale: nl
+      name: "MBO Beek"
+      description: "Middelbaar Beroepsonderwijs Beek"
+      logo: "{{ logos.nl.mbob }}"
+      logo_alttext: "{{ logos.nl.mbob_alttext }}"
+    mbob_abc:
+      locale: nl
+      name: "Academische Basis Credential"
+      description: "Basis credential voor een relatie met MBO Beek"
+      logo: "{{ logos.nl.mbob }}"
+      logo_alttext: "{{ logos.nl.mbob_alttext }}"
+      card: "{{ logos.nl.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    mbob_aec:
+      locale: nl
+      name: "Academische Inschrijvingscredential"
+      description: "Bewijs van inschrijving in het MBO Beek programma"
+      logo: "{{ logos.nl.mbob }}"
+      logo_alttext: "{{ logos.nl.mbob_alttext }}"
+      card: "{{ logos.nl.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    tun:
+      locale: nl
+      name: "Theed University of Naboo"
+      description: "Theed Universiteit van Naboo"
+      logo: "{{ logos.nl.tun }}"
+      logo_alttext: "{{ logos.nl.tun_alttext }}"
+    tun_abc:
+      locale: nl
+      name: "Academic Base Credential"
+      description: "Basis credential voor een relatie met de Theed Universiteit van Naboo"
+      logo: "{{ logos.nl.tun }}"
+      logo_alttext: "{{ logos.nl.tun_alttext }}"
+      color: "{{ styling.tun.color }}"
+      background_color: "{{ styling.tun.background_color }}"
+    uvh:
+      locale: nl
+      name: "Universiteit van Harderwijk"
+      description: "Universiteit van Harderwijk"
+      logo: "{{ logos.nl.uvh }}"
+      logo_alttext: "{{ logos.nl.uvh_alttext }}"
+    uvh_abc:
+      locale: nl
+      name: "Academic Base Credential"
+      description: "Basis credential voor een relatie met de Universiteit van Harderwijk"
+      logo: "{{ logos.nl.uvh }}"
+      logo_alttext: "{{ logos.nl.uvh_alttext }}"
+      card: "{{ logos.nl.uvh_card }}"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
+    uvh_aec:
+      locale: nl
+      name: "Academische Inschrijvingscredential"
+      description: "Bewijs van inschrijving in het programma van de Universiteit van Harderwijk"
+      logo: "{{ logos.nl.uvh }}"
+      logo_alttext: "{{ logos.nl.uvh_alttext }}"
+      card: "{{ logos.nl.uvh_card }}"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
+    nlgov:
+      locale: nl
+      name: "Koninkrijk der Nederlanden"
+      description: "Koninkrijk der Nederlanden"
+      logo: "{{ logos.nl.nlgov }}"
+      logo_alttext: "{{ logos.nl.nlgov_alttext }}"
+    nlgov_pid:
+      locale: nl
+      name: "Persoonlijk ID"
+      description: "Persoonlijk Identiteits Document van het Koninkrijk der Nederlanden"
+      logo: "{{ logos.nl.nlgov }}"
+      logo_alttext: "{{ logos.nl.nlgov_alttext }}"
+      card: "{{ logos.nl.nlgov_card }}"
+      color: "{{ styling.nlgov.color }}"
+      background_color: "{{ styling.nlgov.background_color }}"
+    nbgov:
+      locale: nl
+      name: "Galactische Republiek Naboo"
+      description: "Galactische Republiek Naboo"
+      logo: "{{ logos.nl.nbgov }}"
+      logo_alttext: "{{ logos.nl.nbgov_alttext }}"
+    nbgov_pid:
+      locale: nl
+      name: "Persoonlijk ID"
+      description: "Persoonlijk Identiteits Document van de Galactische Republiek Naboo"
+      logo: "{{ logos.nl.nbgov }}"
+      logo_alttext: "{{ logos.nl.nbgov_alttext }}"
+      card: "{{ logos.nl.nbgov_card }}"
+      color: "{{ styling.nbgov.color }}"
+      background_color: "{{ styling.nbgov.background_color }}"
+    epi:
+      locale: nl
+      name: "eduID Proeftuin Issuer"
+      description: "eduID Proeftuin credential uitgever"
+      logo: "{{ logos.nl.epi }}"
+      logo_alttext: "{{ logos.nl.epi_alttext }}"
+    epi_abc:
+      locale: nl
+      name: "Academische Basis Credential"
+      description: "Basis Academisch Credential"
+      color: "{{ styling.epi.color }}"
+      background_color: "{{ styling.epi.background_color }}"
+    epi_eduid:
+      locale: nl
+      name: "Academische Basis Credential"
+      description: "Basis credential voor een relatie met eduID"
+      logo: "{{ logos.nl.epi }}"
+      logo_alttext: "{{ logos.nl.epi_alttext }}"
+      card: "{{ logos.nl.epi_card }}"
+      color: "{{ styling.epi.color }}"
+      background_color: "{{ styling.epi.background_color }}"
+    sandbox:
+      locale: nl
+      name: "Sandbox Issuer"
+      description: "Issuer voor de sandbox test omgeving"
+    sandbox_abc:
+      locale: nl
+      name: "Academische Basis Credential"
+      description: "Basis credential voor een relatie met eduID"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    sandbox_pid:
+      locale: nl
+      name: "Persoonlijk ID"
+      description: "Persoonlijk Identiteits Document"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    sandbox_generic:
+      locale: nl
+      name: "Generiek Credential"
+      description: "Generiek credential voor test doeleinden"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+  en:
+    mbob:
+      locale: en_US
+      name: "Vocational School Beek"
+      description: "Vocational School of Beek"
+      logo: "{{ logos.en.mbob }}"
+      logo_alttext: "{{ logos.en.mbob_alttext }}"
+    mbob_abc:
+      locale: en
+      name: "Academic Base Credential"
+      description: "Basic credential indicating affiliation with MBO Beek"
+      logo: "{{ logos.en.mbob }}"
+      logo_alttext: "{{ logos.en.mbob_alttext }}"
+      card: "{{ logos.en.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    mbob_aec:
+      locale: en
+      name: "Academic Enrollment Credential"
+      description: "Proof of enrollment in the MBO Beek programme"
+      logo: "{{ logos.en.mbob }}"
+      logo_alttext: "{{ logos.en.mbob_alttext }}"
+      card: "{{ logos.en.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    tun:
+      locale: en
+      name: "Theed University of Naboo"
+      description: "Theed University of Naboo"
+      logo: "{{ logos.en.tun }}"
+      logo_alttext: "{{ logos.en.tun_alttext }}"
+    tun_abc:
+      locale: en
+      name: "Academic Base Credential"
+      description: "Basic credential indicating affiliation with the Theed Universiteit of Naboo"
+      logo: "{{ logos.en.tun }}"
+      logo_alttext: "{{ logos.en.tun_alttext }}"
+      card: "{{ logos.en.tun_card }}"
+      color: "{{ styling.tun.color }}"
+      background_color: "{{ styling.tun.background_color }}"
+    uvh:
+      locale: en
+      name: "University of Harderwijk"
+      description: "University of Harderwijk"
+      logo: "{{ logos.en.uvh }}"
+      logo_alttext: "{{ logos.en.uvh_alttext }}"
+    uvh_abc:
+      locale: en
+      name: "Academic Base Credential"
+      description: "Basic credential indicating affiliation with the University of Harderwijk"
+      logo: "{{ logos.en.uvh }}"
+      logo_alttext: "{{ logos.en.uvh_alttext }}"
+      card: "{{ logos.en.uvh_card }}"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
+    uvh_aec:
+      locale: en
+      name: "Academic Enrollment Credential"
+      description: "Proof of enrollment in the University of Harderwijk programme"
+      logo: "{{ logos.en.uvh }}"
+      logo_alttext: "{{ logos.en.uvh_alttext }}"
+      card: "{{ logos.en.uvh_card }}"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
+    nlgov:
+      locale: en
+      name: "Kingdom of the Netherlands"
+      description: "Kingdom of the Netherlands"
+      logo: "{{ logos.en.nlgov }}"
+      logo_alttext: "{{ logos.en.nlgov_alttext }}"
+    nlgov_pid:
+      locale: en
+      name: "Personal ID"
+      description: "Personal Identity Document of the Kingdom of the Netherlands"
+      logo: "{{ logos.nl.nlgov }}"
+      logo_alttext: "{{ logos.nl.nlgov_alttext }}"
+      card: "{{ logos.nl.nlgov_card }}"
+      color: "{{ styling.nlgov.color }}"
+      background_color: "{{ styling.nlgov.background_color }}"
+    nbgov:
+      locale: en
+      name: "Galactische Republic of Naboo"
+      description: "Galactische Republic of Naboo"
+      logo: "{{ logos.en.nbgov }}"
+      logo_alttext: "{{ logos.en.nbgov_alttext }}"
+    nbgov_pid:
+      locale: en
+      name: "Personal ID"
+      description: "Personal Identity Document of the Galactic Republic of Naboo"
+      logo: "{{ logos.en.nbgov }}"
+      logo_alttext: "{{ logos.en.nbgov_alttext }}"
+      card: "{{ logos.en.nbgov_card }}"
+      color: "{{ styling.nbgov.color }}"
+      background_color: "{{ styling.nbgov.background_color }}"
+    epi:
+      locale: en
+      name: "eduID Proeftuin Issuer"
+      description: "eduID Proeftuin credential issuer"
+      logo: "{{ logos.nl.epi }}"
+      logo_alttext: "{{ logos.nl.epi_alttext }}"
+    epi_abc:
+      locale: en
+      name: "Academic Base Credential"
+      description: "Academic Base Credential"
+      color: "{{ styling.epi.color }}"
+      background_color: "{{ styling.epi.background_color }}"
+    epi_eduid:
+      locale: en
+      name: "Academic Base Credential"
+      description: "Basic credential indicating affiliation with eduID"
+      logo: "{{ logos.en.epi }}"
+      logo_alttext: "{{ logos.en.epi_alttext }}"
+      card: "{{ logos.en.epi_card }}"
+      color: "{{ styling.epi.color }}"
+      background_color: "{{ styling.epi.background_color }}"
+    sandbox:
+      locale: en
+      name: "Sandbox Issuer"
+      description: "Issuer for the sandbox test environment"
+    sandbox_abc:
+      locale: en
+      name: "Academic Base Credential"
+      description: "Basic credential indicating affiliation with an Academic Institution"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    sandbox_pid:
+      locale: en
+      name: "Personal ID"
+      description: "Personal Identity Document"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    sandbox_generic:
+      locale: en
+      name: "Generic Credential"
+      description: "Generic credential for testing"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+  gb:
+    mbob:
+      locale: en_GB
+      name: "FE College Beek"
+      description: "Further Educational College of Beek"
+      logo: "{{ logos.gb.mbob }}"
+      logo_alttext: "{{ logos.gb.mbob_alttext }}"

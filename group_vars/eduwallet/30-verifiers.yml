@@ -1,0 +1,24 @@
+verifiers:
+  - name: demovp
+    path: "/demovp"
+    presentations:
+      - ABC
+      - PID
+    testPresentation: PID
+    token: "{{ tokens.demovp.admin }}"
+  - name: proxy
+    path: "/proxy"
+    presentations:
+      - ABC
+      - PID
+    testPresentation: ABC
+    token: "{{ tokens.proxy.admin }}"
+  - name: sandbox
+    path: "/sandbox"
+    presentations:
+      - ABC
+      - PID
+      - GC
+      - GCLDP
+    testPresentation: ABC
+    token: "{{ tokens.sandbox.verAdmin }}"

@@ -1,0 +1,12 @@
+verifierdeploy:
+  install: true
+  dir: "{{ basedir }}/verifierdeploy"
+  installations:
+    - name: democv
+      port: 8001
+      domain: "demo-cv.verifier.{{ deploydomain }}"
+      path: demo-cv
+      envtemplate: democv.env.j2
+      verifier: demovp
+      presentations: ABC,PID
+      token: "{{ tokens.demovp.admin }}"

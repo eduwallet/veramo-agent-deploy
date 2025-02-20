@@ -1,0 +1,199 @@
+# The list of installations defines the subpaths on the veramo-agent that the agent will listen to.
+# Each installation comes with its own credential metadata and well-known endpoints.
+# The name of the installation is used as the router path as well as the issuer configuration name
+# and the correlation-id to match issuer configuration with metadata configuration
+# preauthcode is used in the testing phase as a pre-configured but random token
+# adminToken is the bearer token that needs to be provided by the front-end issuer when calling create-offer
+# credential is the specific credential this issuer will provide. TODO: support multiple credentials
+# domain is used to determine the did:web key name. TODO: fix this with a proper did name
+# hash is the key identifier of the did:web used and must be manually retrieved from the database after
+#   first deployment. TODO: fix the agent to get the key based on the identifier instead
+# pubName is the public name of the issuer, used in the metadata
+# branding is the issuer specific branding for the one credential that is issued. TODO: support multiple credentials
+installations:
+  - name: mbob
+    domain: "mbob.{{ deploydomain }}"
+    pubName: "MBO Beek"
+    branding:
+      - "{{ branding.nl.mbob }}"
+      - "{{ branding.en.mbob }}"
+      - "{{ branding.gb.mbob }}"
+    test:
+      preauthcode: 9slAxx0AgJjHtS2hChULnPvExeYsLLpu
+      credential: AcademicBaseCredential
+      object:
+        sub:
+          - "12"
+        eduperson_unique_id:
+          - "abracadabra"
+        given_name:
+          - "test"
+        family_name:
+          - "janssen"
+        email:
+          - "test@example.org"
+    adminToken: "{{ tokens.mbob.admin }}"
+    statusToken: "{{ tokens.mbob.status }}"
+    credentials: 
+      AcademicBaseCredential:
+        - "{{ branding.nl.mbob_abc }}"
+        - "{{ branding.en.mbob_abc }}"
+      AcademicEnrollmentCredential:
+        - "{{ branding.nl.mbob_aec }}"
+        - "{{ branding.en.mbob_aec }}"
+  - name: tun
+    domain: "tun.{{ deploydomain }}"
+    pubName: "Theed University of Naboo"
+    test:
+      preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
+      credential: AcademicBaseCredential
+      object:
+        sub:
+          - "12"
+        eduperson_unique_id:
+          - "abracadabra"
+        given_name:
+          - "test"
+        family_name:
+          - "janssen"
+        email:
+          - "test@example.org"
+    adminToken: "{{ tokens.tun.admin }}"
+    statusToken: "{{ tokens.tun.status }}"
+    branding:
+    - "{{ branding.nl.tun }}"
+    - "{{ branding.en.tun }}"
+    credentials:
+      AcademicBaseCredential:
+        - "{{ branding.nl.tun_abc }}"
+        - "{{ branding.en.tun_abc }}"
+  - name: uvh
+    domain: "uvh.{{ deploydomain }}"
+    pubName: "University of Harderwijk"
+    branding:
+    - "{{ branding.nl.uvh }}"
+    - "{{ branding.en.uvh }}"
+    test:
+      preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
+      credential: AcademicBaseCredential
+      object:
+        sub:
+          - "12"
+        eduperson_unique_id:
+          - "abracadabra"
+        given_name:
+          - "test"
+        family_name:
+          - "janssen"
+        email:
+          - "test@example.org"
+    adminToken: "{{ tokens.uvh.admin }}"
+    statusToken: "{{ tokens.uvh.status }}"
+    credentials:
+      AcademicBaseCredential:
+      - "{{ branding.nl.uvh_abc }}"
+      - "{{ branding.en.uvh_abc }}"
+      AcademicEnrollmentCredential:
+      - "{{ branding.nl.uvh_aec }}"
+      - "{{ branding.en.uvh_aec }}"
+  - name: nlgov
+    domain: "nl.gov.{{ deploydomain }}"
+    pubName: "Kingdom of the Netherlands"
+    branding:
+    - "{{ branding.nl.nlgov }}"
+    - "{{ branding.en.nlgov }}"
+    test:
+      preauthcode: G0WAuJwHxtv2dqAMfoDsopRBjTpavttJ
+      credential: PID
+      object:
+        personal_administrative_number: "42"
+        document_number: "1"
+        given_name: "test"
+        family_name: "janssen"
+        nationality: "example"
+    adminToken: "{{ tokens.nlgov.admin }}"
+    statusToken: "{{ tokens.nlgov.status }}"
+    credentials:
+      PID:
+      - "{{ branding.nl.nlgov_pid }}"
+      - "{{ branding.en.nlgov_pid }}"
+  - name: nbgov
+    domain: "nb.gov.{{ deploydomain }}"
+    pubName: "Galactic Republic of Naboo"
+    branding:
+    - "{{ branding.nl.nbgov }}"
+    - "{{ branding.en.nbgov }}"
+    test:
+      preauthcode: WrBAlTNCBfUHDWHtYF0nkV9aJqBVIP5z
+      credential: PID
+      object:
+        personal_administrative_number: "42"
+        document_number: "1"
+        given_name: "test"
+        family_name: "janssen"
+        nationality: "example"
+    adminToken: "{{ tokens.nbgov.admin }}"
+    statusToken: "{{ tokens.nbgov.status }}"
+    credentials:
+      PID:
+      - "{{ branding.nl.nbgov_pid }}"
+      - "{{ branding.en.nbgov_pid }}"
+  - name: epi
+    domain: "epi.{{ deploydomain }}"
+    pubName: "Educational Proeftuin Issuer" 
+    branding:
+    - "{{ branding.nl.epi }}"
+    - "{{ branding.en.epi }}"
+    test:
+      preauthcode: 4GOmhdYyDWfGXT7R21iQ0qB8aBFhYAc9
+      credential: AcademicBaseCredential
+      object:
+        sub:
+          - "12"
+        eduperson_unique_id:
+          - "abracadabra"
+        given_name:
+          - "test"
+        family_name:
+          - "janssen"
+        email:
+          - "test@example.org"
+    adminToken: "{{ tokens.epi.admin }}"
+    statusToken: "{{ tokens.epi.status }}"
+    credentials:
+      AcademicBaseCredential:
+      - "{{ branding.nl.epi_abc }}"
+      - "{{ branding.en.epi_abc }}"
+      EduID:
+      - "{{ branding.nl.epi_eduid }}"
+      - "{{ branding.en.epi_eduid }}"
+  - name: sandbox
+    domain: "sandbox.{{ deploydomain }}"
+    pubName: "Sandbox Test Issuer"
+    branding:
+    - "{{ branding.nl.sandbox }}"
+    - "{{ branding.en.sandbox }}"
+    test:
+      preauthcode: bffy0TXajRTnoujKCIhfOnIUYjqmucRa
+      credential: PID
+      object:
+        personal_administrative_number: "42"
+        document_number: "1"
+        given_name: "test"
+        family_name: "janssen"
+        nationality: "example"
+    adminToken: "{{ tokens.sandbox.admin }}"
+    statusToken: "{{ tokens.sandbox.status }}"
+    credentials:
+      AcademicBaseCredential:
+      - "{{ branding.nl.sandbox_abc }}"
+      - "{{ branding.en.sandbox_abc }}"
+      PID:
+      - "{{ branding.nl.sandbox_pid }}"
+      - "{{ branding.en.sandbox_pid }}"
+      GenericCredential:
+      - "{{ branding.nl.sandbox_generic }}"
+      - "{{ branding.en.sandbox_generic }}"
+      GenericCredentialLD:
+      - "{{ branding.nl.sandbox_generic }}"
+      - "{{ branding.en.sandbox_generic }}"

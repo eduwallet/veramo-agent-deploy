@@ -1,0 +1,37 @@
+# For identifying the issuers and signing the credentials, this deployment uses did:web keys
+# associated with specific issuer domains, based on the front-end facing application that
+# initiates the issuance flow.
+# Different configurations can reuse the same did:web, for example if there is a need for two
+# different credential metadata configurations (one with pre-auth only, one with authorization_code
+# only) that are both linked to the same front-end-facing application.
+#
+# In theory, all configurations could use the same single did:web key
+#
+dids:
+  - name: mbob
+    domain: "mbob.{{ deploydomain }}"
+  - name: uvh
+    domain: "uvh.{{ deploydomain }}"
+  - name: tun
+    domain: "tun.{{ deploydomain }}"
+  - name: nlgov
+    domain: "nl.gov.{{ deploydomain }}"
+  - name: nbgov
+    domain: "nb.gov.{{ deploydomain }}"
+  - name: epi
+    domain: "epi.{{ deploydomain }}"
+  - name: sandbox
+    domain: "sandbox.{{ deploydomain }}"
+
+contexts:
+  - dest: gcldp.json
+    src: gcldp_context.json.j2
+
+# For identifying the verifiers and signing the authorization requests, we use did:keys
+# instead of did:web values. This keeps the verifiers nimble and relocatable without
+# having to configure reverse proxies. New verifiers can be easily added regardless of
+# the domain name. We only require a name for each key.
+verifier_dids:
+  - name: demovp
+  - name: proxy
+  - name: sandbox

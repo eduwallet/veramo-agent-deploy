@@ -1,13 +1,9 @@
 ---
-- name: Install Docker configuration
-  include_tasks: docker.yml
+#- name: Install Docker configuration
+#  include_tasks: docker.yml
 
 - name: Install Agent configuration
   include_tasks: agent.yml
-
-- name: Install Verifier configuration
-  include_tasks: verifier.yml
-  when: enableverifier
 
 - name: Ensure the OpenObserver log directory exists
   file:

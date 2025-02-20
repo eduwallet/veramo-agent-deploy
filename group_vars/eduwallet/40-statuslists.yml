@@ -1,0 +1,32 @@
+# Statuslists
+statuslists:
+  install: true
+  domain: "status.{{ deploydomain }}"
+  dir: "{{ basedir }}/statuslist-agent"
+  keytype: "ed25519"
+  installations:
+    - name: abcrevoke
+      credential: AcademicBaseCredential
+      purpose: revocation
+      size: 131072
+      tokens:
+        - "{{ tokens.mbob.status }}"
+        - "{{ tokens.tun.status }}"
+        - "{{ tokens.uvh.status }}"
+        - "{{ tokens.epi.status }}"
+        - "{{ tokens.sandbox.status }}"
+    - name: aecrevoke
+      credential: AcademicEnrollmentCredential
+      purpose: revocation
+      size: 131072
+      tokens:
+        - "{{ tokens.mbob.status }}"
+        - "{{ tokens.uvh.status }}"
+    - name: pidrevoke
+      credential: PID
+      purpose: revocation
+      size: 131072
+      tokens:
+        - "{{ tokens.nlgov.status }}" 
+        - "{{ tokens.nbgov.status }}"
+        - "{{ tokens.sandbox.status }}"

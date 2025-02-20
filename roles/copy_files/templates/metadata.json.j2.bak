@@ -7,7 +7,7 @@
     "authorization_servers": ["{{ instance.as }}"],
 {% endif %}    
     "display": [
-{% for branding in instance.branding %}
+{% for branding in instance.branding.items() %}
 {% if not loop.first -%},{% endif -%}    
       {
         "locale": "{{ branding.locale }}",
@@ -29,10 +29,9 @@
 {% if not loop.first -%},{% endif -%}
       "{{ cid }}": {
         "display": [
-{% for cbrand in credential %}
+{% for cbrand in credential.items() %}
 {% if not loop.first -%},{% endif -%}    
           {
-            "locale": "{{ cbrand.locale }}",
             "name": "{{ cbrand.name }}",
             "description": "{{ cbrand.description }}",
             "text_color": "{{ cbrand.color }}",

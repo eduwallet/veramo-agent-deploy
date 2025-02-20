@@ -1,0 +1,20 @@
+# This defines the list of Presentation Definitions. Each definition is a way to request a certain
+# credential-with-attributes. As long as we do not have SD-JWT credentials, we will always get the
+# entire credential anyway, so the list is short at first
+presentation_configurations:
+  - id: ABC
+    name: "Academic Base Credential"
+    template: pres_abc.json.j2
+    purpose: "We need to establish your base Academic relation"
+  - id: PID
+    name: "Personal ID"
+    template: pres_pid.json.j2
+    purpose: "We need to establish your basic identity"
+  - id: GC
+    name: "Generic Proeftuin Credential"
+    template: pres_gc.json.j2
+    purpose: "Proeftuin requires the credential content"
+  - id: GCLDP
+    name: "Generic Proeftuin Credential"
+    template: pres_gc_ldp.json.j2
+    purpose: "Proeftuin requires the credential content"

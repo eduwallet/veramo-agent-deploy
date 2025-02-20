@@ -15,28 +15,18 @@ traefik:
   postmaster: certbot@muisit.nl
   expose: false
 
-# This is a generic deploy token for the veramo-agent gitlab application. As long as this ansible only deploys
-# exactly that gitlab repository, the token can be used by all environments
-deployuser: gitlab+deploy-token-43
-deploytoken: !vault |
-             $ANSIBLE_VAULT;1.1;AES256
-             66356166626332356561643739626332363230316538356563653366643166383461343237363562383937333138313561
-             6661303166613335363262656636360a663932626432353561653237646164393732643865333064353439636162666332
-             663234633536623832343338336564353265656665386462343936396263310a3237363562656264326335613264316231
-             3432623561313666316537366634366662643239633432643830363138393234646364343563363737646362623032
-
 sources:
   agent:
-    repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/veramo-agent.git"
+    repo: "https://github.com/eduwallet/veramo-agent.git"
     version: HEAD
   verifier:
-    repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/veramo-verifier.git"
+    repo: "https://github.com/eduwallet/veramo-verifier.git"
     version: HEAD
   verifierdeploy:
-    repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/verifier-deploy.git"
+    repo: "https://github.com/eduwallet/verifier-deploy.git"
     version: HEAD
   statuslist:
-    repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/statuslist-agent.git"
+    repo: "https://github.com/eduwallet/statuslist-agent.git"
     version: HEAD
 
 docker:
