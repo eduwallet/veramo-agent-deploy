@@ -1,0 +1,28 @@
+{
+  "format": "jwt_vc_json",
+  "cryptographic_binding_methods_supported": ["did:jwk", "did:key"],
+  "cryptographic_suites_supported": ["ES256", "EdDSA"],
+  "proof_types_supported": {
+    "jwt": {
+      "proof_signing_alg_values_supported": ["ES256"]
+    }
+  },
+  "scope": "ExamEnrollmentCredential",
+  "display": [{
+        "locale": "en",
+        "name": "Exam Enrollment Credential",
+        "description": "Credential indicating the enrollment into a specific exam and date"
+  },{
+        "locale": "nl",
+        "name": "Examen inschrijvingscredential",
+        "description": "Inschrijvingsbewijs voor een specifiek examen en tijdsvak"
+  }],
+  "credential_definition": {
+    "type": [
+      "VerifiableCredential",
+      "ExamEnrollmentCredential"
+    ],
+    "credentialSubject": {
+    }
+  }
+}

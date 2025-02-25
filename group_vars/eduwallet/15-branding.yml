@@ -82,8 +82,44 @@ branding:
       background_color: "{{ styling.mbob.background_color }}"
     mbob_aec:
       locale: nl
-      name: "Academische Inschrijvingscredential"
+      name: "Academisch Inschrijvingscredential"
       description: "Bewijs van inschrijving in het MBO Beek programma"
+      logo: "{{ logos.nl.mbob }}"
+      logo_alttext: "{{ logos.nl.mbob_alttext }}"
+      card: "{{ logos.nl.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    mbob_sc:
+      locale: nl
+      name: "Ondersteuningscredential"
+      description: "Bewijs van toegekende ondersteuning binnen het onderwijsprogramma van MBO Beek"
+      logo: "{{ logos.nl.mbob }}"
+      logo_alttext: "{{ logos.nl.mbob_alttext }}"
+      card: "{{ logos.nl.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    mbob_sdc:
+      locale: nl
+      name: "Studiegegevens"
+      description: "Gegevens omtrent de studie die gevolgd wordt aan MBO Beek"
+      logo: "{{ logos.nl.mbob }}"
+      logo_alttext: "{{ logos.nl.mbob_alttext }}"
+      card: "{{ logos.nl.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    mbob_scc:
+      locale: nl
+      name: "Collegekaart"
+      description: "Collegekaart van MBO Beek"
+      logo: "{{ logos.nl.mbob }}"
+      logo_alttext: "{{ logos.nl.mbob_alttext }}"
+      card: "{{ logos.nl.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    mbob_eec:
+      locale: nl
+      name: "Toetsinschrijving"
+      description: "Bewijs van inschrijving voor een specifieke toets van MBO Beek"
       logo: "{{ logos.nl.mbob }}"
       logo_alttext: "{{ logos.nl.mbob_alttext }}"
       card: "{{ logos.nl.mbob_card }}"
@@ -120,8 +156,44 @@ branding:
       background_color: "{{ styling.uvh.background_color }}"
     uvh_aec:
       locale: nl
-      name: "Academische Inschrijvingscredential"
+      name: "Academisch Inschrijvingscredential"
       description: "Bewijs van inschrijving in het programma van de Universiteit van Harderwijk"
+      logo: "{{ logos.nl.uvh }}"
+      logo_alttext: "{{ logos.nl.uvh_alttext }}"
+      card: "{{ logos.nl.uvh_card }}"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
+    uvh_sc:
+      locale: nl
+      name: "Ondersteuningscredential"
+      description: "Bewijs van toegekende ondersteuning binnen het onderwijsprogramma van de Universiteit van Harderwijk"
+      logo: "{{ logos.nl.uvh }}"
+      logo_alttext: "{{ logos.nl.uvh_alttext }}"
+      card: "{{ logos.nl.uvh_card }}"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
+    uvh_sdc:
+      locale: nl
+      name: "Studiegegevens"
+      description: "Gegevens omtrent de studie die gevolgd wordt aan de Universiteit van Harderwijk"
+      logo: "{{ logos.nl.uvh }}"
+      logo_alttext: "{{ logos.nl.uvh_alttext }}"
+      card: "{{ logos.nl.uvh_card }}"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
+    uvh_scc:
+      locale: nl
+      name: "Collegekaart"
+      description: "Collegekaart van de Universiteit van Harderwijk"
+      logo: "{{ logos.nl.uvh }}"
+      logo_alttext: "{{ logos.nl.uvh_alttext }}"
+      card: "{{ logos.nl.uvh_card }}"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
+    uvh_eec:
+      locale: nl
+      name: "Tentameninschrijving"
+      description: "Bewijs van inschrijving voor een specifiek tentamen van de Universiteit van Harderwijk"
       logo: "{{ logos.nl.uvh }}"
       logo_alttext: "{{ logos.nl.uvh_alttext }}"
       card: "{{ logos.nl.uvh_card }}"
@@ -219,7 +291,43 @@ branding:
     mbob_aec:
       locale: en
       name: "Academic Enrollment Credential"
-      description: "Proof of enrollment in the MBO Beek programme"
+      description: "Proof of enrollment in the MBO Beek program"
+      logo: "{{ logos.en.mbob }}"
+      logo_alttext: "{{ logos.en.mbob_alttext }}"
+      card: "{{ logos.en.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    mbob_sc:
+      locale: en
+      name: "Support Credential"
+      description: "Proof of support assigned within the context of higher education"
+      logo: "{{ logos.en.mbob }}"
+      logo_alttext: "{{ logos.en.mbob_alttext }}"
+      card: "{{ logos.en.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    mbob_sdc:
+      locale: en
+      name: "Study Data"
+      description: "Data of the study and courses followed at MBO Beek"
+      logo: "{{ logos.en.mbob }}"
+      logo_alttext: "{{ logos.en.mbob_alttext }}"
+      card: "{{ logos.en.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    mbob_scc:
+      locale: en
+      name: "Institution Card"
+      description: "Institution Card of MBO Beek"
+      logo: "{{ logos.en.mbob }}"
+      logo_alttext: "{{ logos.en.mbob_alttext }}"
+      card: "{{ logos.en.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    mbob_eec:
+      locale: en
+      name: "Exam Enrollment"
+      description: "Proof of enrollment for an exam of MBO Beek"
       logo: "{{ logos.en.mbob }}"
       logo_alttext: "{{ logos.en.mbob_alttext }}"
       card: "{{ logos.en.mbob_card }}"
@@ -258,7 +366,43 @@ branding:
     uvh_aec:
       locale: en
       name: "Academic Enrollment Credential"
-      description: "Proof of enrollment in the University of Harderwijk programme"
+      description: "Proof of enrollment in the University of Harderwijk program"
+      logo: "{{ logos.en.uvh }}"
+      logo_alttext: "{{ logos.en.uvh_alttext }}"
+      card: "{{ logos.en.uvh_card }}"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
+    uvh_sc:
+      locale: en
+      name: "Support Credential"
+      description: "Proof of assigned support in the context of higher education at the University of Harderwijk"
+      logo: "{{ logos.en.uvh }}"
+      logo_alttext: "{{ logos.en.uvh_alttext }}"
+      card: "{{ logos.en.uvh_card }}"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
+    uvh_sdc:
+      locale: en
+      name: "Study Data"
+      description: "Data of the study and courses followed at the University of Harderwijk"
+      logo: "{{ logos.en.uvh }}"
+      logo_alttext: "{{ logos.en.uvh_alttext }}"
+      card: "{{ logos.en.uvh_card }}"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
+    uvh_scc:
+      locale: en
+      name: "Institutional Card"
+      description: "Institutional card of the University of Harderwijk"
+      logo: "{{ logos.en.uvh }}"
+      logo_alttext: "{{ logos.en.uvh_alttext }}"
+      card: "{{ logos.en.uvh_card }}"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
+    uvh_eec:
+      locale: en
+      name: "Exam Credential"
+      description: "Proof of enrollment into an exam at the University of Harderwijk"
       logo: "{{ logos.en.uvh }}"
       logo_alttext: "{{ logos.en.uvh_alttext }}"
       card: "{{ logos.en.uvh_card }}"

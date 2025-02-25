@@ -41,6 +41,18 @@ installations:
       AcademicEnrollmentCredential:
         - "{{ branding.nl.mbob_aec }}"
         - "{{ branding.en.mbob_aec }}"
+      SupportCredential:
+        - "{{ branding.nl.mbob_sc }}"
+        - "{{ branding.en.mbob_sc }}"
+      StudyDataCredential:
+        - "{{ branding.nl.mbob_sdc }}"
+        - "{{ branding.en.mbob_sdc }}"
+      StudentCardCredential:
+        - "{{ branding.nl.mbob_scc }}"
+        - "{{ branding.en.mbob_scc }}"
+      ExamEnrollmentCredential:
+        - "{{ branding.nl.mbob_eec }}"
+        - "{{ branding.en.mbob_eec }}"
   - name: tun
     domain: "tun.{{ deploydomain }}"
     pubName: "Theed University of Naboo"
@@ -96,6 +108,18 @@ installations:
       AcademicEnrollmentCredential:
       - "{{ branding.nl.uvh_aec }}"
       - "{{ branding.en.uvh_aec }}"
+      SupportCredential:
+        - "{{ branding.nl.uvh_sc }}"
+        - "{{ branding.en.uvh_sc }}"
+      StudyDataCredential:
+        - "{{ branding.nl.uvh_sdc }}"
+        - "{{ branding.en.uvh_sdc }}"
+      StudentCardCredential:
+        - "{{ branding.nl.uvh_scc }}"
+        - "{{ branding.en.uvh_scc }}"
+      ExamEnrollmentCredential:
+        - "{{ branding.nl.uvh_eec }}"
+        - "{{ branding.en.uvh_eec }}"
   - name: nlgov
     domain: "nl.gov.{{ deploydomain }}"
     pubName: "Kingdom of the Netherlands"

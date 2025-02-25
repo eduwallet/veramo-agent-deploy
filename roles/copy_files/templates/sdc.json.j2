@@ -1,0 +1,28 @@
+{
+  "format": "jwt_vc_json",
+  "cryptographic_binding_methods_supported": ["did:jwk", "did:key"],
+  "cryptographic_suites_supported": ["ES256", "EdDSA"],
+  "proof_types_supported": {
+    "jwt": {
+      "proof_signing_alg_values_supported": ["ES256"]
+    }
+  },
+  "scope": "StudyDataCredential",
+  "display": [{
+        "locale": "en",
+        "name": "Study Data Credential",
+        "description": "Data about the enrolled educational curriculum"
+  },{
+        "locale": "nl",
+        "name": "Studiegegevenscredential",
+        "description": "Gegevens over de ingeschreven opleiding"
+  }],
+  "credential_definition": {
+    "type": [
+      "VerifiableCredential",
+      "StudyDataCredential"
+    ],
+    "credentialSubject": {
+    }
+  }
+}
