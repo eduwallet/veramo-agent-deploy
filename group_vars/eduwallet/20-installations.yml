@@ -221,3 +221,49 @@ installations:
       GenericCredential_LD:
       - "{{ branding.nl.sandbox_generic }}"
       - "{{ branding.en.sandbox_generic }}"
+  - name: epi
+    domain: "epi.{{ deploydomain }}"
+    pubName: "Educational Proeftuin Issuer" 
+    branding:
+    - "{{ branding.nl.epi }}"
+    - "{{ branding.en.epi }}"
+    test:
+      preauthcode: 4GOmhdYyDWfGXT7R21iQ0qB8aBFhYAc9
+      credential: AcademicBaseCredential
+      object:
+        sub:
+          - "12"
+        eduperson_unique_id:
+          - "abracadabra"
+        given_name:
+          - "test"
+        family_name:
+          - "janssen"
+        email:
+          - "test@example.org"
+    adminToken: "{{ tokens.epi.admin }}"
+    statusToken: "{{ tokens.epi.status }}"
+    credentials:
+      AcademicBaseCredential:
+      - "{{ branding.nl.epi_abc }}"
+      - "{{ branding.en.epi_abc }}"
+      EduID:
+      - "{{ branding.nl.epi_eduid }}"
+      - "{{ branding.en.epi_eduid }}"
+  - name: auth
+    domain: "did:key:auth"
+    clientId: _07e5994b256d0e2284059acacb7bd7bc26b7d3beeb
+    as: https://as.dev.eduwallet.nl
+    pubName: "Auth Code Flow Issuer"
+    branding:
+    - "{{ branding.nl.auth }}"
+    test:
+      preauthcode: bffy0TXajRTnoujKCIhfOnIUYjqmucRa
+      credential: GenericCredential
+      object:
+        given_name: "test"
+        family_name: "janssen"
+    adminToken: "{{ tokens.auth.admin }}"
+    credentials:
+      GenericCredential:
+      - "{{ branding.nl.auth_generic }}"

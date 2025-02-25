@@ -1,9 +1,12 @@
 {
-  "did": "did:web:{{ instance.domain }}",
-  "did_vm": "did:web:{{ instance.domain }}#auth-key",
+{% if not instance.alias is defined -%}
+  "did": "{{ instance.provider }}:{{ instance.domain }}",
+  "did_vm": "{{ instance.provider }}:{{ instance.domain }}#auth-key",
+{% else -%}
+  "alias": "{{ instance.alias }}",
+{% endif %}
   "createArgs": {
-    "provider": "did:web",
-    "alias": "{{ instance.domain }}",
+    "provider": "{{ instance.provider }}",
     "options": {
       "kid": "auth-key",
       "keyType": "Ed25519",

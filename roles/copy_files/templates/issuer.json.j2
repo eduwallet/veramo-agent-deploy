@@ -8,6 +8,9 @@
 {% if instance.clientSecret is defined %}
   "clientSecret": "{{ instance.clientSecret }}",
 {% endif %}
+{% if instance.as is defined %}
+  "authorizationEndpoint": "{{ instance.as }}",
+{% endif %}
   "options": {
     "correlationId": "{{ instance.name }}",
     "definitionId": "{{ instance.name }}",

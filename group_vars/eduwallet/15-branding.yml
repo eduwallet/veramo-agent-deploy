@@ -272,6 +272,16 @@ branding:
       description: "Generiek credential voor test doeleinden"
       color: "{{ styling.mbob.color }}"
       background_color: "{{ styling.mbob.background_color }}"
+    auth:
+      locale: nl
+      name: "Auth Issuer"
+      description: "Issuer voor authorized_code flow test"
+    auth_generic:
+      locale: nl
+      name: "Generiek Credential"
+      description: "Generiek credential voor test doeleinden"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
   en:
     mbob:
       locale: en_US

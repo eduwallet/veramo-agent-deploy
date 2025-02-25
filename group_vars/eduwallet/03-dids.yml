@@ -9,19 +9,29 @@
 #
 dids:
   - name: mbob
+    provider: did:web
     domain: "mbob.{{ deploydomain }}"
   - name: uvh
+    provider: did:web
     domain: "uvh.{{ deploydomain }}"
   - name: tun
+    provider: did:web
     domain: "tun.{{ deploydomain }}"
   - name: nlgov
+    provider: did:web
     domain: "nl.gov.{{ deploydomain }}"
   - name: nbgov
+    provider: did:web
     domain: "nb.gov.{{ deploydomain }}"
   - name: epi
+    provider: did:web
     domain: "epi.{{ deploydomain }}"
   - name: sandbox
+    provider: did:web
     domain: "sandbox.{{ deploydomain }}"
+  - name: auth
+    provider: did:key
+    alias: "did:key:auth"
 
 contexts:
   - dest: gcldp.json
