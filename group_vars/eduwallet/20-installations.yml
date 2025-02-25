@@ -175,7 +175,7 @@ installations:
     - "{{ branding.en.sandbox }}"
     test:
       preauthcode: bffy0TXajRTnoujKCIhfOnIUYjqmucRa
-      credential: PID
+      credential: PID_JWT
       object:
         personal_administrative_number: "42"
         document_number: "1"
@@ -185,15 +185,15 @@ installations:
     adminToken: "{{ tokens.sandbox.admin }}"
     statusToken: "{{ tokens.sandbox.status }}"
     credentials:
-      AcademicBaseCredential:
+      AcademicBaseCredential_JWT:
       - "{{ branding.nl.sandbox_abc }}"
       - "{{ branding.en.sandbox_abc }}"
-      PID:
+      PID_JWT:
       - "{{ branding.nl.sandbox_pid }}"
       - "{{ branding.en.sandbox_pid }}"
-      GenericCredential:
+      GenericCredential_JWT:
       - "{{ branding.nl.sandbox_generic }}"
       - "{{ branding.en.sandbox_generic }}"
-      GenericCredentialLD:
+      GenericCredential_LD:
       - "{{ branding.nl.sandbox_generic }}"
       - "{{ branding.en.sandbox_generic }}"
