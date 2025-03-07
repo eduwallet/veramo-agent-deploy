@@ -30,35 +30,3 @@
     loop_var: instance
   become: yes
 
-- name: Verifier - Ensure the Dids configuration directories exists
-  file:
-    state: directory
-    path: "{{ verifier.dir }}/conf/dids"
-    mode: 0755
-  become: yes
-  when: enableverifier
-
-- name: Verifier - Clean did configurations
-  ansible.builtin.shell:
-    cmd: "rm -f {{ verifier.dir }}/conf/dids/*.json"
-  become: yes
-
-- name: Verifier - Install verifier DID specifications
-  template:
-    src: didkey.json.j2
-    dest: "{{ verifier.dir }}/conf/dids/{{ instance.name }}.json"
-  loop: "{{ verifier_dids }}"
-  loop_control:
-    loop_var: instance
-  become: yes
-  when: enableverifier
-
-- name: Verifier - Check DID specifications
-  ansible.builtin.shell:
-    cmd: "cat {{ verifier.dir }}/conf/dids/{{ instance.name }}.json | jq '.' > tmp;mv tmp {{ verifier.dir }}/conf/dids/{{ instance.name }}.json"
-    chdir: "{{ docker.dir }}"
-  loop: "{{ verifier_dids }}"
-  loop_control:
-    loop_var: instance
-  become: yes
-

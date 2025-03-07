@@ -41,7 +41,18 @@ contexts:
 # instead of did:web values. This keeps the verifiers nimble and relocatable without
 # having to configure reverse proxies. New verifiers can be easily added regardless of
 # the domain name. We only require a name for each key.
+# Due to the implementation of did alias retrieval, the name must include the provider!
+# The name must also match the key name of the verifier instance (including the provider)
 verifier_dids:
   - name: demovp
+    alias: did:key:demovpr1
+    provider: did:key
+    type: "Secp256r1"
   - name: proxy
+    alias: did:key:proxyr1
+    provider: did:key
+    type: "Secp256r1"
   - name: sandbox
+    alias: did:key:sandboxr1
+    provider: did:key
+    type: "Secp256r1"
