@@ -1,0 +1,5 @@
+vct:
+  - src: abc_vct.json.j2
+    dest: AcademicBaseCredential.json
+  - src: pid_vct.json.j2
+    dest: PID.json

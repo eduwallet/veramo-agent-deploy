@@ -1,0 +1,207 @@
+{
+    "credentials": ["AcademicBaseCredential"],
+    "path": "/vct/abc",
+    "document": {
+        "name": "{{ branding.en.mbob_abc.name }}",
+        "description": "{{ branding.en.mbob_abc.description",
+        "display": [{
+            "lang": "en",
+            "name": "{{ branding.en.mbob_abc.name }}",
+            "description": "{{ branding.en.mbob_abc.description }}",
+            "rendering": {
+                "simple": {
+                    "text_color": "{{ styling.mbob.color }}",
+                    "background_color": "{{ styling.mbob.background_color }}",
+                }
+            }
+        }, {
+            "lang": "nl-NL",
+            "name": "{{ branding.nl.mbob_abc.name }}",
+            "description": "{{ branding.nl.mbob_abc.description }}",
+            "rendering": {
+                "simple": {
+                    "text_color": "{{ styling.mbob.color }}",
+                    "background_color": "{{ styling.mbob.background_color }}",
+                }
+            }
+        }],
+        "claims": [
+            {
+                "path": ["sub"],
+                "sd": "allowed",
+                "display": [
+                    {
+                        "name": "{{ branding.en.claims.instituteId }}",
+                        "description": "{{ branding.en.claims.instituteIdDescr }}",
+                        "lang": "{{ branding.en.claims.lang }}"
+                    },
+                    {
+                        "name": "{{ branding.nl.claims.instituteId }}",
+                        "description": "{{ branding.nl.claims.instituteIdDescr }}",
+                        "lang": "{{ branding.nl.claims.lang }}"
+                    }
+                ]
+            },
+            {
+                "path": ["eduperson_unique_id"],
+                "sd": "allowed",
+                "display": [
+                    {
+                        "name": "{{ branding.en.claims.edupersonUniqueId }}",
+                        "description": "{{ branding.en.claims.edupersonUniqueIdDescr }}",
+                        "lang": "{{ branding.en.claims.lang }}"
+                    },
+                    {
+                        "name": "{{ branding.nl.claims.edupersonUniqueId }}",
+                        "description": "{{ branding.nl.claims.edupersonUniqueIdDescr }}",
+                        "lang": "{{ branding.nl.claims.lang }}"
+                    }
+                ]
+            },
+            {
+                "path": ["shac_home_organization"],
+                "sd": "allowed",
+                "display": [
+                    {
+                        "name": "{{ branding.en.claims.organization }}",
+                        "description": "{{ branding.en.claims.organizationDescr }}",
+                        "lang": "{{ branding.en.claims.lang }}"
+                    },
+                    {
+                        "name": "{{ branding.nl.claims.organization }}",
+                        "description": "{{ branding.nl.claims.organizationDescr }}",
+                        "lang": "{{ branding.nl.claims.lang }}"
+                    }
+                ]
+            },
+            {
+                "path": ["name"],
+                "sd": "allowed",
+                "display": [
+                    {
+                        "name": "{{ branding.en.claims.name }}",
+                        "description": "{{ branding.en.claims.nameDescr }}",
+                        "lang": "{{ branding.en.claims.lang }}"
+                    },
+                    {
+                        "name": "{{ branding.nl.claims.name }}",
+                        "description": "{{ branding.nl.claims.nameDescr }}",
+                        "lang": "{{ branding.nl.claims.lang }}"
+                    }
+                ]
+            },
+            {
+                "path": ["given_name"],
+                "sd": "allowed",
+                "display": [
+                    {
+                        "name": "{{ branding.en.claims.givenName }}",
+                        "description": "{{ branding.en.claims.givenNameDescr }}",
+                        "lang": "{{ branding.en.claims.lang }}"
+                    },
+                    {
+                        "name": "{{ branding.nl.claims.givenName }}",
+                        "description": "{{ branding.nl.claims.givenNameDescr }}",
+                        "lang": "{{ branding.nl.claims.lang }}"
+                    }
+                ]
+            },
+            {
+                "path": ["family_name"],
+                "sd": "allowed",
+                "display": [
+                    {
+                        "name": "{{ branding.en.claims.familyName }}",
+                        "description": "{{ branding.en.claims.familyNameDescr }}",
+                        "lang": "{{ branding.en.claims.lang }}"
+                    },
+                    {
+                        "name": "{{ branding.nl.claims.familyName }}",
+                        "description": "{{ branding.nl.claims.familyNameDescr }}",
+                        "lang": "{{ branding.nl.claims.lang }}"
+                    }
+                ]
+            },
+            {
+                "path": ["email"],
+                "sd": "allowed",
+                "display": [
+                    {
+                        "name": "{{ branding.en.claims.email }}",
+                        "description": "{{ branding.en.claims.emailDescr }}",
+                        "lang": "{{ branding.en.claims.lang }}"
+                    },
+                    {
+                        "name": "{{ branding.nl.claims.email }}",
+                        "description": "{{ branding.nl.claims.emailDescr }}",
+                        "lang": "{{ branding.nl.claims.lang }}"
+                    }
+                ]
+            },
+            {
+                "path": ["eduperson_affiliation"],
+                "sd": "allowed",
+                "display": [
+                    {
+                        "name": "{{ branding.en.claims.affiliation }}",
+                        "description": "{{ branding.en.claims.affiliationDescr }}",
+                        "lang": "{{ branding.en.claims.lang }}"
+                    },
+                    {
+                        "name": "{{ branding.nl.claims.affiliation }}",
+                        "description": "{{ branding.nl.claims.affiliationDescr }}",
+                        "lang": "{{ branding.nl.claims.lang }}"
+                    }
+                ]
+            },
+            {
+                "path": ["eduperson_scoped_affiliation"],
+                "sd": "allowed",
+                "display": [
+                    {
+                        "name": "{{ branding.en.claims.edupersonScopedAffiliation }}",
+                        "description": "{{ branding.en.claims.edupersonScopedAffiliationDescr }}",
+                        "lang": "{{ branding.en.claims.lang }}"
+                    },
+                    {
+                        "name": "{{ branding.nl.claims.edupersonScopedAffiliation }}",
+                        "description": "{{ branding.nl.claims.edupersonScopedAffiliationDescr }}",
+                        "lang": "{{ branding.nl.claims.lang }}"
+                    }
+                ]
+            },
+            {
+                "path": ["eduperson_entitlement"],
+                "sd": "allowed",
+                "display": [
+                    {
+                        "name": "{{ branding.en.claims.edupersonEntitlement }}",
+                        "description": "{{ branding.en.claims.edupersonEntitlementDescr }}",
+                        "lang": "{{ branding.en.claims.lang }}"
+                    },
+                    {
+                        "name": "{{ branding.nl.claims.edupersonEntitlement }}",
+                        "description": "{{ branding.nl.claims.edupersonEntitlementDescr }}",
+                        "lang": "{{ branding.nl.claims.lang }}"
+                    }
+                ]
+            },
+            {
+                "path": ["eduperson_assurance"],
+                "sd": "allowed",
+                "display": [
+                    {
+                        "name": "{{ branding.en.claims.assurance }}",
+                        "description": "{{ branding.en.claims.assuranceDescr }}",
+                        "lang": "{{ branding.en.claims.lang }}"
+                    },
+                    {
+                        "name": "{{ branding.nl.claims.assurance }}",
+                        "description": "{{ branding.nl.claims.assuranceDescr }}",
+                        "lang": "{{ branding.nl.claims.lang }}"
+                    }
+                ]
+            }
+        ]
+    }
+}

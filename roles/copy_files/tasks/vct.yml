@@ -1,0 +1,31 @@
+---
+- name: Agent - Ensure the VCT configuration directories exists
+  file:
+    state: directory
+    path: "{{ agent.dir }}/conf/vct"
+    mode: 0755
+  become: yes
+
+- name: Clean configurations
+  ansible.builtin.shell:
+    cmd: "rm -f {{ agent.dir }}/conf/vct/*.json"
+    chdir: "{{ docker.dir }}"
+  become: yes
+
+- name: Agent - Install VCT metadata
+  template:
+    src: "{{ instance.src }}"
+    dest: "{{ agent.dir }}/conf/vct/{{ instance.dest }}"
+  loop: "{{ vct }}"
+  loop_control:
+    loop_var: instance
+  become: yes
+
+- name: Agent - Check vct configurations
+  ansible.builtin.shell:
+    cmd: "cat {{ agent.dir }}/conf/vct/{{ instance.dest }} | jq '.' > tmp;mv tmp {{ agent.dir }}/conf/vct/{{ instance.dest }}"
+    chdir: "{{ docker.dir }}"
+  loop: "{{ vct }}"
+  loop_control:
+    loop_var: instance
+  become: yes

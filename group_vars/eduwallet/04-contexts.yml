@@ -1,0 +1,3 @@
+contexts:
+  - dest: gcldp.json
+    src: gcldp_context.json.j2

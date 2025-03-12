@@ -33,10 +33,6 @@ dids:
     provider: did:key
     alias: "did:key:auth"
 
-contexts:
-  - dest: gcldp.json
-    src: gcldp_context.json.j2
-
 # For identifying the verifiers and signing the authorization requests, we use did:keys
 # instead of did:web values. This keeps the verifiers nimble and relocatable without
 # having to configure reverse proxies. New verifiers can be easily added regardless of

@@ -212,7 +212,13 @@ installations:
       AcademicBaseCredential_JWT:
       - "{{ branding.nl.sandbox_abc }}"
       - "{{ branding.en.sandbox_abc }}"
+      AcademicBaseCredential_SD:
+      - "{{ branding.nl.sandbox_abc }}"
+      - "{{ branding.en.sandbox_abc }}"
       PID_JWT:
+      - "{{ branding.nl.sandbox_pid }}"
+      - "{{ branding.en.sandbox_pid }}"
+      PID_SD:
       - "{{ branding.nl.sandbox_pid }}"
       - "{{ branding.en.sandbox_pid }}"
       GenericCredential_JWT:

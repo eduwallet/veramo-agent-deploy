@@ -282,6 +282,31 @@ branding:
       description: "Generiek credential voor test doeleinden"
       color: "{{ styling.uvh.color }}"
       background_color: "{{ styling.uvh.background_color }}"
+    claims:
+      locale: nl_NL
+      lang: nl
+      instituteId: "Instellings ID"
+      instituteIdDescr: "Instelling specifiek ID"
+      edupersonUniqueId: "Uniek ID"
+      edupersonUniqueIdDescr: "Uniek persoonlijke ID in de context van hoger onderwijs en onderzoek"
+      organization: "Instelling"
+      organizationDescr: "Instelling"
+      name: "Naam"
+      nameDescr: "Volledige naam"
+      givenName: "Voornaam"
+      givenNameDescr: "Voornaam"
+      familyName: "Achternaam"
+      familyNameDescr: "Achternaam met tussenvoegsels"
+      email: "E-mail"
+      emailDescr: "E-mail adres"
+      edupersonAffiliation: "Betrekking"
+      edupersonAffiliationDescr: "Betrekking bij de instelling"
+      edupersonScopedAffiliation: "Betrekking (in relatie)"
+      edupersonScopedAffiliationDescr: "Betrekking in relatie tot de instelling"
+      edupersonEntitlement: "Rechten"
+      edupersonEntitlementDescr: "Rechten namens de instelling"
+      assurance: "Bevestiging"
+      assuranceDescr: "Bevestigingsniveau voor het verkrijgen van dit credential"
   en:
     mbob:
       locale: en_US
@@ -491,6 +516,31 @@ branding:
       description: "Generic credential for testing"
       color: "{{ styling.mbob.color }}"
       background_color: "{{ styling.mbob.background_color }}"
+    claims:
+      locale: en
+      lang: en
+      instituteId: "Institute ID"
+      instituteIdDescr: "Institute specific identifier"
+      edupersonUniqueId: "Unique ID"
+      edupersonUniqueIdDescr: "Unique personal identifier in the context of highed education and research"
+      organization: "Organization"
+      organizationDescr: "Organization"
+      name: "Name"
+      nameDescr: "Full name"
+      givenName: "Given name"
+      givenNameDescr: "Given name or first name"
+      familyName: "Family name"
+      familyNameDescr: "Family name or surname"
+      email: "E-mail"
+      emailDescr: "E-mail address"
+      edupersonAffiliation: "Affiliation"
+      edupersonAffiliationDescr: "Affiliation with the organization"
+      edupersonScopedAffiliation: "Affiliation (scoped)"
+      edupersonScopedAffiliationDescr: "Affiliation scoped to the home organization"
+      edupersonEntitlement: "Entitlements"
+      edupersonEntitlementDescr: "Entitlements"
+      assurance: "Assurance"
+      assuranceDescr: "Assurance level for receiving this credential"
   gb:
     mbob:
       locale: en_GB
