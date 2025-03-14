@@ -36,23 +36,35 @@ installations:
     statusToken: "{{ tokens.mbob.status }}"
     credentials: 
       AcademicBaseCredential:
-        - "{{ branding.nl.mbob_abc }}"
-        - "{{ branding.en.mbob_abc }}"
+        branding:
+          - "{{ branding.nl.mbob_abc }}"
+          - "{{ branding.en.mbob_abc }}"
+      AcademicBaseCredential_SD:
+        format: "vc+sd-jwt"
+        extends: "AcademicBaseCredential"
+        branding:
+          - "{{ branding.nl.mbob_abc }}"
+          - "{{ branding.en.mbob_abc }}"
       AcademicEnrollmentCredential:
-        - "{{ branding.nl.mbob_aec }}"
-        - "{{ branding.en.mbob_aec }}"
+        branding:
+          - "{{ branding.nl.mbob_aec }}"
+          - "{{ branding.en.mbob_aec }}"
       SupportCredential:
-        - "{{ branding.nl.mbob_sc }}"
-        - "{{ branding.en.mbob_sc }}"
+        branding:
+          - "{{ branding.nl.mbob_sc }}"
+          - "{{ branding.en.mbob_sc }}"
       StudyDataCredential:
-        - "{{ branding.nl.mbob_sdc }}"
-        - "{{ branding.en.mbob_sdc }}"
+        branding:
+          - "{{ branding.nl.mbob_sdc }}"
+          - "{{ branding.en.mbob_sdc }}"
       StudentCardCredential:
-        - "{{ branding.nl.mbob_scc }}"
-        - "{{ branding.en.mbob_scc }}"
+        branding:
+          - "{{ branding.nl.mbob_scc }}"
+          - "{{ branding.en.mbob_scc }}"
       ExamEnrollmentCredential:
-        - "{{ branding.nl.mbob_eec }}"
-        - "{{ branding.en.mbob_eec }}"
+        branding:
+          - "{{ branding.nl.mbob_eec }}"
+          - "{{ branding.en.mbob_eec }}"
   - name: tun
     domain: "tun.{{ deploydomain }}"
     pubName: "Theed University of Naboo"
@@ -77,8 +89,15 @@ installations:
     - "{{ branding.en.tun }}"
     credentials:
       AcademicBaseCredential:
-        - "{{ branding.nl.tun_abc }}"
-        - "{{ branding.en.tun_abc }}"
+        branding:
+          - "{{ branding.nl.tun_abc }}"
+          - "{{ branding.en.tun_abc }}"
+      AcademicBaseCredential_SD:
+        format: "vc+sd-jwt"
+        extends: "AcademicBaseCredential"
+        branding:
+          - "{{ branding.nl.tun_abc }}"
+          - "{{ branding.en.tun_abc }}"
   - name: uvh
     domain: "uvh.{{ deploydomain }}"
     pubName: "University of Harderwijk"
@@ -103,23 +122,35 @@ installations:
     statusToken: "{{ tokens.uvh.status }}"
     credentials:
       AcademicBaseCredential:
-      - "{{ branding.nl.uvh_abc }}"
-      - "{{ branding.en.uvh_abc }}"
+        branding:
+          - "{{ branding.nl.uvh_abc }}"
+          - "{{ branding.en.uvh_abc }}"
+      AcademicBaseCredential_SD:
+        format: "vc+sd-jwt"
+        extends: "AcademicBaseCredential"
+        branding:
+          - "{{ branding.nl.uvh_abc }}"
+          - "{{ branding.en.uvh_abc }}"
       AcademicEnrollmentCredential:
-      - "{{ branding.nl.uvh_aec }}"
-      - "{{ branding.en.uvh_aec }}"
+        branding:
+          - "{{ branding.nl.uvh_aec }}"
+          - "{{ branding.en.uvh_aec }}"
       SupportCredential:
-        - "{{ branding.nl.uvh_sc }}"
-        - "{{ branding.en.uvh_sc }}"
+        branding:
+          - "{{ branding.nl.uvh_sc }}"
+          - "{{ branding.en.uvh_sc }}"
       StudyDataCredential:
-        - "{{ branding.nl.uvh_sdc }}"
-        - "{{ branding.en.uvh_sdc }}"
+        branding:
+          - "{{ branding.nl.uvh_sdc }}"
+          - "{{ branding.en.uvh_sdc }}"
       StudentCardCredential:
-        - "{{ branding.nl.uvh_scc }}"
-        - "{{ branding.en.uvh_scc }}"
+        branding:
+          - "{{ branding.nl.uvh_scc }}"
+          - "{{ branding.en.uvh_scc }}"
       ExamEnrollmentCredential:
-        - "{{ branding.nl.uvh_eec }}"
-        - "{{ branding.en.uvh_eec }}"
+        branding:
+          - "{{ branding.nl.uvh_eec }}"
+          - "{{ branding.en.uvh_eec }}"
   - name: nlgov
     domain: "nl.gov.{{ deploydomain }}"
     pubName: "Kingdom of the Netherlands"
@@ -139,8 +170,15 @@ installations:
     statusToken: "{{ tokens.nlgov.status }}"
     credentials:
       PID:
-      - "{{ branding.nl.nlgov_pid }}"
-      - "{{ branding.en.nlgov_pid }}"
+        branding:
+          - "{{ branding.nl.nlgov_pid }}"
+          - "{{ branding.en.nlgov_pid }}"
+      PID_SD:
+        format: "vc+sd-jwt"
+        extends: "PID"
+        branding:
+          - "{{ branding.nl.nlgov_pid }}"
+          - "{{ branding.en.nlgov_pid }}"
   - name: nbgov
     domain: "nb.gov.{{ deploydomain }}"
     pubName: "Galactic Republic of Naboo"
@@ -160,8 +198,15 @@ installations:
     statusToken: "{{ tokens.nbgov.status }}"
     credentials:
       PID:
-      - "{{ branding.nl.nbgov_pid }}"
-      - "{{ branding.en.nbgov_pid }}"
+        branding:
+          - "{{ branding.nl.nbgov_pid }}"
+          - "{{ branding.en.nbgov_pid }}"
+      PID_SD:
+        format: "vc+sd-jwt"
+        extends: "PID"
+        branding:
+          - "{{ branding.nl.nbgov_pid }}"
+          - "{{ branding.en.nbgov_pid }}"
   - name: epi
     domain: "epi.{{ deploydomain }}"
     pubName: "Educational Proeftuin Issuer" 
@@ -186,17 +231,19 @@ installations:
     statusToken: "{{ tokens.epi.status }}"
     credentials:
       AcademicBaseCredential:
-      - "{{ branding.nl.epi_abc }}"
-      - "{{ branding.en.epi_abc }}"
+        branding:
+          - "{{ branding.nl.epi_abc }}"
+          - "{{ branding.en.epi_abc }}"
       EduID:
-      - "{{ branding.nl.epi_eduid }}"
-      - "{{ branding.en.epi_eduid }}"
+        branding:
+          - "{{ branding.nl.epi_eduid }}"
+          - "{{ branding.en.epi_eduid }}"
   - name: sandbox
     domain: "sandbox.{{ deploydomain }}"
     pubName: "Sandbox Test Issuer"
     branding:
-    - "{{ branding.nl.sandbox }}"
-    - "{{ branding.en.sandbox }}"
+      - "{{ branding.nl.sandbox }}"
+      - "{{ branding.en.sandbox }}"
     test:
       preauthcode: bffy0TXajRTnoujKCIhfOnIUYjqmucRa
       credential: PID_JWT
@@ -210,23 +257,33 @@ installations:
     statusToken: "{{ tokens.sandbox.status }}"
     credentials:
       AcademicBaseCredential_JWT:
-      - "{{ branding.nl.sandbox_abc }}"
-      - "{{ branding.en.sandbox_abc }}"
+        branding:
+          - "{{ branding.nl.sandbox_abc }}"
+          - "{{ branding.en.sandbox_abc }}"
       AcademicBaseCredential_SD:
-      - "{{ branding.nl.sandbox_abc }}"
-      - "{{ branding.en.sandbox_abc }}"
+        format: "vc+sd-jwt"
+        extends: "AcademicBaseCredential_JWT"
+        branding:
+          - "{{ branding.nl.sandbox_abc }}"
+          - "{{ branding.en.sandbox_abc }}"
       PID_JWT:
-      - "{{ branding.nl.sandbox_pid }}"
-      - "{{ branding.en.sandbox_pid }}"
+        branding:
+          - "{{ branding.nl.sandbox_pid }}"
+          - "{{ branding.en.sandbox_pid }}"
       PID_SD:
-      - "{{ branding.nl.sandbox_pid }}"
-      - "{{ branding.en.sandbox_pid }}"
+        format: "vc+sd-jwt"
+        extends: "PID_JWT"
+        branding:
+          - "{{ branding.nl.sandbox_pid }}"
+          - "{{ branding.en.sandbox_pid }}"
       GenericCredential_JWT:
-      - "{{ branding.nl.sandbox_generic }}"
-      - "{{ branding.en.sandbox_generic }}"
+        branding:
+          - "{{ branding.nl.sandbox_generic }}"
+          - "{{ branding.en.sandbox_generic }}"
       GenericCredential_LD:
-      - "{{ branding.nl.sandbox_generic }}"
-      - "{{ branding.en.sandbox_generic }}"
+        branding:
+          - "{{ branding.nl.sandbox_generic }}"
+          - "{{ branding.en.sandbox_generic }}"
   - name: epi
     domain: "epi.{{ deploydomain }}"
     pubName: "Educational Proeftuin Issuer" 
@@ -251,11 +308,13 @@ installations:
     statusToken: "{{ tokens.epi.status }}"
     credentials:
       AcademicBaseCredential:
-      - "{{ branding.nl.epi_abc }}"
-      - "{{ branding.en.epi_abc }}"
+        branding:
+          - "{{ branding.nl.epi_abc }}"
+          - "{{ branding.en.epi_abc }}"
       EduID:
-      - "{{ branding.nl.epi_eduid }}"
-      - "{{ branding.en.epi_eduid }}"
+        branding:
+          - "{{ branding.nl.epi_eduid }}"
+          - "{{ branding.en.epi_eduid }}"
   - name: auth
     domain: "did:key:auth"
     clientId: _07e5994b256d0e2284059acacb7bd7bc26b7d3beeb
@@ -272,4 +331,5 @@ installations:
     adminToken: "{{ tokens.auth.admin }}"
     credentials:
       GenericCredential:
-      - "{{ branding.nl.auth_generic }}"
+        branding:
+          - "{{ branding.nl.auth_generic }}"

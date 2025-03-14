@@ -3,7 +3,7 @@
     "path": "/vct/abc",
     "document": {
         "name": "{{ branding.en.mbob_abc.name }}",
-        "description": "{{ branding.en.mbob_abc.description",
+        "description": "{{ branding.en.mbob_abc.description }}",
         "display": [{
             "lang": "en",
             "name": "{{ branding.en.mbob_abc.name }}",
@@ -11,7 +11,7 @@
             "rendering": {
                 "simple": {
                     "text_color": "{{ styling.mbob.color }}",
-                    "background_color": "{{ styling.mbob.background_color }}",
+                    "background_color": "{{ styling.mbob.background_color }}"
                 }
             }
         }, {
@@ -21,7 +21,7 @@
             "rendering": {
                 "simple": {
                     "text_color": "{{ styling.mbob.color }}",
-                    "background_color": "{{ styling.mbob.background_color }}",
+                    "background_color": "{{ styling.mbob.background_color }}"
                 }
             }
         }],
@@ -159,13 +159,13 @@
                 "sd": "allowed",
                 "display": [
                     {
-                        "name": "{{ branding.en.claims.edupersonScopedAffiliation }}",
-                        "description": "{{ branding.en.claims.edupersonScopedAffiliationDescr }}",
+                        "name": "{{ branding.en.claims.scopedAffiliation }}",
+                        "description": "{{ branding.en.claims.scopedAffiliationDescr }}",
                         "lang": "{{ branding.en.claims.lang }}"
                     },
                     {
-                        "name": "{{ branding.nl.claims.edupersonScopedAffiliation }}",
-                        "description": "{{ branding.nl.claims.edupersonScopedAffiliationDescr }}",
+                        "name": "{{ branding.nl.claims.scopedAffiliation }}",
+                        "description": "{{ branding.nl.claims.scopedAffiliationDescr }}",
                         "lang": "{{ branding.nl.claims.lang }}"
                     }
                 ]
@@ -188,7 +188,7 @@
             },
             {
                 "path": ["eduperson_assurance"],
-                "sd": "allowed",
+                "sd": "never",
                 "display": [
                     {
                         "name": "{{ branding.en.claims.assurance }}",

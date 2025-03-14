@@ -28,8 +28,9 @@
 {% for cid,credential in instance.credentials.items() %}
 {% if not loop.first -%},{% endif -%}
       "{{ cid }}": {
+{% if credential.branding is defined %}
         "display": [
-{% for cbrand in credential %}
+{% for cbrand in credential.branding %}
 {% if not loop.first -%},{% endif -%}    
           {
             "locale": "{{ cbrand.locale }}",
@@ -53,6 +54,12 @@
           }
 {% endfor %}
         ]
+{% endif %}
+{% if credential.format is defined %}
+{% if credential.branding is defined -%},{% endif -%}
+        "format": "{{ credential.format }}",
+        "extends": "{{ credential.extends }}"
+{% endif %}
       }
 {% endfor %}
     }

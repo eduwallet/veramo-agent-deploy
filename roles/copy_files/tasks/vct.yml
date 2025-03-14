@@ -23,7 +23,7 @@
 
 - name: Agent - Check vct configurations
   ansible.builtin.shell:
-    cmd: "cat {{ agent.dir }}/conf/vct/{{ instance.dest }} | jq '.' > tmp;mv tmp {{ agent.dir }}/conf/vct/{{ instance.dest }}"
+    cmd: "cat {{ agent.dir }}/conf/vct/{{ instance.dest }} | jq '.' > tmp; mv tmp {{ agent.dir }}/conf/vct/{{ instance.dest }}"
     chdir: "{{ docker.dir }}"
   loop: "{{ vct }}"
   loop_control:
