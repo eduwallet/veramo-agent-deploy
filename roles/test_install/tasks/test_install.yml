@@ -28,16 +28,39 @@
       Authorization: "Bearer {{ installation.adminToken }}"
     body: "{\"credentials\":[\"{{ installation.test.credential }}\"],\"grants\":{\"urn:ietf:params:oauth:grant-type:pre-authorized_code\":{\"pre-authorized_code\":\"{{ installation.test.preauthcode }}\",\"user_pin_required\":false}},\"credentialDataSupplierInput\":{{ installation.test.object | to_json }}}"
     method: POST
+    return_content: true
+  when: installation.test.as is not defined
+  register: createoffer_pre
+
+- name: "{{ installation.name }}: Testing create offer"
+  ansible.builtin.uri:
+    url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/api/create-offer"
+    body_format: json
+    headers:
+      Content-type: 'application/json'
+      Authorization: "Bearer {{ installation.adminToken }}"
+    body: "{\"credentials\":[\"{{ installation.test.credential }}\"],\"grants\":{\"authorization_code\":{\"issuer_state\":\"{{ installation.test.preauthcode }}\"}},\"credentialDataSupplierInput\":{{ installation.test.object | to_json }}}"
+    method: POST
+    return_content: true
+  when: installation.test.as is defined
+  register: createoffer_as
+
+- name: "{{ installation.name }}: unify registered var"
+  set_fact:
+    createoffer: "{{ createoffer_pre.content if not createoffer_pre.skipped is defined else createoffer_as.content | from_json }}"
 
 - name: "{{ installation.name }}: Testing get offer"
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/get-credential-offer/{{ installation.test.preauthcode}}"
+    url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/get-credential-offer/{{ createoffer.id }}"
     method: GET
 
 - name: "{{ installation.name }}: Testing check offer"
   ansible.builtin.uri:
     url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/api/check-offer"
     body_format: json
-    body: "{\"id\":\"{{ installation.test.preauthcode}}\"}"
+    headers:
+      Content-type: 'application/json'
+      Authorization: "Bearer {{ installation.adminToken }}"
+    body: "{\"id\":\"{{ createoffer.id }}\"}"
     method: POST
 

@@ -7,5 +7,5 @@ WORKDIR /opt/app
 
 ENV NODE_SCRIPT={{ agent.script }}
 ENV GENERATE_SOURCEMAP=false
-ENV DEBUG=*:*
+ENV DEBUG=issuer:*
 ENTRYPOINT npm run-script {{ agent.script }}

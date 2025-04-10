@@ -30,8 +30,9 @@ dids:
     provider: did:web
     domain: "sandbox.{{ deploydomain }}"
   - name: auth
-    provider: did:key
-    alias: "did:key:auth"
+    provider: did:web
+    domain: "agent.{{ deploydomain }}:auth"
+    alias: "did:web:auth"
 
 # For identifying the verifiers and signing the authorization requests, we use did:keys
 # instead of did:web values. This keeps the verifiers nimble and relocatable without

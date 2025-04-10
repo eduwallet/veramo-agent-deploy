@@ -1,7 +1,4 @@
 {
-  "correlationId": "{{ instance.name }}",
-  "overwriteExisting": true,
-  "metadata": {
     "credential_issuer": "{{ protocol }}://{{ basedomain }}/{{ instance.name }}",
     "credential_endpoint": "{{ protocol }}://{{ basedomain }}/{{ instance.name }}/credentials",{% if instance.as is defined %}
     "authorization_servers": ["{{ instance.as }}"],
@@ -63,5 +60,4 @@
       }
 {% endfor %}
     }
-  }
 }

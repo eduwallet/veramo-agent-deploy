@@ -55,7 +55,7 @@ services:
       - BASEURL={{ protocol }}://{{ agent.hostname }}
       - LOG_SERVICE=http://log:5080/api/default/issuer/_json
       - LOG_USER={{ (openobserver.adminEmail + ':' + openobserver.adminPassword) | b64encode }}
-      - DEBUG=*
+      - DEBUG=issuer:*
     volumes:
       - "{{ agent.dir }}:/opt/app"
     ports:

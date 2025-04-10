@@ -316,7 +316,7 @@ installations:
           - "{{ branding.nl.epi_eduid }}"
           - "{{ branding.en.epi_eduid }}"
   - name: auth
-    domain: "did:key:auth"
+    domain: "did:web:auth"
     clientId: _07e5994b256d0e2284059acacb7bd7bc26b7d3beeb
     as: https://as.dev.eduwallet.nl
     pubName: "Auth Code Flow Issuer"

@@ -1,9 +1,9 @@
 {
-  "baseUrl": "{{ protocol }}://{{ basedomain }}/{{ instance.name }}",
-  "enableCreateCredentials": true,
-  "adminToken": "{{ instance.adminToken }}",
 {% if instance.clientId is defined %}
   "clientId": "{{ instance.clientId }}",
+  "useNonces": true,
+{% else %}
+  "useNonces": false,
 {% endif %}
 {% if instance.clientSecret is defined %}
   "clientSecret": "{{ instance.clientSecret }}",
@@ -11,20 +11,8 @@
 {% if instance.as is defined %}
   "authorizationEndpoint": "{{ instance.as }}",
 {% endif %}
-  "options": {
-    "correlationId": "{{ instance.name }}",
-    "definitionId": "{{ instance.name }}",
-    "issuerOpts": {
-      "didOpts": {
-        "checkLinkedDomains": "if_present",
-        "identifierOpts": {
-          "alias": "{{ instance.domain }}"
-        }
-      }
-    }
-  }
-{% if statuslists and statuslists.install %}
-  ,"statusLists": {
+{% if statuslists and statuslists.install and instance.statusToken is defined %}
+  "statusLists": {
 {% for statuslist in statuslists.installations if statuslist.credential in instance.credentials %}
 {% if not loop.first -%},{% endif -%}
     "{{ statuslist.credential }}": {
@@ -33,6 +21,10 @@
       "token": "{{ instance.statusToken }}"
     }
 {% endfor %}
-  }
+  },
 {% endif %}
+  "name": "{{ instance.name }}",
+  "baseUrl": "{{ protocol }}://{{ basedomain }}/{{ instance.name }}",
+  "adminToken": "{{ instance.adminToken }}",
+  "did": "{{ instance.domain }}"
 }
