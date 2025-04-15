@@ -199,6 +199,15 @@ branding:
       card: "{{ logos.nl.uvh_card }}"
       color: "{{ styling.uvh.color }}"
       background_color: "{{ styling.uvh.background_color }}"
+    uvh_ob:
+      locale: nl
+      name: "OpenBadge"
+      description: "Diploma, badge of resultaat volgens OpenBadge format"
+      logo: "{{ logos.nl.uvh }}"
+      logo_alttext: "{{ logos.nl.uvh_alttext }}"
+      card: "{{ logos.nl.uvh_card }}"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
     nlgov:
       locale: nl
       name: "Koninkrijk der Nederlanden"
@@ -490,6 +499,15 @@ branding:
       locale: en
       name: "Exam Credential"
       description: "Proof of enrollment into an exam at the University of Harderwijk"
+      logo: "{{ logos.en.uvh }}"
+      logo_alttext: "{{ logos.en.uvh_alttext }}"
+      card: "{{ logos.en.uvh_card }}"
+      color: "{{ styling.uvh.color }}"
+      background_color: "{{ styling.uvh.background_color }}"
+    uvh_ob:
+      locale: en
+      name: "OpenBadge"
+      description: "Badge, diploma or result in the OpenBadge format"
       logo: "{{ logos.en.uvh }}"
       logo_alttext: "{{ logos.en.uvh_alttext }}"
       card: "{{ logos.en.uvh_card }}"

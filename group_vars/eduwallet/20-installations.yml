@@ -151,6 +151,10 @@ installations:
         branding:
           - "{{ branding.nl.uvh_eec }}"
           - "{{ branding.en.uvh_eec }}"
+      OpenBadgeCredential:
+        branding:
+          - "{{ branding.nl.uvh_ob }}"
+          - "{{ branding.en.uvh_ob }}"
   - name: nlgov
     domain: "nl.gov.{{ deploydomain }}"
     pubName: "Kingdom of the Netherlands"
