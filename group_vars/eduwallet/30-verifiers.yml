@@ -24,5 +24,10 @@ verifiers:
       - PID
       - GC
       - GCLDP
+      - AEC
+      - SC
+      - SCC
+      - SDC
+      - EEC
     testPresentation: ABC
     token: "{{ tokens.sandbox.verAdmin }}"

@@ -11,10 +11,36 @@ presentation_configurations:
     template: pres_pid.json.j2
     purpose: "We need to establish your basic identity"
   - id: GC
+    credential: GenericCredential
     name: "Generic Proeftuin Credential"
     template: pres_gc.json.j2
     purpose: "Proeftuin requires the credential content"
   - id: GCLDP
     name: "Generic Proeftuin Credential"
     template: pres_gc_ldp.json.j2
+    purpose: "Proeftuin requires the credential content"
+  - id: AEC
+    credential: AcademicEnrollmentCredential
+    name: "Academic Enrollment Credential"
+    template: pres_gc.json.j2
+    purpose: "Proeftuin requires the credential content"
+  - id: SC
+    credential: SupportCredential
+    name: "Support Credential"
+    template: pres_gc.json.j2
+    purpose: "Proeftuin requires the credential content"
+  - id: SDC
+    credential: StudyDataCredential
+    name: "Study Data Credential"
+    template: pres_gc.json.j2
+    purpose: "Proeftuin requires the credential content"
+  - id: SCC
+    credential: StudentCardCredential
+    name: "Student Card Credential"
+    template: pres_gc.json.j2
+    purpose: "Proeftuin requires the credential content"
+  - id: EEC
+    credential: ExamEnrollmentCredential
+    name: "Exam Enrollment Credential"
+    template: pres_gc.json.j2
     purpose: "Proeftuin requires the credential content"
