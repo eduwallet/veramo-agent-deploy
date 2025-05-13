@@ -30,6 +30,7 @@ logos:
     uvh_card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
     nlgov: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_logo.png
     nlgov_alttext: "Weapon of the Kingdom with two lions and the text 'Digitale Zaken'"
+    nlgov_card: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_bg.png
     nbgov: https://nb.gov.dev.eduwallet.nl/images/nbgov_credential_logo.png
     nbgov_alttext: "French tulip like logo with Digital Affairs subtitle"
     nbgov_card: https://nb.gov.dev.eduwallet.nl/images/nbgov_credential_bg.png
@@ -523,9 +524,9 @@ branding:
       locale: en
       name: "Personal ID"
       description: "Personal Identity Document of the Kingdom of the Netherlands"
-      logo: "{{ logos.nl.nlgov }}"
-      logo_alttext: "{{ logos.nl.nlgov_alttext }}"
-      card: "{{ logos.nl.nlgov_card }}"
+      logo: "{{ logos.en.nlgov }}"
+      logo_alttext: "{{ logos.en.nlgov_alttext }}"
+      card: "{{ logos.en.nlgov_card }}"
       color: "{{ styling.nlgov.color }}"
       background_color: "{{ styling.nlgov.background_color }}"
     nbgov:
@@ -547,8 +548,8 @@ branding:
       locale: en
       name: "eduID Proeftuin Issuer"
       description: "eduID Proeftuin credential issuer"
-      logo: "{{ logos.nl.epi }}"
-      logo_alttext: "{{ logos.nl.epi_alttext }}"
+      logo: "{{ logos.en.epi }}"
+      logo_alttext: "{{ logos.en.epi_alttext }}"
     epi_abc:
       locale: en
       name: "Academic Base Credential"
