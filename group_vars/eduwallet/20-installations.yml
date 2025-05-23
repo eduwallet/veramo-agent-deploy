@@ -155,6 +155,63 @@ installations:
         branding:
           - "{{ branding.nl.uvh_ob }}"
           - "{{ branding.en.uvh_ob }}"
+  - name: hbot
+    domain: "hbot.{{ deploydomain }}"
+    pubName: "University College Terschelling"
+    branding:
+    - "{{ branding.nl.hbot }}"
+    - "{{ branding.en.hbot }}"
+    test:
+      preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
+      credential: AcademicBaseCredential
+      object:
+        sub:
+          - "12"
+        eduperson_unique_id:
+          - "abracadabra"
+        given_name:
+          - "test"
+        family_name:
+          - "janssen"
+        email:
+          - "test@example.org"
+    adminToken: "{{ tokens.hbot.admin }}"
+    statusToken: "{{ tokens.hbot.status }}"
+    credentials:
+      AcademicBaseCredential:
+        branding:
+          - "{{ branding.nl.hbot_abc }}"
+          - "{{ branding.en.hbot_abc }}"
+      AcademicBaseCredential_SD:
+        format: "vc+sd-jwt"
+        extends: "AcademicBaseCredential"
+        branding:
+          - "{{ branding.nl.hbot_abc }}"
+          - "{{ branding.en.hbot_abc }}"
+      AcademicEnrollmentCredential:
+        branding:
+          - "{{ branding.nl.hbot_aec }}"
+          - "{{ branding.en.hbot_aec }}"
+      SupportCredential:
+        branding:
+          - "{{ branding.nl.hbot_sc }}"
+          - "{{ branding.en.hbot_sc }}"
+      StudyDataCredential:
+        branding:
+          - "{{ branding.nl.hbot_sdc }}"
+          - "{{ branding.en.hbot_sdc }}"
+      StudentCardCredential:
+        branding:
+          - "{{ branding.nl.hbot_scc }}"
+          - "{{ branding.en.hbot_scc }}"
+      ExamEnrollmentCredential:
+        branding:
+          - "{{ branding.nl.hbot_eec }}"
+          - "{{ branding.en.hbot_eec }}"
+      OpenBadgeCredential:
+        branding:
+          - "{{ branding.nl.hbot_ob }}"
+          - "{{ branding.en.hbot_ob }}"
   - name: nlgov
     domain: "nl.gov.{{ deploydomain }}"
     pubName: "Kingdom of the Netherlands"

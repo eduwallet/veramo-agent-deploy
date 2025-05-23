@@ -13,6 +13,7 @@ statuslists:
         - "{{ tokens.mbob.status }}"
         - "{{ tokens.tun.status }}"
         - "{{ tokens.uvh.status }}"
+        - "{{ tokens.hbot.status }}"
         - "{{ tokens.epi.status }}"
         - "{{ tokens.sandbox.status }}"
     - name: aecrevoke
@@ -22,6 +23,7 @@ statuslists:
       tokens:
         - "{{ tokens.mbob.status }}"
         - "{{ tokens.uvh.status }}"
+        - "{{ tokens.hbot.status }}"
     - name: pidrevoke
       credential: PID
       purpose: revocation

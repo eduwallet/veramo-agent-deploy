@@ -9,6 +9,9 @@ logos:
     uvh: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
     uvh_alttext: "Harderwijk met het logo van de universiteit: een gekroonde dame met staf en schild en de latijnse tekst 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' er rondomheen"
     uvh_card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
+    hbot: https://hbot.dev.eduwallet.nl/images/hbot_credential_logo.png
+    hbot_alttext: "De vuurtoren Brandaris met de kleuren van Terschelling op de achtergrond"
+    hbot_card: https://hbot.dev.eduwallet.nl/images/hbot_credential_bg.png
     nlgov: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_logo.png
     nlgov_alttext: "Wapenschild van het koninkrijk met twee leeuwen en de tekst 'Digitale Zaken'"
     nlgov_card: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_bg.png
@@ -28,6 +31,9 @@ logos:
     uvh: https://uvh.dev.eduwallet.nl/images/uvh_credential_logo.png
     uvh_alttext: "Harderwijk with the University of Harderwijk logo displaying a crowned lady with a staff and shield and the latin text reading 'Academiae Ducatus Gelriae et Comitatus Zutphaniae Sacrum' around"
     uvh_card: https://uvh.dev.eduwallet.nl/images/uvh_credential_bg.png
+    hbot: https://hbot.dev.eduwallet.nl/images/hbot_credential_logo.png
+    hbot_alttext: "The watchtower Brandaris with the colours of Terschelling in the background"
+    hbot_card: https://hbot.dev.eduwallet.nl/images/hbot_credential_bg.png
     nlgov: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_logo.png
     nlgov_alttext: "Weapon of the Kingdom with two lions and the text 'Digitale Zaken'"
     nlgov_card: https://nl.gov.dev.eduwallet.nl/images/nlgov_credential_bg.png
@@ -51,6 +57,9 @@ styling:
   uvh:
     color: '#ffffff'
     background_color: '#4779aa'
+  hbot:
+    color: '#ffffff'
+    background_color: '#0501ed'
   nlgov:
     color: '#ffffff'
     background_color: '#DFF4FF'
@@ -209,6 +218,66 @@ branding:
       card: "{{ logos.nl.uvh_card }}"
       color: "{{ styling.uvh.color }}"
       background_color: "{{ styling.uvh.background_color }}"
+    hbot:
+      locale: nl
+      name: "HBO Terschelling"
+      description: "Hoger Beroepsonderwijs Terschelling"
+      logo: "{{ logos.nl.hbot }}"
+      logo_alttext: "{{ logos.nl.hbot_alttext }}"
+    hbot_abc:
+      locale: nl
+      name: "Academische Basis Credential"
+      description: "Basis credential voor een relatie met HBO Terschelling"
+      logo: "{{ logos.nl.hbot }}"
+      logo_alttext: "{{ logos.nl.hbot_alttext }}"
+      card: "{{ logos.nl.hbot_card }}"
+      color: "{{ styling.hbot.color }}"
+      background_color: "{{ styling.hbot.background_color }}"
+    hbot_aec:
+      locale: nl
+      name: "Academisch Inschrijvingscredential"
+      description: "Bewijs van inschrijving in het HBO Terschelling programma"
+      logo: "{{ logos.nl.hbot }}"
+      logo_alttext: "{{ logos.nl.hbot_alttext }}"
+      card: "{{ logos.nl.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    hbot_sc:
+      locale: nl
+      name: "Ondersteuningscredential"
+      description: "Bewijs van toegekende ondersteuning binnen het onderwijsprogramma van HBO Terschelling"
+      logo: "{{ logos.nl.hbot }}"
+      logo_alttext: "{{ logos.nl.hbot_alttext }}"
+      card: "{{ logos.nl.hbot_card }}"
+      color: "{{ styling.hbot.color }}"
+      background_color: "{{ styling.hbot.background_color }}"
+    hbot_sdc:
+      locale: nl
+      name: "Studiegegevens"
+      description: "Gegevens omtrent de studie die gevolgd wordt aan HBO Terschelling"
+      logo: "{{ logos.nl.hbot }}"
+      logo_alttext: "{{ logos.nl.hbot_alttext }}"
+      card: "{{ logos.nl.hbot_card }}"
+      color: "{{ styling.hbot.color }}"
+      background_color: "{{ styling.hbot.background_color }}"
+    hbot_scc:
+      locale: nl
+      name: "Collegekaart"
+      description: "Collegekaart van HBO Terschelling"
+      logo: "{{ logos.nl.hbot }}"
+      logo_alttext: "{{ logos.nl.hbot_alttext }}"
+      card: "{{ logos.nl.hbot_card }}"
+      color: "{{ styling.hbot.color }}"
+      background_color: "{{ styling.hbot.background_color }}"
+    hbot_eec:
+      locale: nl
+      name: "Toetsinschrijving"
+      description: "Bewijs van inschrijving voor een specifieke toets van HBO Terschelling"
+      logo: "{{ logos.nl.hbot }}"
+      logo_alttext: "{{ logos.nl.hbot_alttext }}"
+      card: "{{ logos.nl.hbot_card }}"
+      color: "{{ styling.hbot.color }}"
+      background_color: "{{ styling.hbot.background_color }}"
     nlgov:
       locale: nl
       name: "Koninkrijk der Nederlanden"
@@ -514,6 +583,66 @@ branding:
       card: "{{ logos.en.uvh_card }}"
       color: "{{ styling.uvh.color }}"
       background_color: "{{ styling.uvh.background_color }}"
+    hbot:
+      locale: en_US
+      name: "University College Terschelling"
+      description: "University College Terschelling"
+      logo: "{{ logos.en.hbot }}"
+      logo_alttext: "{{ logos.en.hbot_alttext }}"
+    hbot_abc:
+      locale: en
+      name: "Academic Base Credential"
+      description: "Basic credential indicating affiliation with UC Terschelling"
+      logo: "{{ logos.en.hbot }}"
+      logo_alttext: "{{ logos.en.hbot_alttext }}"
+      card: "{{ logos.en.hbot_card }}"
+      color: "{{ styling.hbot.color }}"
+      background_color: "{{ styling.hbot.background_color }}"
+    hbot_aec:
+      locale: en
+      name: "Academic Enrollment Credential"
+      description: "Proof of enrollment in the UC Terschelling program"
+      logo: "{{ logos.en.hbot }}"
+      logo_alttext: "{{ logos.en.hbot_alttext }}"
+      card: "{{ logos.en.hbot_card }}"
+      color: "{{ styling.hbot.color }}"
+      background_color: "{{ styling.hbot.background_color }}"
+    hbot_sc:
+      locale: en
+      name: "Support Credential"
+      description: "Proof of support assigned within the context of higher education"
+      logo: "{{ logos.en.hbot }}"
+      logo_alttext: "{{ logos.en.hbot_alttext }}"
+      card: "{{ logos.en.hbot_card }}"
+      color: "{{ styling.hbot.color }}"
+      background_color: "{{ styling.hbot.background_color }}"
+    hbot_sdc:
+      locale: en
+      name: "Study Data"
+      description: "Data of the study and courses followed at UC Terschelling"
+      logo: "{{ logos.en.hbot }}"
+      logo_alttext: "{{ logos.en.hbot_alttext }}"
+      card: "{{ logos.en.hbot_card }}"
+      color: "{{ styling.hbot.color }}"
+      background_color: "{{ styling.hbot.background_color }}"
+    hbot_scc:
+      locale: en
+      name: "Institution Card"
+      description: "Institution Card of UC Terschelling"
+      logo: "{{ logos.en.hbot }}"
+      logo_alttext: "{{ logos.en.hbot_alttext }}"
+      card: "{{ logos.en.hbot_card }}"
+      color: "{{ styling.hbot.color }}"
+      background_color: "{{ styling.hbot.background_color }}"
+    hbot_eec:
+      locale: en
+      name: "Exam Enrollment"
+      description: "Proof of enrollment for an exam of UC Terschelling"
+      logo: "{{ logos.en.hbot }}"
+      logo_alttext: "{{ logos.en.hbot_alttext }}"
+      card: "{{ logos.en.hbot_card }}"
+      color: "{{ styling.hbot.color }}"
+      background_color: "{{ styling.hbot.background_color }}"
     nlgov:
       locale: en
       name: "Kingdom of the Netherlands"

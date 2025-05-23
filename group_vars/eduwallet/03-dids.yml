@@ -17,6 +17,9 @@ dids:
   - name: tun
     provider: did:web
     domain: "tun.{{ deploydomain }}"
+  - name: hbot
+    provider: did:web
+    domain: "hbot.{{ deploydomain }}"
   - name: nlgov
     provider: did:web
     domain: "nl.gov.{{ deploydomain }}"
