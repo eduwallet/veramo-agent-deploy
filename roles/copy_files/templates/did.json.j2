@@ -1,16 +1,14 @@
 {
-{% if not instance.alias is defined -%}
   "did": "{{ instance.provider }}:{{ instance.domain }}",
-  "did_vm": "{{ instance.provider }}:{{ instance.domain }}#auth-key",
-{% else -%}
+{% if instance.alias is defined -%}
   "alias": "{{ instance.alias }}",
 {% endif %}
   "createArgs": {
     "provider": "{{ instance.provider }}",
     "options": {
       "kid": "auth-key",
-      "keyType": "Ed25519",
-      "keys": [{"type": "Ed25519", "isController": true }]
+      "keyType": "Secp256r1",
+      "keys": [{"type": "Secp256r1", "isController": true }]
     }
   }
 }

@@ -11,30 +11,38 @@ dids:
   - name: mbob
     provider: did:web
     domain: "mbob.{{ deploydomain }}"
+    alias: did:web:mbob
   - name: uvh
     provider: did:web
     domain: "uvh.{{ deploydomain }}"
+    alias: did:web:uvh
   - name: tun
     provider: did:web
     domain: "tun.{{ deploydomain }}"
+    alias: did:web:tun
   - name: hbot
     provider: did:web
     domain: "hbot.{{ deploydomain }}"
+    alias: did:web:hbot
   - name: nlgov
     provider: did:web
     domain: "nl.gov.{{ deploydomain }}"
+    alias: did:web:nlgov
   - name: nbgov
     provider: did:web
     domain: "nb.gov.{{ deploydomain }}"
+    alias: did:web:nbgov
   - name: epi
     provider: did:web
     domain: "epi.{{ deploydomain }}"
+    alias: did:web:epi
   - name: sandbox
     provider: did:web
     domain: "sandbox.{{ deploydomain }}"
+    alias: did:web:sandbox
   - name: auth
     provider: did:web
-    domain: "agent.{{ deploydomain }}:auth"
+    domain: "agent.{{ deploydomain }}:auth:.well-known"
     alias: "did:web:auth"
 
 # For identifying the verifiers and signing the authorization requests, we use did:keys

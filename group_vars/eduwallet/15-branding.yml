@@ -278,6 +278,15 @@ branding:
       card: "{{ logos.nl.hbot_card }}"
       color: "{{ styling.hbot.color }}"
       background_color: "{{ styling.hbot.background_color }}"
+    hbot_ob:
+      locale: nl
+      name: "OpenBadge"
+      description: "Diploma, badge of resultaat volgens OpenBadge format"
+      logo: "{{ logos.nl.hbot }}"
+      logo_alttext: "{{ logos.nl.hbot_alttext }}"
+      card: "{{ logos.nl.hbot_card }}"
+      color: "{{ styling.hbot.color }}"
+      background_color: "{{ styling.hbot.background_color }}"
     nlgov:
       locale: nl
       name: "Koninkrijk der Nederlanden"
@@ -638,6 +647,15 @@ branding:
       locale: en
       name: "Exam Enrollment"
       description: "Proof of enrollment for an exam of UC Terschelling"
+      logo: "{{ logos.en.hbot }}"
+      logo_alttext: "{{ logos.en.hbot_alttext }}"
+      card: "{{ logos.en.hbot_card }}"
+      color: "{{ styling.hbot.color }}"
+      background_color: "{{ styling.hbot.background_color }}"
+    hbot_ob:
+      locale: en
+      name: "OpenBadge"
+      description: "Badge, diploma or result in the OpenBadge format"
       logo: "{{ logos.en.hbot }}"
       logo_alttext: "{{ logos.en.hbot_alttext }}"
       card: "{{ logos.en.hbot_card }}"
