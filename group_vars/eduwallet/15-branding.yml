@@ -135,6 +135,15 @@ branding:
       card: "{{ logos.nl.mbob_card }}"
       color: "{{ styling.mbob.color }}"
       background_color: "{{ styling.mbob.background_color }}"
+    mbob_ob:
+      locale: nl
+      name: "OpenBadge"
+      description: "Diploma, badge of resultaat volgens OpenBadge format"
+      logo: "{{ logos.nl.mbob }}"
+      logo_alttext: "{{ logos.nl.mbob_alttext }}"
+      card: "{{ logos.nl.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
     tun:
       locale: nl
       name: "Theed University of Naboo"
@@ -503,6 +512,15 @@ branding:
       locale: en
       name: "Exam Enrollment"
       description: "Proof of enrollment for an exam of MBO Beek"
+      logo: "{{ logos.en.mbob }}"
+      logo_alttext: "{{ logos.en.mbob_alttext }}"
+      card: "{{ logos.en.mbob_card }}"
+      color: "{{ styling.mbob.color }}"
+      background_color: "{{ styling.mbob.background_color }}"
+    mbob_ob:
+      locale: en
+      name: "OpenBadge"
+      description: "Badge, diploma or result in the OpenBadge format"
       logo: "{{ logos.en.mbob }}"
       logo_alttext: "{{ logos.en.mbob_alttext }}"
       card: "{{ logos.en.mbob_card }}"

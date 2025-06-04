@@ -65,6 +65,10 @@ installations:
         branding:
           - "{{ branding.nl.mbob_eec }}"
           - "{{ branding.en.mbob_eec }}"
+      OpenBadgeCredential:
+        branding:
+          - "{{ branding.nl.mbob_ob }}"
+          - "{{ branding.en.mbob_ob }}"
   - name: tun
     domain: "tun.{{ deploydomain }}"
     pubName: "Theed University of Naboo"
