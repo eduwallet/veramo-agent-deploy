@@ -1,0 +1,43 @@
+---
+- name: Ensure the configuration directories exists
+  file:
+    state: directory
+    path: "{{ itb.path }}/{{ item }}"
+    mode: 0755
+  loop:
+    - conf
+  become: yes
+
+- name: Delete possible env file
+  file:
+    path: "{{ itb.path }}/.env"
+    state: absent
+  become: yes
+
+- name: Clean configurations
+  ansible.builtin.shell:
+    cmd: "rm -f {{ itb.path }}/conf/*"
+    chdir: "{{ itb.path }}"
+  become: yes
+
+- name: Install configurations
+  template:
+    src: conf.json.j2
+    dest: "{{ itb.path }}/conf/{{ instance.name }}.json"
+  loop: "{{ configurations }}"
+  loop_control:
+    loop_var: instance
+  become: yes
+
+- name: Install env file
+  template:
+    src: itb_env.j2
+    dest: "{{ itb.path }}/.env"
+  become: yes
+
+- name: Copy dockerfile
+  template:
+    src: itb_dockerfile.j2
+    dest: "{{ itb.path }}/Dockerfile"
+  become: yes
+

@@ -28,6 +28,9 @@ sources:
   statuslist:
     repo: "https://github.com/eduwallet/statuslist-agent.git"
     version: HEAD
+  itbservice:
+    repo: "https://github.com/eduwallet/itb-service.git"
+    version: HEAD
 
 docker:
   dir: "{{ basedir }}/docker"

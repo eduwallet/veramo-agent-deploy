@@ -27,3 +27,19 @@
     cmd: "rm -rf {{ verifier.dir }}/node_modules"
     chdir: "{{ agent.dir }}"
   become: yes
+
+- name: Clone the ITB Service repository
+  ansible.builtin.git:
+    repo: "{{ sources.itbservice.repo }}"
+    dest: "{{ itb.path }}"
+    version: "{{ sources.itbservice.version }}"
+    force: yes
+  become: yes
+  when: itb.enabled
+
+- name: Clean up the old cached node_modules of the ITB service
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ itb.path }}/node_modules"
+    chdir: "{{ itb.path }}"
+  become: yes
+  when: itb.enabled

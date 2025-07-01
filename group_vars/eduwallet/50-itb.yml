@@ -1,0 +1,23 @@
+itb:
+  enabled: true
+  path: /opt/itb
+  domain: itb.dev.eduwallet.nl
+  project: eduwallet_itb
+  port: 80
+  postmaster: info@muisit.nl
+
+  configurations:
+    - name: GenericCredential
+      description: Simple test to configure a generic credential
+      url: "{{ basedomain }}"
+      token: "{{ tokens.sandbox.admin }}"
+      data:
+        credentials:
+          - GenericCredential
+        grants:
+          "urn:ietf:params:oauth:grant-type:pre-authorized_code":
+            "pre-authorized_code": generate
+        credentialDataSupplierInput:
+          given_name: Test
+          family_name: Test
+          age: 12

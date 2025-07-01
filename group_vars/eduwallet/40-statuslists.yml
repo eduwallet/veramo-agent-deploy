@@ -3,7 +3,7 @@ statuslists:
   install: true
   domain: "status.{{ deploydomain }}"
   dir: "{{ basedir }}/statuslist-agent"
-  keytype: "ed25519"
+  keytype: "Secp256r1"
   installations:
     - name: abcrevoke
       credential: AcademicBaseCredential
