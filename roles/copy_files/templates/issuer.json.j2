@@ -1,9 +1,6 @@
 {
 {% if instance.clientId is defined %}
   "clientId": "{{ instance.clientId }}",
-  "useNonces": true,
-{% else %}
-  "useNonces": false,
 {% endif %}
 {% if instance.clientSecret is defined %}
   "clientSecret": "{{ instance.clientSecret }}",
@@ -24,7 +21,8 @@
   },
 {% endif %}
   "name": "{{ instance.name }}",
+  "useNonces": true,
   "baseUrl": "{{ protocol }}://{{ basedomain }}/{{ instance.name }}",
   "adminToken": "{{ instance.adminToken }}",
-  "did": "{{ instance.domain }}"
+  "did": "{{ instance.provider }}:{{ instance.domain }}"
 }

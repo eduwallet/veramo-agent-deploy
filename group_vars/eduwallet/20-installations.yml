@@ -13,6 +13,8 @@
 installations:
   - name: mbob
     domain: "mbob.{{ deploydomain }}"
+    provider: did:web
+    keytype: Secp256r1
     pubName: "MBO Beek"
     branding:
       - "{{ branding.nl.mbob }}"
@@ -36,6 +38,7 @@ installations:
     statusToken: "{{ tokens.mbob.status }}"
     credentials: 
       AcademicBaseCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.mbob_abc }}"
           - "{{ branding.en.mbob_abc }}"
@@ -46,31 +49,39 @@ installations:
           - "{{ branding.nl.mbob_abc }}"
           - "{{ branding.en.mbob_abc }}"
       AcademicEnrollmentCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.mbob_aec }}"
           - "{{ branding.en.mbob_aec }}"
       SupportCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.mbob_sc }}"
           - "{{ branding.en.mbob_sc }}"
       StudyDataCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.mbob_sdc }}"
           - "{{ branding.en.mbob_sdc }}"
       StudentCardCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.mbob_scc }}"
           - "{{ branding.en.mbob_scc }}"
       ExamEnrollmentCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.mbob_eec }}"
           - "{{ branding.en.mbob_eec }}"
       OpenBadgeCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.mbob_ob }}"
           - "{{ branding.en.mbob_ob }}"
   - name: tun
     domain: "tun.{{ deploydomain }}"
+    provider: did:web
+    keytype: Secp256r1
     pubName: "Theed University of Naboo"
     test:
       preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
@@ -93,6 +104,7 @@ installations:
     - "{{ branding.en.tun }}"
     credentials:
       AcademicBaseCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.tun_abc }}"
           - "{{ branding.en.tun_abc }}"
@@ -104,6 +116,8 @@ installations:
           - "{{ branding.en.tun_abc }}"
   - name: uvh
     domain: "uvh.{{ deploydomain }}"
+    provider: did:web
+    keytype: Secp256r1
     pubName: "University of Harderwijk"
     branding:
     - "{{ branding.nl.uvh }}"
@@ -126,6 +140,7 @@ installations:
     statusToken: "{{ tokens.uvh.status }}"
     credentials:
       AcademicBaseCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.uvh_abc }}"
           - "{{ branding.en.uvh_abc }}"
@@ -136,31 +151,39 @@ installations:
           - "{{ branding.nl.uvh_abc }}"
           - "{{ branding.en.uvh_abc }}"
       AcademicEnrollmentCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.uvh_aec }}"
           - "{{ branding.en.uvh_aec }}"
       SupportCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.uvh_sc }}"
           - "{{ branding.en.uvh_sc }}"
       StudyDataCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.uvh_sdc }}"
           - "{{ branding.en.uvh_sdc }}"
       StudentCardCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.uvh_scc }}"
           - "{{ branding.en.uvh_scc }}"
       ExamEnrollmentCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.uvh_eec }}"
           - "{{ branding.en.uvh_eec }}"
       OpenBadgeCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.uvh_ob }}"
           - "{{ branding.en.uvh_ob }}"
   - name: hbot
     domain: "hbot.{{ deploydomain }}"
+    provider: did:web
+    keytype: Secp256r1
     pubName: "University College Terschelling"
     branding:
     - "{{ branding.nl.hbot }}"
@@ -183,6 +206,7 @@ installations:
     statusToken: "{{ tokens.hbot.status }}"
     credentials:
       AcademicBaseCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.hbot_abc }}"
           - "{{ branding.en.hbot_abc }}"
@@ -193,31 +217,39 @@ installations:
           - "{{ branding.nl.hbot_abc }}"
           - "{{ branding.en.hbot_abc }}"
       AcademicEnrollmentCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.hbot_aec }}"
           - "{{ branding.en.hbot_aec }}"
       SupportCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.hbot_sc }}"
           - "{{ branding.en.hbot_sc }}"
       StudyDataCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.hbot_sdc }}"
           - "{{ branding.en.hbot_sdc }}"
       StudentCardCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.hbot_scc }}"
           - "{{ branding.en.hbot_scc }}"
       ExamEnrollmentCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.hbot_eec }}"
           - "{{ branding.en.hbot_eec }}"
       OpenBadgeCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.hbot_ob }}"
           - "{{ branding.en.hbot_ob }}"
   - name: nlgov
     domain: "nl.gov.{{ deploydomain }}"
+    provider: did:web
+    keytype: Secp256r1
     pubName: "Kingdom of the Netherlands"
     branding:
     - "{{ branding.nl.nlgov }}"
@@ -235,6 +267,7 @@ installations:
     statusToken: "{{ tokens.nlgov.status }}"
     credentials:
       PID:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.nlgov_pid }}"
           - "{{ branding.en.nlgov_pid }}"
@@ -246,6 +279,8 @@ installations:
           - "{{ branding.en.nlgov_pid }}"
   - name: nbgov
     domain: "nb.gov.{{ deploydomain }}"
+    provider: did:web
+    keytype: Secp256r1
     pubName: "Galactic Republic of Naboo"
     branding:
     - "{{ branding.nl.nbgov }}"
@@ -263,6 +298,7 @@ installations:
     statusToken: "{{ tokens.nbgov.status }}"
     credentials:
       PID:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.nbgov_pid }}"
           - "{{ branding.en.nbgov_pid }}"
@@ -274,6 +310,8 @@ installations:
           - "{{ branding.en.nbgov_pid }}"
   - name: epi
     domain: "epi.{{ deploydomain }}"
+    provider: did:web
+    keytype: Secp256r1
     pubName: "Educational Proeftuin Issuer" 
     branding:
     - "{{ branding.nl.epi }}"
@@ -296,15 +334,19 @@ installations:
     statusToken: "{{ tokens.epi.status }}"
     credentials:
       AcademicBaseCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.epi_abc }}"
           - "{{ branding.en.epi_abc }}"
       EduID:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.epi_eduid }}"
           - "{{ branding.en.epi_eduid }}"
   - name: sandbox
     domain: "sandbox.{{ deploydomain }}"
+    provider: did:web
+    keytype: Secp256r1
     pubName: "Sandbox Test Issuer"
     branding:
       - "{{ branding.nl.sandbox }}"
@@ -322,6 +364,7 @@ installations:
     statusToken: "{{ tokens.sandbox.status }}"
     credentials:
       AcademicBaseCredential_JWT:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.sandbox_abc }}"
           - "{{ branding.en.sandbox_abc }}"
@@ -332,6 +375,7 @@ installations:
           - "{{ branding.nl.sandbox_abc }}"
           - "{{ branding.en.sandbox_abc }}"
       PID_JWT:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.sandbox_pid }}"
           - "{{ branding.en.sandbox_pid }}"
@@ -345,43 +389,19 @@ installations:
         branding:
           - "{{ branding.nl.sandbox_generic }}"
           - "{{ branding.en.sandbox_generic }}"
+      GenericCredential_JWT2:
+        format: "vc+jwt"
+        branding:
+          - "{{ branding.nl.sandbox_generic }}"
+          - "{{ branding.en.sandbox_generic }}"
       GenericCredential_LD:
         branding:
           - "{{ branding.nl.sandbox_generic }}"
           - "{{ branding.en.sandbox_generic }}"
-  - name: epi
-    domain: "epi.{{ deploydomain }}"
-    pubName: "Educational Proeftuin Issuer" 
-    branding:
-    - "{{ branding.nl.epi }}"
-    - "{{ branding.en.epi }}"
-    test:
-      preauthcode: 4GOmhdYyDWfGXT7R21iQ0qB8aBFhYAc9
-      credential: AcademicBaseCredential
-      object:
-        sub:
-          - "12"
-        eduperson_unique_id:
-          - "abracadabra"
-        given_name:
-          - "test"
-        family_name:
-          - "janssen"
-        email:
-          - "test@example.org"
-    adminToken: "{{ tokens.epi.admin }}"
-    statusToken: "{{ tokens.epi.status }}"
-    credentials:
-      AcademicBaseCredential:
-        branding:
-          - "{{ branding.nl.epi_abc }}"
-          - "{{ branding.en.epi_abc }}"
-      EduID:
-        branding:
-          - "{{ branding.nl.epi_eduid }}"
-          - "{{ branding.en.epi_eduid }}"
   - name: auth
     domain: "did:web:auth"
+    provider: did:web
+    keytype: Secp256r1
     clientId: _07e5994b256d0e2284059acacb7bd7bc26b7d3beeb
     as: https://as.dev.eduwallet.nl
     pubName: "Auth Code Flow Issuer"
@@ -396,5 +416,6 @@ installations:
     adminToken: "{{ tokens.auth.admin }}"
     credentials:
       GenericCredential:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.auth_generic }}"

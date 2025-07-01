@@ -3,12 +3,5 @@
 {% if instance.alias is defined -%}
   "alias": "{{ instance.alias }}",
 {% endif %}
-  "createArgs": {
-    "provider": "{{ instance.provider }}",
-    "options": {
-      "kid": "auth-key",
-      "keyType": "Secp256r1",
-      "keys": [{"type": "Secp256r1", "isController": true }]
-    }
-  }
+  "type": "{{ instance.keytype }}",
 }
