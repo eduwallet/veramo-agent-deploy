@@ -119,7 +119,7 @@ services:
       dockerfile: "{{ verifierdeploy.dir }}/{{ installation.path }}/docker/Dockerfile"
     hostname: {{ installation.name }}
     volumes:
-      - "{{ verifierdeploy.dir }}/{{ installation.path }}/app:/var/www/html"
+      - "{{ verifierdeploy.dir }}/{{ installation.path }}/app:/var/www"
     ports:
       - {{ installation.port }}:80
     restart: unless-stopped
