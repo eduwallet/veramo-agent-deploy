@@ -12,38 +12,47 @@ dids:
     provider: did:web
     domain: "mbob.{{ deploydomain }}"
     alias: did:web:mbob
+    keytype: Secp256r1
   - name: uvh
     provider: did:web
     domain: "uvh.{{ deploydomain }}"
     alias: did:web:uvh
+    keytype: Secp256r1
   - name: tun
     provider: did:web
     domain: "tun.{{ deploydomain }}"
     alias: did:web:tun
+    keytype: Secp256r1
   - name: hbot
     provider: did:web
     domain: "hbot.{{ deploydomain }}"
     alias: did:web:hbot
+    keytype: Secp256r1
   - name: nlgov
     provider: did:web
     domain: "nl.gov.{{ deploydomain }}"
     alias: did:web:nlgov
+    keytype: Secp256r1
   - name: nbgov
     provider: did:web
     domain: "nb.gov.{{ deploydomain }}"
     alias: did:web:nbgov
+    keytype: Secp256r1
   - name: epi
     provider: did:web
     domain: "epi.{{ deploydomain }}"
     alias: did:web:epi
+    keytype: Secp256r1
   - name: sandbox
     provider: did:web
     domain: "sandbox.{{ deploydomain }}"
     alias: did:web:sandbox
+    keytype: Secp256r1
   - name: auth
     provider: did:web
     domain: "agent.{{ deploydomain }}:auth:.well-known"
     alias: "did:web:auth"
+    keytype: Secp256r1
 
 # For identifying the verifiers and signing the authorization requests, we use did:keys
 # instead of did:web values. This keeps the verifiers nimble and relocatable without

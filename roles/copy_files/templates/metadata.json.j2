@@ -54,7 +54,10 @@
 {% endif %}
 {% if credential.format is defined %}
 {% if credential.branding is defined -%},{% endif -%}
-        "format": "{{ credential.format }}",
+        "format": "{{ credential.format }}"
+{% endif %}
+{% if credential.extends is defined %}
+{% if credential.branding is defined or credential.format is defined -%},{% endif -%}
         "extends": "{{ credential.extends }}"
 {% endif %}
       }

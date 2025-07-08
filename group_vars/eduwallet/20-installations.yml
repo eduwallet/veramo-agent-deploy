@@ -13,8 +13,7 @@
 installations:
   - name: mbob
     domain: "mbob.{{ deploydomain }}"
-    provider: did:web
-    keytype: Secp256r1
+    did: "did:web:mbob.{{ deploydomain }}"
     pubName: "MBO Beek"
     branding:
       - "{{ branding.nl.mbob }}"
@@ -80,8 +79,7 @@ installations:
           - "{{ branding.en.mbob_ob }}"
   - name: tun
     domain: "tun.{{ deploydomain }}"
-    provider: did:web
-    keytype: Secp256r1
+    did: "did:web:tun.{{ deploydomain }}"
     pubName: "Theed University of Naboo"
     test:
       preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
@@ -116,8 +114,7 @@ installations:
           - "{{ branding.en.tun_abc }}"
   - name: uvh
     domain: "uvh.{{ deploydomain }}"
-    provider: did:web
-    keytype: Secp256r1
+    did: "did:web:uvh.{{ deploydomain }}"
     pubName: "University of Harderwijk"
     branding:
     - "{{ branding.nl.uvh }}"
@@ -182,8 +179,7 @@ installations:
           - "{{ branding.en.uvh_ob }}"
   - name: hbot
     domain: "hbot.{{ deploydomain }}"
-    provider: did:web
-    keytype: Secp256r1
+    did: "did:web:hbot.{{ deploydomain }}"
     pubName: "University College Terschelling"
     branding:
     - "{{ branding.nl.hbot }}"
@@ -248,8 +244,7 @@ installations:
           - "{{ branding.en.hbot_ob }}"
   - name: nlgov
     domain: "nl.gov.{{ deploydomain }}"
-    provider: did:web
-    keytype: Secp256r1
+    did: "did:web:nl.gov.{{ deploydomain }}"    
     pubName: "Kingdom of the Netherlands"
     branding:
     - "{{ branding.nl.nlgov }}"
@@ -279,8 +274,7 @@ installations:
           - "{{ branding.en.nlgov_pid }}"
   - name: nbgov
     domain: "nb.gov.{{ deploydomain }}"
-    provider: did:web
-    keytype: Secp256r1
+    did: "did:web:nb.gov.{{ deploydomain }}"
     pubName: "Galactic Republic of Naboo"
     branding:
     - "{{ branding.nl.nbgov }}"
@@ -310,8 +304,7 @@ installations:
           - "{{ branding.en.nbgov_pid }}"
   - name: epi
     domain: "epi.{{ deploydomain }}"
-    provider: did:web
-    keytype: Secp256r1
+    did: "did:web:epi.{{ deploydomain }}"
     pubName: "Educational Proeftuin Issuer" 
     branding:
     - "{{ branding.nl.epi }}"
@@ -345,8 +338,7 @@ installations:
           - "{{ branding.en.epi_eduid }}"
   - name: sandbox
     domain: "sandbox.{{ deploydomain }}"
-    provider: did:web
-    keytype: Secp256r1
+    did: "did:web:sandbox.{{ deploydomain }}"
     pubName: "Sandbox Test Issuer"
     branding:
       - "{{ branding.nl.sandbox }}"
@@ -386,11 +378,13 @@ installations:
           - "{{ branding.nl.sandbox_pid }}"
           - "{{ branding.en.sandbox_pid }}"
       GenericCredential_JWT:
+        format: "vc+jwt"
         branding:
           - "{{ branding.nl.sandbox_generic }}"
           - "{{ branding.en.sandbox_generic }}"
-      GenericCredential_JWT2:
-        format: "vc+jwt"
+      GenericCredential_JWT_1:
+        format: "jwt_vc_json"
+        extends: "GenericCredential_JWT"
         branding:
           - "{{ branding.nl.sandbox_generic }}"
           - "{{ branding.en.sandbox_generic }}"
@@ -399,9 +393,8 @@ installations:
           - "{{ branding.nl.sandbox_generic }}"
           - "{{ branding.en.sandbox_generic }}"
   - name: auth
-    domain: "did:web:auth"
-    provider: did:web
-    keytype: Secp256r1
+    domain: "auth.{{ deploydomain }}"
+    did: "did:web:agent.{{ deploydomain }}:auth:.well-known"
     clientId: _07e5994b256d0e2284059acacb7bd7bc26b7d3beeb
     as: https://as.dev.eduwallet.nl
     pubName: "Auth Code Flow Issuer"

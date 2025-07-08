@@ -27,7 +27,7 @@
 
 - name: Install Node modules in ITB
   ansible.builtin.shell:
-    cmd:  "docker run --rm -v {{ itb.path }}:/opt/app --entrypoint yarn eduwallet_agent-itb:latest install"
+    cmd:  "docker run --rm -v {{ itb.path }}:/opt/app --entrypoint yarn eduwallet_agent-app_itb:latest install"
     chdir: "{{ docker.dir }}"
   become: yes
   when: itb.enabled

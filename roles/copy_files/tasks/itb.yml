@@ -22,9 +22,9 @@
 
 - name: Install configurations
   template:
-    src: conf.json.j2
+    src: itb_conf.json.j2
     dest: "{{ itb.path }}/conf/{{ instance.name }}.json"
-  loop: "{{ configurations }}"
+  loop: "{{ itb.configurations }}"
   loop_control:
     loop_var: instance
   become: yes
