@@ -44,3 +44,8 @@ presentation_configurations:
     name: "Exam Enrollment Credential"
     template: pres_gc.json.j2
     purpose: "Proeftuin requires the credential content"
+  - id: OBC
+    credential: OpenBadgeCredential
+    name: "OpenBadge v3 Credential"
+    template: pres_obc.json.j2
+    purpose: "Proeftuin requires the credential content"

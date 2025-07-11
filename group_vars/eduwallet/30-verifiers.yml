@@ -29,5 +29,6 @@ verifiers:
       - SCC
       - SDC
       - EEC
+      - OBC
     testPresentation: ABC
     token: "{{ tokens.sandbox.verAdmin }}"
