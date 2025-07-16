@@ -10,7 +10,7 @@ statuslists:
       purpose: revocation
       size: 131072
       bitSize: 1
-      type: BitStringStatusList
+      type: BitstringStatusList
       tokens:
         - "{{ tokens.mbob.status }}"
         - "{{ tokens.tun.status }}"
@@ -23,7 +23,7 @@ statuslists:
       purpose: revocation
       size: 131072
       bitSize: 1
-      type: BitStringStatusList
+      type: BitstringStatusList
       tokens:
         - "{{ tokens.mbob.status }}"
         - "{{ tokens.uvh.status }}"
@@ -33,7 +33,7 @@ statuslists:
       purpose: revocation
       size: 131072
       bitSize: 1
-      type: BitStringStatusList
+      type: BitstringStatusList
       tokens:
         - "{{ tokens.nlgov.status }}" 
         - "{{ tokens.nbgov.status }}"
