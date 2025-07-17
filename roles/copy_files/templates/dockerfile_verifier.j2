@@ -1,10 +1,9 @@
 # Builder stage
-FROM node:21-bookworm
-SHELL ["/bin/bash", "-c"]
-RUN yarn add typescript tslib
+FROM node:20-alpine
+RUN yarn global add typescript tslib
 WORKDIR /opt/app
 
 ENV NODE_SCRIPT={{ verifier.script }}
 ENV GENERATE_SOURCEMAP=false
 ENV DEBUG=*:*
-ENTRYPOINT npm run {{ verifier.script }}
+ENTRYPOINT yarn {{ verifier.script }}

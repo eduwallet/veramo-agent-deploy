@@ -360,6 +360,11 @@ installations:
         branding:
           - "{{ branding.nl.sandbox_abc }}"
           - "{{ branding.en.sandbox_abc }}"
+      AcademicBaseCredential_LD:
+        format: "vc+jwt"
+        branding:
+          - "{{ branding.nl.sandbox_abc }}"
+          - "{{ branding.en.sandbox_abc }}"
       AcademicBaseCredential_SD:
         format: "vc+sd-jwt"
         extends: "AcademicBaseCredential_JWT"

@@ -1,12 +1,5 @@
 {
-  "didAlias": "{{ instance.alias }}",
-  "createArgs": {
-    "provider": "{{ instance.provider }}",
-    "alias": "{{ instance.alias }}",
-    "options": {
-      "kid": "auth-key",
-      "keyType": "{{ instance.type }}",
-      "keys": [{"type": "{{ instance.type }}", "isController": true }]
-    }
-  }
+  "alias": "{{ instance.alias }}",
+  "provider": "{{ instance.provider }}",
+  "type": "{{ instance.type }}"
 }
