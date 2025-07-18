@@ -46,6 +46,7 @@ itb:
         credentialDataSupplierInput: "{{ base_itb_data.abc}}"         
         credentialMetadata:
           expiration: 2678400
+          enableStatusLists: false
     - name: ABC_TX
       description: Protected issuance of an Academic Base Credential
       url: "{{ protocol }}:{{ basedomain }}/sandbox"
@@ -64,6 +65,7 @@ itb:
         credentialDataSupplierInput: "{{ base_itb_data.abc}}"         
         credentialMetadata:
           expiration: 2678400
+          enableStatusLists: false
     - name: ABC_TX2
       description: Protected issuance of an Academic Base Credential
       url: "{{ protocol }}:{{ basedomain }}/sandbox"
@@ -82,6 +84,7 @@ itb:
         credentialDataSupplierInput: "{{ base_itb_data.abc}}"         
         credentialMetadata:
           expiration: 2678400
+          enableStatusLists: false
     - name: GC_STAT
       description: Issuance of a Generic Credential with IETF status list information
       url: "{{ protocol }}:{{ basedomain }}/sandbox"

@@ -361,7 +361,7 @@ installations:
           - "{{ branding.nl.sandbox_abc }}"
           - "{{ branding.en.sandbox_abc }}"
       AcademicBaseCredential_LD:
-        format: "vc+jwt"
+        format: "ldp_vc"
         branding:
           - "{{ branding.nl.sandbox_abc }}"
           - "{{ branding.en.sandbox_abc }}"
