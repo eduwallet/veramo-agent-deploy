@@ -6,7 +6,11 @@ statuslists:
   keytype: "Secp256r1"
   installations:
     - name: abcrevoke
-      credential: AcademicBaseCredential
+      credentials: 
+        - AcademicBaseCredential
+        - AcademicBaseCredential_JWT
+        - AcademicBaseCredential_LD
+        - AcademicBaseCredential_SD
       purpose: revocation
       size: 131072
       bitSize: 1
@@ -17,32 +21,10 @@ statuslists:
         - "{{ tokens.uvh.status }}"
         - "{{ tokens.hbot.status }}"
         - "{{ tokens.epi.status }}"
-    - name: abcrevoke
-      credential: AcademicBaseCredential_JWT
-      purpose: revocation
-      size: 131072
-      bitSize: 1
-      type: BitstringStatusList
-      tokens:
-        - "{{ tokens.sandbox.status }}"
-    - name: abcrevoke
-      credential: AcademicBaseCredential_LD
-      purpose: revocation
-      size: 131072
-      bitSize: 1
-      type: BitstringStatusList
-      tokens:
-        - "{{ tokens.sandbox.status }}"
-    - name: abcrevoke
-      credential: AcademicBaseCredential_SD
-      purpose: revocation
-      size: 131072
-      bitSize: 1
-      type: BitstringStatusList
-      tokens:
         - "{{ tokens.sandbox.status }}"
     - name: aecrevoke
-      credential: AcademicEnrollmentCredential
+      credentials:
+        - AcademicEnrollmentCredential
       purpose: revocation
       size: 131072
       bitSize: 1
@@ -52,7 +34,9 @@ statuslists:
         - "{{ tokens.uvh.status }}"
         - "{{ tokens.hbot.status }}"
     - name: pidrevoke
-      credential: PID
+      credentials:
+        - PID
+        - PID_JWT
       purpose: revocation
       size: 131072
       bitSize: 1
@@ -60,16 +44,10 @@ statuslists:
       tokens:
         - "{{ tokens.nlgov.status }}" 
         - "{{ tokens.nbgov.status }}"
-    - name: pidrevoke
-      credential: PID_JWT
-      purpose: revocation
-      size: 131072
-      bitSize: 1
-      type: BitstringStatusList
-      tokens:
         - "{{ tokens.sandbox.status }}"
     - name: ietf
-      credential: GenericCredential_JWT
+      credentials:
+        - GenericCredential_JWT
       purpose: revocation
       size: 131072
       bitSize: 1

@@ -10,13 +10,16 @@
 {% endif %}
 {% if statuslists and statuslists.install and instance.statusToken is defined %}
   "statusLists": {
-{% for statuslist in statuslists.installations if statuslist.credential in instance.credentials %}
-{% if not loop.first -%},{% endif -%}
-    "{{ statuslist.credential }}": {
+{% for statuslist in statuslists.installations if (instance.credentials.keys() | list | intersect(statuslist.credentials)) %}
+{% if not loop.first  -%},{% endif -%}
+{% for credential in statuslist.credentials if credential in (instance.credentials.keys() | list) %}
+{% if not loop.first  -%},{% endif -%}
+  "{{ credential }}": {
       "url": "https://{{ statuslists.domain }}/{{ statuslist.name }}/api/index",
       "revoke": "https://{{ statuslists.domain }}/{{ statuslist.name }}/api/revoke",
       "token": "{{ instance.statusToken }}"
-    }
+  }
+{% endfor %}
 {% endfor %}
   },
 {% endif %}
