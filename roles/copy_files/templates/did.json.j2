@@ -1,8 +1,0 @@
-{
-  "did": "{{ instance.provider }}:{{ instance.domain }}",
-  "provider": "{{ instance.provider }}",
-{% if instance.alias is defined -%}
-  "alias": "{{ instance.alias }}",
-{% endif %}
-  "type": "{{ instance.keytype }}"
-}

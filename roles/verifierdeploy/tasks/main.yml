@@ -1,4 +1,0 @@
----
-- name: Install the verifier example deployments
-  include_tasks: install.yml
-  when: verifierdeploy and verifierdeploy.install

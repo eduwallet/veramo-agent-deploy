@@ -1,0 +1,6 @@
+---
+- name: Build docker containers
+  include_tasks: docker.yml
+
+- name: Install node modules
+  include_tasks: modules.yml

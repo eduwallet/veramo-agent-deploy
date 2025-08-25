@@ -34,12 +34,12 @@ services:
       - "./letsencrypt:/letsencrypt"
 {% endif %}
     networks:
-      - eduwallet_agent
+      - {{ compose_project }}
 {% endif %}
 
   agent:
     build:
-      dockerfile: "{{ docker.dir }}/agent/Dockerfile"
+      dockerfile: "{{ docker.dir }}/issuer/Dockerfile"
     hostname: agent
     environment:
       - CONF_PATH=conf
@@ -53,8 +53,6 @@ services:
       - PORT={{ agent.port }}
       - LISTEN_ADDRESS=0.0.0.0
       - BASEURL={{ protocol }}://{{ agent.hostname }}
-      - LOG_SERVICE=http://log:5080/api/default/issuer/_json
-      - LOG_USER={{ (openobserver.adminEmail + ':' + openobserver.adminPassword) | b64encode }}
       - DEBUG=issuer:*
     volumes:
       - "{{ agent.dir }}:/opt/app"
@@ -62,7 +60,7 @@ services:
       - {{ agent.port }}:5000
     restart: unless-stopped
     networks:
-      - eduwallet_agent
+      - {{ compose_project }}
     links:
       - "db:db"
       - "log:log"
@@ -92,7 +90,7 @@ services:
       - {{ verifier.port }}:5002
     restart: unless-stopped
     networks:
-      - eduwallet_agent
+      - {{ compose_project }}
     links:
       - "db:db"
       - "log:log"
@@ -124,7 +122,7 @@ services:
       - {{ installation.port }}:80
     restart: unless-stopped
     networks:
-      - eduwallet_agent
+      - {{ compose_project }}
 {% if traefik.enabled %}
     labels:
       - "traefik.enable=true"
@@ -139,10 +137,10 @@ services:
 {% endfor %}
 {% endif %}
 
-{% if statuslists and statuslists.install %}
+{% if statuslists and statuslists.enabled %}
   statuslist:
     build:
-      dockerfile: "{{ statuslists.dir }}/docker/Dockerfile"
+      dockerfile: "{{ docker.dir }}/statuslists/Dockerfile"
     hostname: statuslist
     volumes:
       - "{{ statuslists.dir }}:/opt/app"
@@ -152,7 +150,7 @@ services:
     ports:
       - 7001:80
     networks:
-      - eduwallet_agent
+      - {{ compose_project }}
 {% if traefik.enabled %}
     labels:
       - "traefik.enable=true"
@@ -170,15 +168,15 @@ services:
 {% if itb.enabled %}
   app_itb:
     build:
-      dockerfile: "{{ itb.path }}/Dockerfile"
+      dockerfile: "{{ docker.dir }}/itb/Dockerfile"
     hostname: itb
     volumes:
-      - "{{ itb.path }}:/opt/app"
+      - "{{ itb.dir }}:/opt/app"
     restart: unless-stopped
     ports:
       - 5003:{{ itb.port }}
     networks:
-      - eduwallet_agent
+      - {{ compose_project }}
 {% if traefik.enabled %}
     labels:
       - "traefik.enable=true"
@@ -202,7 +200,7 @@ services:
       - POSTGRES_USER={{ database.user }}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     networks:
-      - eduwallet_agent
+      - {{ compose_project }}
     ports:
       - {{ database.port }}:5432
     volumes:
@@ -214,34 +212,5 @@ services:
         target: /docker-entrypoint-initdb.d
     # no Traefik configuration, the database is not publicly available
 
-  log:
-    image: public.ecr.aws/zinclabs/openobserve:latest
-    hostname: log
-    restart: unless-stopped
-    ports:
-      - 5080:5080
-    networks:
-      - eduwallet_agent
-    volumes:
-      - type: bind
-        source: {{ openobserver.datadir }}
-        target: /data
-    environment:
-      - ZO_DATA_DIR=/data
-      - ZO_ROOT_USER_EMAIL={{ openobserver.adminEmail }}
-      - ZO_ROOT_USER_PASSWORD={{ openobserver.adminPassword }}
-      - ZO_INGEST_FLATTEN_LEVEL=1
-{% if traefik.enabled %}
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.openobserver.rule=Host(`{{ openobserver.hostname }}`)"
-{% if traefik.secure == 'true' %}
-      - "traefik.http.routers.openobserver.entrypoints=websecure"
-      - "traefik.http.routers.openobserver.tls.certresolver=myresolver"
-{% else %}
-      - "traefik.http.routers.openobserver.entrypoints=web"
-{% endif %}
-{% endif %}
-
 networks:
-  eduwallet_agent:
+  {{ compose_project }}:

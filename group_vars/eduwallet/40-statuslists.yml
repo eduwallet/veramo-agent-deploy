@@ -1,56 +1,6 @@
 # Statuslists
 statuslists:
-  install: true
+  enabled: true
   domain: "status.{{ deploydomain }}"
   dir: "{{ basedir }}/statuslist-agent"
   keytype: "Secp256r1"
-  installations:
-    - name: abcrevoke
-      credentials: 
-        - AcademicBaseCredential
-        - AcademicBaseCredential_JWT
-        - AcademicBaseCredential_LD
-        - AcademicBaseCredential_SD
-      purpose: revocation
-      size: 131072
-      bitSize: 1
-      type: BitstringStatusList
-      tokens:
-        - "{{ tokens.mbob.status }}"
-        - "{{ tokens.tun.status }}"
-        - "{{ tokens.uvh.status }}"
-        - "{{ tokens.hbot.status }}"
-        - "{{ tokens.epi.status }}"
-        - "{{ tokens.sandbox.status }}"
-    - name: aecrevoke
-      credentials:
-        - AcademicEnrollmentCredential
-      purpose: revocation
-      size: 131072
-      bitSize: 1
-      type: BitstringStatusList
-      tokens:
-        - "{{ tokens.mbob.status }}"
-        - "{{ tokens.uvh.status }}"
-        - "{{ tokens.hbot.status }}"
-    - name: pidrevoke
-      credentials:
-        - PID
-        - PID_JWT
-      purpose: revocation
-      size: 131072
-      bitSize: 1
-      type: BitstringStatusList
-      tokens:
-        - "{{ tokens.nlgov.status }}" 
-        - "{{ tokens.nbgov.status }}"
-        - "{{ tokens.sandbox.status }}"
-    - name: ietf
-      credentials:
-        - GenericCredential_JWT
-      purpose: revocation
-      size: 131072
-      bitSize: 1
-      type: BitstringStatusList
-      tokens:
-        - "{{ tokens.sandbox.status }}"

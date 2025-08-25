@@ -1,0 +1,6 @@
+- name: Build and configure installations
+  include_tasks: installtasks.yml
+  loop: "{{ verifierdeploy.installations }}"
+  loop_control:
+    loop_var: deploy
+

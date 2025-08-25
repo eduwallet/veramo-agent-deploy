@@ -2,11 +2,10 @@
 ---
 - hosts: all
   roles:
-    - { role: basic, tags: ['basic', 'install'] }
-    - { role: clone_repo, tags: ['clone', 'install'] }
-    - { role: verifierdeploy, tags: ['verifierdeploy', 'install'] }
-    - { role: statuslistdeploy, tags: ['statuslistdeploy', 'install'] }
-    - { role: copy_files, tags: ['mainconf', 'install'] }
-    - { role: copy_files_verifier, tags: ['verifierconf', 'verifierdeploy', 'install'] }
+    - { role: basic, tags: ['basic'] }
+    - { role: clone_repo, tags: ['clone'] }
+    - { role: copy_files, tags: ['copy', 'install'] }
+    - { role: build, tags: ['build', 'install'] }
+    - { role: post_config, tags: ['post-config', 'install'] }
     - { role: run_docker, tags: ['docker', 'run'] }
     - { role: test_install, tags: ['test']}

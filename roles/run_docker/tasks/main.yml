@@ -6,35 +6,16 @@
     mode: 0755
   become: yes
 
+# should not be necessary, but never hurts
 - name: Prebuilding all docker containers
   ansible.builtin.shell:
-    cmd: docker compose -p eduwallet_agent build
+    cmd: "docker compose -p {{ composer_project }} build"
     chdir: "{{ docker.dir }}"
   become: yes
-
-- name: Install Node modules
-  ansible.builtin.shell:
-    cmd:  "docker run --rm -v {{ agent.dir }}:/opt/app --entrypoint yarn eduwallet_agent-agent:latest install"
-    chdir: "{{ docker.dir }}"
-  become: yes
-
-- name: Install Node modules in Verifier
-  ansible.builtin.shell:
-    cmd:  "docker run --rm -v {{ verifier.dir }}:/opt/app --entrypoint yarn eduwallet_agent-verifier:latest install"
-    chdir: "{{ docker.dir }}"
-  become: yes
-  when: enableverifier
-
-- name: Install Node modules in ITB
-  ansible.builtin.shell:
-    cmd:  "docker run --rm -v {{ itb.path }}:/opt/app --entrypoint yarn eduwallet_agent-app_itb:latest install"
-    chdir: "{{ docker.dir }}"
-  become: yes
-  when: itb.enabled
 
 - name: Stop the existing setup
   ansible.builtin.shell:
-    cmd: docker compose -p eduwallet_agent down
+    cmd: docker compose -p {{ composer_project }} down
     chdir: "{{ docker.dir }}"
   become: yes
 
@@ -53,20 +34,17 @@
 - name: Run the docker containers using docker-compose
   community.docker.docker_compose_v2:
     project_src: "{{ docker.dir }}"
-    project_name: eduwallet_agent
+    project_name: {{ composer_project }}
     state: present
   become: yes
 
 - name: Wait for the certificate to settle
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ basedomain }}/{{ did.name }}/.well-known/openid-credential-issuer"
+    url: "{{ protocol }}://{{ basedomain }}/mbob/.well-known/openid-credential-issuer"
     follow_redirects: none
     method: GET
   register: _result
   until: _result.status == 200
   retries: 720 # 720 * 5 seconds = 1hour (60*60/5)
   delay: 5 
-  loop: "{{ dids }}"
-  loop_control:
-    loop_var: did
 

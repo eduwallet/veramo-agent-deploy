@@ -1,4 +1,0 @@
----
-- name: Install the statuslist agent
-  include_tasks: install.yml
-  when: statuslists and statuslists.install

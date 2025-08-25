@@ -31,9 +31,15 @@ sources:
   itbservice:
     repo: "https://github.com/eduwallet/itb-service.git"
     version: HEAD
+  configurations:
+    repo: "https://gitlab.surf.nl/eduwallet/agents-conf.git"
+    version: HEAD
 
 docker:
   dir: "{{ basedir }}/docker"
+
+configuration:
+  dir: "{{ basedir }}/configuration"
 
 agent:
   dir: "{{ basedir }}/agent"

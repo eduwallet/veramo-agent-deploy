@@ -1,5 +1,0 @@
-contexts:
-  - dest: gcldp.json
-    src: gcldp_context.json.j2
-  - dest: abcldp.json
-    src: abcldp_context.json.j2

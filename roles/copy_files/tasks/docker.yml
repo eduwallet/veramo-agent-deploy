@@ -8,8 +8,14 @@
 - name: Ensure Docker Agent directory exists
   file:
     state: directory
-    path: "{{ docker.dir }}/agent"
+    path: "{{ docker.dir }}/issuer"
     mode: 0755
+  become: yes
+
+- name: Push Dockerfile
+  template:
+    src: dockerfile_issuer.j2
+    dest: "{{ docker.dir }}/issuer/Dockerfile"
   become: yes
 
 - name: Ensure Docker Verifier directory exists
@@ -21,16 +27,38 @@
 
 - name: Push Dockerfile
   template:
-    src: dockerfile.j2
-    dest: "{{ docker.dir }}/agent/Dockerfile"
-  become: yes
-
-- name: Push Dockerfile
-  template:
     src: dockerfile_verifier.j2
     dest: "{{ docker.dir }}/verifier/Dockerfile"
   become: yes
   when: enableverifier
+
+- name: Ensure Docker StatusList directory exists
+  file:
+    state: directory
+    path: "{{ docker.dir }}/statuslists"
+    mode: 0755
+  become: yes
+
+- name: Push Dockerfile
+  template:
+    src: dockerfile_statuslists.j2
+    dest: "{{ docker.dir }}/statuslists/Dockerfile"
+  become: yes
+  when: enableverifier
+
+- name: Ensure Docker ITB directory exists
+  file:
+    state: directory
+    path: "{{ docker.dir }}/itb"
+    mode: 0755
+  become: yes
+
+- name: Push Dockerfile
+  template:
+    src: dockerfile_itb.j2
+    dest: "{{ docker.dir }}/itb/Dockerfile"
+  become: yes
+  when: itb.enabled
 
 - name: Push Docker Env file
   template:

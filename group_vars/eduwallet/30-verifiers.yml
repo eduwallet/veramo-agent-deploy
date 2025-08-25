@@ -1,34 +1,13 @@
 # key refers to the alias of the verifier configured did keys
 verifiers:
   - name: demovp
-    key: did:key:demovpr1
     path: "/demovp"
-    presentations:
-      - ABC
-      - PID
     testPresentation: PID
-    token: "{{ tokens.demovp.admin }}"
+
   - name: proxy
-    key: did:key:proxyr1
     path: "/proxy"
-    presentations:
-      - ABC
-      - PID
     testPresentation: ABC
-    token: "{{ tokens.proxy.admin }}"
+
   - name: sandbox
-    key: did:key:sandboxr1
     path: "/sandbox"
-    presentations:
-      - ABC
-      - PID
-      - GC
-      - GCLDP
-      - AEC
-      - SC
-      - SCC
-      - SDC
-      - EEC
-      - OBC
     testPresentation: ABC
-    token: "{{ tokens.sandbox.verAdmin }}"

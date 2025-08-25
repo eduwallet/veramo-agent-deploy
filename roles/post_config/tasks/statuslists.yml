@@ -1,0 +1,16 @@
+- name: Create a random key for StatusList
+  shell: "docker run -v {{ statuslists.dir }}:/opt/app --entrypoint /usr/local/bin/npm eduwallet_agent-statuslist run key {{statuslists.keytype }} | tail -1"
+  register: keyoutput
+
+- name: Search for existing key file
+  stat:
+    path: "{{ statuslists.dir }}/local.key"
+  register: existingkey
+
+- name: Push key configuration
+  template:
+    src: local.key.j2
+    dest: "{{ statuslists.dir }}/local.key"
+    mode: 0600
+  become: yes
+  when: not existingkey.stat.exists

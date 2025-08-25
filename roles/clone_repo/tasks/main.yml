@@ -31,7 +31,7 @@
 - name: Clone the ITB Service repository
   ansible.builtin.git:
     repo: "{{ sources.itbservice.repo }}"
-    dest: "{{ itb.path }}"
+    dest: "{{ itb.dir }}"
     version: "{{ sources.itbservice.version }}"
     force: yes
   become: yes
@@ -39,7 +39,40 @@
 
 - name: Clean up the old cached node_modules of the ITB service
   ansible.builtin.shell:
-    cmd: "rm -rf {{ itb.path }}/node_modules"
-    chdir: "{{ itb.path }}"
+    cmd: "rm -rf {{ itb.dir }}/node_modules"
+    chdir: "{{ itb.dir }}"
   become: yes
   when: itb.enabled
+
+- name: Clone the StatusList agent repository
+  ansible.builtin.git:
+    repo: "{{ sources.statuslist.repo }}"
+    dest: "{{ statuslists.dir }}"
+    version: "{{ sources.statuslist.version }}"
+    force: yes
+  become: yes
+  when: statuslists.enabled
+
+- name: Clean up the old cached node_modules of the statuslist service
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ statuslists.dir }}/node_modules"
+    chdir: "{{ statuslists.dir }}"
+  become: yes
+  when: statuslists.enabled
+
+- name: Clone the Configuration Service repository
+  ansible.builtin.git:
+    repo: "{{ sources.configuration.repo }}"
+    dest: "{{ configuration.dir }}"
+    version: "{{ sources.configuration.version }}"
+    force: yes
+  become: yes
+
+- name: Clone the Verifier Deploy repository
+  ansible.builtin.git:
+    repo: "{{ sources.verifierdeploy.repo }}"
+    dest: "{{ verifierdeploy.dir }}"
+    version: "{{ sources.verifierdeploy.version }}"
+    force: yes
+  become: yes
+  when: verifierdeploy and verifierdeploy.install

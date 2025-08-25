@@ -5,4 +5,6 @@ logdomain: "logs.{{ deploydomain }}"
 enablehttps: "true"
 protocol: "https"
 enableverifier: true
+auth_client_id: _07e5994b256d0e2284059acacb7bd7bc26b7d3beeb
+compose_project: eduwallet_agent
 

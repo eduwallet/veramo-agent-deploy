@@ -1,0 +1,32 @@
+---
+- name: Install Issuer env file
+  template:
+    src: env.agent.j2
+    dest: "{{ agent.dir }}/.env"
+  become: yes
+
+- name: Install Verifier env file
+  template:
+    src: env.verifier.j2
+    dest: "{{ verifier.dir }}/.env"
+  become: yes
+
+- name: Install Statuslists env file
+  template:
+    src: env.statuslists.j2
+    dest: "{{ statuslists.dir }}/.env"
+  become: yes
+  when: statuslists.enabled
+
+- name: Install ITB env file
+  template:
+    src: env.itb.j2
+    dest: "{{ itb.dir }}/.env"
+  become: yes
+  when: itb.enabled
+
+- name: Install Configuration env file
+  template:
+    src: env.configuration.j2
+    dest: "{{ configuration.dir }}/.env"
+  become: yes
