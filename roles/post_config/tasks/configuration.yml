@@ -2,47 +2,47 @@
   ansible.builtin.shell:
     cmd: python ./generate.py
     chdir: "{{ configuration.dir }}"
-  become: yes
+  become: true
 
 - name: Ensure Issuer configuration directory exists
   file:
     state: directory
     path: "{{ agent.dir }}/conf"
     mode: 0755
-  become: yes
+  become: true
 
 - name: Copy the Issuer configuration
   ansible.builtin.shell:
-    cmd: "cp -darp {{ configuration.dir }}/issuer/* {{ agent.dir }}/conf"
+    cmd: "cp -darp {{ configuration.dir }}/dist/issuer/* {{ agent.dir }}/conf"
     chdir: "{{ configuration.dir }}"
-  become: yes
+  become: true
 
 - name: Ensure Verifier configuration directory exists
   file:
     state: directory
     path: "{{ verifier.dir }}/conf"
     mode: 0755
-  become: yes
+  become: true
 
 - name: Copy the Verifier configuration
   ansible.builtin.shell:
-    cmd: "cp -darp {{ configuration.dir }}/verifier/* {{ verifier.dir }}/conf"
+    cmd: "cp -darp {{ configuration.dir }}/dist/verifier/* {{ verifier.dir }}/conf"
     chdir: "{{ configuration.dir }}"
-  become: yes
+  become: true
 
 - name: Ensure StatusList configuration directory exists
   file:
     state: directory
     path: "{{ statuslists.dir }}/conf"
     mode: 0755
-  become: yes
+  become: true
   when: statuslists.enabled
 
 - name: Copy the StatusList configuration
   ansible.builtin.shell:
-    cmd: "cp -darp {{ configuration.dir }}/statuslist/* {{ statuslists.dir }}/conf"
+    cmd: "cp -darp {{ configuration.dir }}/dist/statuslist/* {{ statuslists.dir }}/conf"
     chdir: "{{ configuration.dir }}"
-  become: yes
+  become: true
   when: statuslists.enabled
 
 - name: Ensure ITB configuration directory exists
@@ -50,12 +50,12 @@
     state: directory
     path: "{{ itb.dir }}/conf"
     mode: 0755
-  become: yes
+  become: true
   when: itb.enabled
 
 - name: Copy the ITB configuration
   ansible.builtin.shell:
-    cmd: "cp -darp {{ configuration.dir }}/itb/* {{ itb.dir }}/conf"
+    cmd: "cp -darp {{ configuration.dir }}/dist/itb/* {{ itb.dir }}/conf"
     chdir: "{{ configuration.dir }}"
-  become: yes
+  become: true
   when: itb.enabled

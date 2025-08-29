@@ -4,39 +4,39 @@
     state: directory
     path: "{{ database.dir }}"
     mode: 0755
-  become: yes
+  become: true
 
 # should not be necessary, but never hurts
 - name: Prebuilding all docker containers
   ansible.builtin.shell:
-    cmd: "docker compose -p {{ composer_project }} build"
+    cmd: "docker compose -p {{ compose_project }} build"
     chdir: "{{ docker.dir }}"
-  become: yes
+  become: true
 
 - name: Stop the existing setup
   ansible.builtin.shell:
-    cmd: docker compose -p {{ composer_project }} down
+    cmd: docker compose -p {{ compose_project }} down
     chdir: "{{ docker.dir }}"
-  become: yes
+  become: true
 
 - name: Pruning stopped containers
   ansible.builtin.shell:
     cmd: docker container prune -f
     chdir: "{{ docker.dir }}"
-  become: yes
+  become: true
 
 - name: Pruning unused images
   ansible.builtin.shell:
     cmd: docker image prune -f
     chdir: "{{ docker.dir }}"
-  become: yes
+  become: true
 
 - name: Run the docker containers using docker-compose
   community.docker.docker_compose_v2:
     project_src: "{{ docker.dir }}"
-    project_name: {{ composer_project }}
+    project_name: "{{ compose_project }}"
     state: present
-  become: yes
+  become: true
 
 - name: Wait for the certificate to settle
   ansible.builtin.uri:

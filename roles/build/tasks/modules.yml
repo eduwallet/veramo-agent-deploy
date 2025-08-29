@@ -1,23 +1,23 @@
 - name: Install node modules for Issuer
   ansible.builtin.shell:
     cmd: "docker run -v {{ agent.dir }}:/opt/app --entrypoint /usr/local/bin/yarn {{ compose_project }}-agent install"
-  become: yes
+  become: true
 
 - name: Install node modules for Verifier
   ansible.builtin.shell:
     cmd: "docker run -v {{ verifier.dir }}:/opt/app --entrypoint /usr/local/bin/yarn {{ compose_project }}-verifier install"
-  become: yes
+  become: true
 
 - name: Install node modules for StatusList
   ansible.builtin.shell:
-    cmd: "docker run -v {{ statuslists.dir }}:/opt/app --entrypoint /usr/local/bin/yarn {{ compose_project }}-statuslis install"
-  become: yes
+    cmd: "docker run -v {{ statuslists.dir }}:/opt/app --entrypoint /usr/local/bin/yarn {{ compose_project }}-statuslist install"
+  become: true
   when: statuslists.enabled
 
 - name: Install node modules for ITB
   ansible.builtin.shell:
     cmd: "docker run -v {{ itb.dir }}:/opt/app --entrypoint /usr/local/bin/yarn {{ compose_project }}-itb install"
-  become: yes
+  become: true
   when: itb.enabled
 
 

@@ -15,6 +15,15 @@ traefik:
   postmaster: certbot@muisit.nl
   expose: false
 
+deployuser: gitlab+deploy-token-43
+deploytoken: !vault |
+             $ANSIBLE_VAULT;1.1;AES256
+             66356166626332356561643739626332363230316538356563653366643166383461343237363562383937333138313561
+             6661303166613335363262656636360a663932626432353561653237646164393732643865333064353439636162666332
+             663234633536623832343338336564353265656665386462343936396263310a3237363562656264326335613264316231
+             3432623561313666316537366634366662643239633432643830363138393234646364343563363737646362623032
+
+
 sources:
   agent:
     repo: "https://github.com/eduwallet/veramo-agent.git"
@@ -32,7 +41,7 @@ sources:
     repo: "https://github.com/eduwallet/itb-service.git"
     version: HEAD
   configurations:
-    repo: "https://gitlab.surf.nl/eduwallet/agents-conf.git"
+    repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/agents-conf.git"
     version: HEAD
 
 docker:

@@ -1,0 +1,6 @@
+---
+- name: "{{ installation }}: Testing status list token"
+  ansible.builtin.uri:
+    url: "{{ protocol }}://{{ statuslists.domain }}/{{ installation }}/1"
+    method: GET
+

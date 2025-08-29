@@ -3,11 +3,14 @@ verifiers:
   - name: demovp
     path: "/demovp"
     testPresentation: PID
+    token: "{{ tokens.demovp.admin }}"
 
   - name: proxy
     path: "/proxy"
     testPresentation: ABC
+    token: "{{ tokens.proxy.admin }}"
 
   - name: sandbox
     path: "/sandbox"
     testPresentation: ABC
+    token: "{{ tokens.sandbox.verAdmin }}"

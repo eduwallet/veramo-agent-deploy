@@ -4,3 +4,9 @@ statuslists:
   domain: "status.{{ deploydomain }}"
   dir: "{{ basedir }}/statuslist-agent"
   keytype: "Secp256r1"
+  installations:
+    - abcrevoke
+    - aecrevoke
+    - ietf
+    - pidrevoke
+

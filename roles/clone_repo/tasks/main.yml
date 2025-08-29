@@ -5,13 +5,13 @@
     dest: "{{ agent.dir }}"
     version: "{{ sources.agent.version }}"
     force: yes
-  become: yes
+  become: true
 
 - name: Clean up the old cached node_modules of the agent
   ansible.builtin.shell:
     cmd: "rm -rf {{ agent.dir }}/node_modules"
     chdir: "{{ agent.dir }}"
-  become: yes
+  become: true
 
 - name: Clone the Verifier repository
   ansible.builtin.git:
@@ -19,14 +19,14 @@
     dest: "{{ verifier.dir }}"
     version: "{{ sources.verifier.version }}"
     force: yes
-  become: yes
+  become: true
   when: enableverifier
 
 - name: Clean up the old cached node_modules of the verifier
   ansible.builtin.shell:
     cmd: "rm -rf {{ verifier.dir }}/node_modules"
     chdir: "{{ agent.dir }}"
-  become: yes
+  become: true
 
 - name: Clone the ITB Service repository
   ansible.builtin.git:
@@ -34,14 +34,14 @@
     dest: "{{ itb.dir }}"
     version: "{{ sources.itbservice.version }}"
     force: yes
-  become: yes
+  become: true
   when: itb.enabled
 
 - name: Clean up the old cached node_modules of the ITB service
   ansible.builtin.shell:
     cmd: "rm -rf {{ itb.dir }}/node_modules"
     chdir: "{{ itb.dir }}"
-  become: yes
+  become: true
   when: itb.enabled
 
 - name: Clone the StatusList agent repository
@@ -50,23 +50,23 @@
     dest: "{{ statuslists.dir }}"
     version: "{{ sources.statuslist.version }}"
     force: yes
-  become: yes
+  become: true
   when: statuslists.enabled
 
 - name: Clean up the old cached node_modules of the statuslist service
   ansible.builtin.shell:
     cmd: "rm -rf {{ statuslists.dir }}/node_modules"
     chdir: "{{ statuslists.dir }}"
-  become: yes
+  become: true
   when: statuslists.enabled
 
 - name: Clone the Configuration Service repository
   ansible.builtin.git:
-    repo: "{{ sources.configuration.repo }}"
+    repo: "{{ sources.configurations.repo }}"
     dest: "{{ configuration.dir }}"
-    version: "{{ sources.configuration.version }}"
+    version: "{{ sources.configurations.version }}"
     force: yes
-  become: yes
+  become: true
 
 - name: Clone the Verifier Deploy repository
   ansible.builtin.git:
@@ -74,5 +74,5 @@
     dest: "{{ verifierdeploy.dir }}"
     version: "{{ sources.verifierdeploy.version }}"
     force: yes
-  become: yes
+  become: true
   when: verifierdeploy and verifierdeploy.install

@@ -11,3 +11,10 @@
   loop_control:
     loop_var: installation
   when: enableverifier
+
+- name: Loop over the statuslist installations
+  include_tasks: test_statlist.yml
+  loop: "{{ statuslists.installations }}"
+  loop_control:
+    loop_var: installation
+  when: statuslists.enabled

@@ -1,26 +1,26 @@
 - name: Build the Issuer docker container
   ansible.builtin.shell:
     cmd: "docker build -t {{ compose_project }}-agent ."
-    chdir: "{{ docker.dir }}/docker"
-  become: yes
+    chdir: "{{ docker.dir }}/issuer"
+  become: true
 
 - name: Build the Verifier docker container
   ansible.builtin.shell:
     cmd: "docker build -t {{ compose_project }}-verifier ."
-    chdir: "{{ docker.dir }}/docker"
-  become: yes
+    chdir: "{{ docker.dir }}/verifier"
+  become: true
 
 - name: Build the StatusList docker container
   ansible.builtin.shell:
     cmd: "docker build -t {{ compose_project }}-statuslist ."
-    chdir: "{{ docker.dir }}/docker"
-  become: yes
+    chdir: "{{ docker.dir }}/statuslists"
+  become: true
   when: statuslists.enabled
 
 - name: Build the ITB docker container
   ansible.builtin.shell:
     cmd: "docker build -t {{ compose_project }}-itb ."
-    chdir: "{{ docker.dir }}/docker"
-  become: yes
+    chdir: "{{ docker.dir }}/itb"
+  become: true
   when: itb.enabled
   

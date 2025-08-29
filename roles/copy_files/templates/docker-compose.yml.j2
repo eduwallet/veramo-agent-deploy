@@ -63,7 +63,6 @@ services:
       - {{ compose_project }}
     links:
       - "db:db"
-      - "log:log"
 {% if traefik.enabled %}
     labels:
       - "traefik.enable=true"
@@ -93,7 +92,6 @@ services:
       - {{ compose_project }}
     links:
       - "db:db"
-      - "log:log"
 {% if traefik.enabled %}
     labels:
       - "traefik.enable=true"

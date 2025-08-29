@@ -1,31 +1,31 @@
 ---
-- name: Build the docker container
+- name: Build the docker containers
   ansible.builtin.shell:
-    cmd:  "docker compose -p {{ composer_project }} build"
+    cmd:  "docker compose -p {{ compose_project }} build"
     chdir: "{{ verifierdeploy.dir }}/{{ deploy.path }}/docker"
-  become: yes
+  become: true
 
 - name: Get composer
   ansible.builtin.shell:
-    cmd:  "docker run -v .:/var/www/html --entrypoint /usr/local/bin/php {{ composer_project }}-{{ deploy.name }} -r 'copy(\"https://getcomposer.org/installer\", \"composer-setup.php\");'"
+    cmd:  "docker run -v .:/var/www/html --entrypoint /usr/local/bin/php {{ compose_project }}-{{ deploy.name }} -r 'copy(\"https://getcomposer.org/installer\", \"composer-setup.php\");'"
     chdir: "{{ verifierdeploy.dir }}/{{ deploy.path }}/app"
-  become: yes
+  become: true
 
 - name: Configure composer
   ansible.builtin.shell:
-    cmd:  "docker run -v .:/var/www/html --entrypoint /usr/local/bin/php {{ composer_project }}-{{ deploy.name }} composer-setup.php"
+    cmd:  "docker run -v .:/var/www/html --entrypoint /usr/local/bin/php {{ compose_project }}-{{ deploy.name }} composer-setup.php"
     chdir: "{{ verifierdeploy.dir }}/{{ deploy.path }}/app"
-  become: yes
+  become: true
 
 - name: Install composer requirements
   ansible.builtin.shell:
-    cmd:  "docker run -v .:/var/www/html --entrypoint /usr/local/bin/php {{ composer_project }}-{{ deploy.name }} composer.phar install"
+    cmd:  "docker run -v .:/var/www/html --entrypoint /usr/local/bin/php {{ compose_project }}-{{ deploy.name }} composer.phar install"
     chdir: "{{ verifierdeploy.dir }}/{{ deploy.path }}/app"
-  become: yes
+  become: true
 
 - name: Push environment file
   template:
     src: "{{ deploy.envtemplate }}"
     dest: "{{ verifierdeploy.dir }}/{{ deploy.path }}/app/.env"
-  become: yes
+  become: true
 

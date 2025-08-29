@@ -3,33 +3,38 @@
     state: directory
     path: "{{ docker.dir }}"
     mode: 0755
-  become: yes
+  become: true
+
+- name: Clean up old files
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ docker.dir }}/*"
+  become: true
 
 - name: Ensure Docker Agent directory exists
   file:
     state: directory
     path: "{{ docker.dir }}/issuer"
     mode: 0755
-  become: yes
+  become: true
 
 - name: Push Dockerfile
   template:
     src: dockerfile_issuer.j2
     dest: "{{ docker.dir }}/issuer/Dockerfile"
-  become: yes
+  become: true
 
 - name: Ensure Docker Verifier directory exists
   file:
     state: directory
     path: "{{ docker.dir }}/verifier"
     mode: 0755
-  become: yes
+  become: true
 
 - name: Push Dockerfile
   template:
     src: dockerfile_verifier.j2
     dest: "{{ docker.dir }}/verifier/Dockerfile"
-  become: yes
+  become: true
   when: enableverifier
 
 - name: Ensure Docker StatusList directory exists
@@ -37,13 +42,13 @@
     state: directory
     path: "{{ docker.dir }}/statuslists"
     mode: 0755
-  become: yes
+  become: true
 
 - name: Push Dockerfile
   template:
     src: dockerfile_statuslists.j2
     dest: "{{ docker.dir }}/statuslists/Dockerfile"
-  become: yes
+  become: true
   when: enableverifier
 
 - name: Ensure Docker ITB directory exists
@@ -51,23 +56,23 @@
     state: directory
     path: "{{ docker.dir }}/itb"
     mode: 0755
-  become: yes
+  become: true
 
 - name: Push Dockerfile
   template:
     src: dockerfile_itb.j2
     dest: "{{ docker.dir }}/itb/Dockerfile"
-  become: yes
+  become: true
   when: itb.enabled
 
 - name: Push Docker Env file
   template:
     src: docker.env.j2
     dest: "{{ docker.dir }}/.env"
-  become: yes
+  become: true
 
 - name: Push Docker Compose configuration
   template:
     src: docker-compose.yml.j2
     dest: "{{ docker.dir }}/docker-compose.yml"
-  become: yes
+  become: true
