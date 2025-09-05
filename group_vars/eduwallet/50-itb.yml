@@ -1,5 +1,0 @@
-itb:
-  enabled: true
-  dir: /opt/agent/itb
-  domain: itb.dev.eduwallet.nl
-  port: 80

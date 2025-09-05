@@ -1,11 +1,4 @@
 ---
-- name: Post configuration for Configuration
-  include_tasks: configuration.yml
-
-- name: Post configuration for Statuslists
-  include_tasks: statuslists.yml
-  when: statuslists.enabled
-
 - name: Post configuration for Verifier Deploy
   include_tasks: verifierdeploy.yml
   when: verifierdeploy and verifierdeploy.install

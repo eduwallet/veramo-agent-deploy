@@ -6,12 +6,12 @@
     mode: 0755
   become: true
 
-# should not be necessary, but never hurts
-- name: Prebuilding all docker containers
-  ansible.builtin.shell:
-    cmd: "docker compose -p {{ compose_project }} build"
-    chdir: "{{ docker.dir }}"
-  become: true
+# disabled, because we clean up the code now after build
+#- name: Prebuilding all docker containers
+#  ansible.builtin.shell:
+#    cmd: "docker compose -p {{ compose_project }} build"
+#    chdir: "{{ docker.dir }}"
+#  become: true
 
 - name: Stop the existing setup
   ansible.builtin.shell:

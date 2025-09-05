@@ -18,6 +18,13 @@
   become: yes
   when: statuslists.enabled
 
+- name: Install Statuslists key
+  template:
+    src: local.key.j2
+    dest: "{{ statuslists.dir }}/local.key"
+  become: yes
+  when: statuslists.enabled
+
 - name: Install ITB env file
   template:
     src: env.itb.j2

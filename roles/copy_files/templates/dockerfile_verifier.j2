@@ -1,9 +1,0 @@
-# Builder stage
-FROM node:20-alpine
-RUN yarn global add typescript tslib
-WORKDIR /opt/app
-
-ENV NODE_SCRIPT={{ verifier.script }}
-ENV GENERATE_SOURCEMAP=false
-ENV DEBUG=*:*
-ENTRYPOINT yarn {{ verifier.script }}

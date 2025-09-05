@@ -54,8 +54,7 @@ services:
       - LISTEN_ADDRESS=0.0.0.0
       - BASEURL={{ protocol }}://{{ agent.hostname }}
       - DEBUG=issuer:*
-    volumes:
-      - "{{ agent.dir }}:/opt/app"
+      - TOOL=issuer
     ports:
       - {{ agent.port }}:5000
     restart: unless-stopped
@@ -83,11 +82,11 @@ services:
     build:
       dockerfile: "{{ docker.dir }}/verifier/Dockerfile"
     hostname: verifier
-    volumes:
-      - "{{ verifier.dir }}:/opt/app"
     ports:
       - {{ verifier.port }}:5002
     restart: unless-stopped
+    environment:
+      - TOOL=verifier
     networks:
       - {{ compose_project }}
     links:
@@ -140,13 +139,13 @@ services:
     build:
       dockerfile: "{{ docker.dir }}/statuslists/Dockerfile"
     hostname: statuslist
-    volumes:
-      - "{{ statuslists.dir }}:/opt/app"
     restart: unless-stopped
     links:
       - "db:db"
     ports:
       - 7001:80
+    environment:
+      - TOOL=statuslist
     networks:
       - {{ compose_project }}
 {% if traefik.enabled %}
@@ -164,15 +163,15 @@ services:
 
 
 {% if itb.enabled %}
-  app_itb:
+  itb:
     build:
       dockerfile: "{{ docker.dir }}/itb/Dockerfile"
     hostname: itb
-    volumes:
-      - "{{ itb.dir }}:/opt/app"
     restart: unless-stopped
     ports:
       - 5003:{{ itb.port }}
+    environment:
+      - TOOL=itb
     networks:
       - {{ compose_project }}
 {% if traefik.enabled %}

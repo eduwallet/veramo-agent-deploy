@@ -1,0 +1,21 @@
+- name: Remove the Issuer build context
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ docker.dir }}/issuer"
+  become: yes
+
+- name: Remove the Verifier build context
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ docker.dir }}/verifier"
+  become: yes
+
+- name: Remove the Statuslist build context
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ docker.dir }}/statuslists"
+  become: yes
+  when: statuslists.enabled
+
+- name: Remove the ITB build context
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ docker.dir }}/itb"
+  become: yes
+  when: itb.enabled

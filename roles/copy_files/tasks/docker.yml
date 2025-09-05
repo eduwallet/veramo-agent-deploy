@@ -5,64 +5,70 @@
     mode: 0755
   become: true
 
-- name: Clean up old files
+- name: Copy generic Dockerfile
   ansible.builtin.shell:
-    cmd: "rm -rf {{ docker.dir }}/*"
-  become: true
+    cmd: "cp {{ configuration.dir }}/Dockerfile {{ docker.dir }}/issuer"
+  become: yes
 
-- name: Ensure Docker Agent directory exists
-  file:
-    state: directory
-    path: "{{ docker.dir }}/issuer"
-    mode: 0755
-  become: true
+- name: Remove configuration
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ docker.dir }}/issuer/conf"
+  become: yes
 
-- name: Push Dockerfile
-  template:
-    src: dockerfile_issuer.j2
-    dest: "{{ docker.dir }}/issuer/Dockerfile"
-  become: true
+- name: Copy configuration
+  ansible.builtin.shell:
+    cmd: "/usr/bin/cp -fr {{ configuration.dir }} {{ docker.dir }}/issuer/conf"
+  become: yes
 
-- name: Ensure Docker Verifier directory exists
-  file:
-    state: directory
-    path: "{{ docker.dir }}/verifier"
-    mode: 0755
-  become: true
+- name: Copy generic Dockerfile
+  ansible.builtin.shell:
+    cmd: "cp {{ configuration.dir }}/Dockerfile {{ docker.dir }}/verifier"
+  become: yes
 
-- name: Push Dockerfile
-  template:
-    src: dockerfile_verifier.j2
-    dest: "{{ docker.dir }}/verifier/Dockerfile"
-  become: true
-  when: enableverifier
+- name: Remove configuration
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ docker.dir }}/verifier/conf"
+  become: yes
 
-- name: Ensure Docker StatusList directory exists
-  file:
-    state: directory
-    path: "{{ docker.dir }}/statuslists"
-    mode: 0755
-  become: true
+- name: Copy configuration
+  ansible.builtin.shell:
+    cmd: "/usr/bin/cp -fr {{ configuration.dir }} {{ docker.dir }}/verifier/conf"
+  become: yes
 
-- name: Push Dockerfile
-  template:
-    src: dockerfile_statuslists.j2
-    dest: "{{ docker.dir }}/statuslists/Dockerfile"
-  become: true
-  when: enableverifier
+- name: Copy generic Dockerfile
+  ansible.builtin.shell:
+    cmd: "cp {{ configuration.dir }}/Dockerfile {{ docker.dir }}/statuslists"
+  become: yes
+  when: statuslists.enabled
 
-- name: Ensure Docker ITB directory exists
-  file:
-    state: directory
-    path: "{{ docker.dir }}/itb"
-    mode: 0755
-  become: true
+- name: Remove configuration
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ docker.dir }}/statuslists/conf"
+  become: yes
+  when: statuslists.enabled
 
-- name: Push Dockerfile
-  template:
-    src: dockerfile_itb.j2
-    dest: "{{ docker.dir }}/itb/Dockerfile"
-  become: true
+- name: Copy configuration
+  ansible.builtin.shell:
+    cmd: "/usr/bin/cp -rf {{ configuration.dir }} {{ docker.dir }}/statuslists/conf"
+  become: yes
+  when: statuslists.enabled
+
+- name: Copy generic Dockerfile
+  ansible.builtin.shell:
+    cmd: "cp {{ configuration.dir }}/Dockerfile {{ docker.dir }}/itb"
+  become: yes
+  when: itb.enabled
+
+- name: Remove configuration
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ docker.dir }}/itb/conf"
+  become: yes
+  when: itb.enabled
+
+- name: Copy configuration
+  ansible.builtin.shell:
+    cmd: "/usr/bin/cp -fr {{ configuration.dir }} {{ docker.dir }}/itb/conf"
+  become: yes
   when: itb.enabled
 
 - name: Push Docker Env file
