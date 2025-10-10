@@ -169,7 +169,7 @@ services:
     hostname: itb
     restart: unless-stopped
     ports:
-      - 5003:{{ itb.port }}
+      - {{ itb.port }}:80
     environment:
       - TOOL=itb
     networks:
@@ -183,6 +183,29 @@ services:
       - "traefik.http.routers.itb.tls.certresolver=myresolver"
 {% else %}
       - "traefik.http.routers.itb.entrypoints=web"
+{% endif %}
+{% endif %}
+{% endif %}
+
+{% if manager.enabled %}
+  manager:
+    build:
+      dockerfile: "{{ docker.dir }}/manager/Dockerfile"
+    hostname: manager
+    restart: unless-stopped
+    ports:
+      - {{ manager.port }}:80
+    networks:
+      - {{ compose_project }}
+{% if traefik.enabled %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.manager.rule=Host(`{{ manager.domain }}`)"
+{% if traefik.secure == 'true' %}
+      - "traefik.http.routers.manager.entrypoints=websecure"
+      - "traefik.http.routers.manager.tls.certresolver=myresolver"
+{% else %}
+      - "traefik.http.routers.manager.entrypoints=web"
 {% endif %}
 {% endif %}
 {% endif %}

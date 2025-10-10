@@ -24,3 +24,32 @@
   become: true
   when: itb.enabled
   
+- name: Use a container to install the manager application modules
+  ansible.builtin.shell:
+    cmd: "docker run -v {{ docker.dir }}/manager/app:/app -w /app node:24 yarn install"
+    chdir: "{{ docker.dir }}/manager"
+  become: true
+  when: manager.enabled
+
+- name: Replace the asset base path of the manager application
+  ansible.builtin.lineinfile:
+    line: "base: '/',"
+    search_string: "base: '/agentmanager/',"
+    state: present
+    path: "{{ docker.dir }}/manager/app/vite.config.ts"
+  become: true
+  when: manager.enabled
+
+- name: Use a container to build the manager application
+  ansible.builtin.shell:
+    cmd: "docker run -v {{ docker.dir }}/manager/app:/app -w /app node:24 yarn build"
+    chdir: "{{ docker.dir }}/manager"
+  become: true
+  when: manager.enabled
+
+- name: Build the Manager docker container
+  ansible.builtin.shell:
+    cmd: "docker build -t {{ compose_project }}-manager ."
+    chdir: "{{ docker.dir }}/manager"
+  become: true
+  when: manager.enabled

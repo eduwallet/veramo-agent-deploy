@@ -71,6 +71,13 @@
   become: yes
   when: itb.enabled
 
+- name: Copy manager Dockerfile
+  ansible.builtin.template:
+    src: dockerfile_manager.j2
+    dest: "{{ docker.dir }}/manager/Dockerfile"
+  become: yes
+  when: itb.enabled
+
 - name: Push Docker Env file
   template:
     src: docker.env.j2

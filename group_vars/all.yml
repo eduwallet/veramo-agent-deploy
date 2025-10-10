@@ -43,6 +43,9 @@ sources:
   configurations:
     repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/agents-conf.git"
     version: HEAD
+  manager:
+    repo: "https://github.com/eduwallet/agentmanager.git"
+    version: HEAD
 
 docker:
   dir: "{{ basedir }}/docker"
@@ -105,7 +108,7 @@ itb:
   enabled: true
   dir: "{{ docker.dir }}/itb/app"
   domain: itb.dev.eduwallet.nl
-  port: 80
+  port: 5003
 
 database:
   dir: "{{ basedir }}/database"
@@ -121,3 +124,9 @@ database:
             0a363133356630373263663736396137643535643033613130623536386334613265323831303065643835
             32643637343539303064373636396463613231643861316464613461303337303265386530386332626664
             3437343734373764363130
+
+manager:
+  enabled: true
+  dir: "{{ docker.dir }}/manager/app"
+  domain: manager.dev.eduwallet.nl
+  port: 5004

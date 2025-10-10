@@ -50,3 +50,12 @@
     force: yes
   become: true
   when: verifierdeploy and verifierdeploy.install
+
+- name: Clone the Agent Manager repository
+  ansible.builtin.git:
+    repo: "{{ sources.manager.repo }}"
+    dest: "{{ manager.dir }}"
+    version: "{{ sources.manager.version }}"
+    force: yes
+  become: true
+  when: manager.enabled
