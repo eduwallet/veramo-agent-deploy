@@ -1,0 +1,11 @@
+FROM node:24-bookworm
+SHELL ["/bin/bash", "-c"]
+RUN yarn add typescript tslib
+WORKDIR /app
+
+COPY ./app/ /app/
+
+RUN yarn install
+
+ENV DEBUG=*:*
+CMD yarn start
