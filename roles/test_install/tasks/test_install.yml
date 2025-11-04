@@ -4,6 +4,11 @@
     url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/.well-known/openid-credential-issuer"
     method: GET
 
+- name: "{{ installation.name }}: Testing well knowns - openid-credential-issuer"
+  ansible.builtin.uri:
+    url: "{{ protocol }}://{{ basedomain }}/.well-known/openid-credential-issuer/{{ installation.name }}"
+    method: GET
+
 - name: "{{ installation.name }}: Testing well knowns - did:web"
   ansible.builtin.uri:
     url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/.well-known/did.json"
@@ -13,11 +18,25 @@
   ansible.builtin.uri:
     url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/.well-known/openid-configuration"
     method: GET
+  when: installation.hasTokenEndpoint
+
+- name: "{{ installation.name }}: Testing well knowns - openid-configuration"
+  ansible.builtin.uri:
+    url: "{{ protocol }}://{{ basedomain }}/.well-known/openid-configuration/{{ installation.name }}"
+    method: GET
+  when: installation.hasTokenEndpoint
 
 - name: "{{ installation.name }}: Testing well knowns - oauth-authorization-server"
   ansible.builtin.uri:
     url: "{{ protocol }}://{{ basedomain }}/{{ installation.name }}/.well-known/oauth-authorization-server"
     method: GET
+  when: installation.hasTokenEndpoint
+
+- name: "{{ installation.name }}: Testing well knowns - oauth-authorization-server"
+  ansible.builtin.uri:
+    url: "{{ protocol }}://{{ basedomain }}/.well-known/oauth-authorization-server/{{ installation.name }}"
+    method: GET
+  when: installation.hasTokenEndpoint
 
 - name: "{{ installation.name }}: Testing create offer"
   ansible.builtin.uri:

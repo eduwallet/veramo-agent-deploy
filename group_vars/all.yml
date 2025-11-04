@@ -42,7 +42,7 @@ sources:
     version: HEAD
   configurations:
     repo: "https://{{ deployuser }}:{{ deploytoken }}@gitlab.surf.nl/eduwallet/agents-conf.git"
-    version: HEAD
+    version: development
   manager:
     repo: "https://github.com/eduwallet/agentmanager.git"
     version: HEAD

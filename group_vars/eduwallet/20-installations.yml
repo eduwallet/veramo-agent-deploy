@@ -17,6 +17,7 @@ installations:
         email:
           - "test@example.org"
     adminToken: "{{ tokens.mbob.admin }}"
+    hasTokenEndpoint: true
 
   - name: tun
     test:
@@ -34,6 +35,7 @@ installations:
         email:
           - "test@example.org"
     adminToken: "{{ tokens.tun.admin }}"
+    hasTokenEndpoint: true
 
   - name: uvh
     test:
@@ -51,6 +53,7 @@ installations:
         email:
           - "test@example.org"
     adminToken: "{{ tokens.uvh.admin }}"
+    hasTokenEndpoint: true
 
   - name: hbot
     test:
@@ -68,6 +71,7 @@ installations:
         email:
           - "test@example.org"
     adminToken: "{{ tokens.hbot.admin }}"
+    hasTokenEndpoint: true
 
   - name: nlgov
     test:
@@ -80,6 +84,7 @@ installations:
         family_name: "janssen"
         nationality: "example"
     adminToken: "{{ tokens.nlgov.admin }}"
+    hasTokenEndpoint: true
 
   - name: nbgov
     test:
@@ -92,6 +97,7 @@ installations:
         family_name: "janssen"
         nationality: "example"
     adminToken: "{{ tokens.nbgov.admin }}"
+    hasTokenEndpoint: true
 
   - name: epi
     test:
@@ -109,9 +115,9 @@ installations:
         email:
           - "test@example.org"
     adminToken: "{{ tokens.epi.admin }}"
+    hasTokenEndpoint: true
 
   - name: sandbox
-
     test:
       preauthcode: bffy0TXajRTnoujKCIhfOnIUYjqmucRa
       credential: PID_JWT
@@ -122,6 +128,7 @@ installations:
         family_name: "janssen"
         nationality: "example"
     adminToken: "{{ tokens.sandbox.admin }}"
+    hasTokenEndpoint: true
 
   - name: auth
     test:
@@ -131,3 +138,4 @@ installations:
         given_name: "test"
         family_name: "janssen"
     adminToken: "{{ tokens.auth.admin }}"
+    hasTokenEndpoint: false
