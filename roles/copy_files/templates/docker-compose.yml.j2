@@ -1,7 +1,7 @@
 services:
 {% if traefik.enabled %}
   traefik:
-    image: "traefik:v3.0"
+    image: "traefik:3.6"
     container_name: "traefik"
     hostname: traefik
     restart: unless-stopped
@@ -39,6 +39,7 @@ services:
 
   agent:
     build:
+      context: "{{ docker.dir }}/issuer"
       dockerfile: "{{ docker.dir }}/issuer/Dockerfile"
     hostname: agent
     environment:
@@ -80,6 +81,7 @@ services:
 {% if enableverifier %}
   verifier:
     build:
+      context: "{{ docker.dir }}/verifier"
       dockerfile: "{{ docker.dir }}/verifier/Dockerfile"
     hostname: verifier
     ports:
@@ -111,6 +113,7 @@ services:
 {% for installation in verifierdeploy.installations %}
   {{ installation.name }}:
     build:
+      context: "{{ verifierdeploy.dir }}/{{ installation.path }}/docker"
       dockerfile: "{{ verifierdeploy.dir }}/{{ installation.path }}/docker/Dockerfile"
     hostname: {{ installation.name }}
     volumes:
@@ -137,6 +140,7 @@ services:
 {% if statuslists and statuslists.enabled %}
   statuslist:
     build:
+      context: "{{ docker.dir }}/statuslists"
       dockerfile: "{{ docker.dir }}/statuslists/Dockerfile"
     hostname: statuslist
     restart: unless-stopped
@@ -165,6 +169,7 @@ services:
 {% if itb.enabled %}
   itb:
     build:
+      context: "{{ docker.dir }}/itb"
       dockerfile: "{{ docker.dir }}/itb/Dockerfile"
     hostname: itb
     restart: unless-stopped
@@ -190,6 +195,7 @@ services:
 {% if manager.enabled %}
   manager:
     build:
+      context: "{{ docker.dir }}/manager"
       dockerfile: "{{ docker.dir }}/manager/Dockerfile"
     hostname: manager
     restart: unless-stopped

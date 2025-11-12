@@ -31,11 +31,16 @@
     chdir: "{{ docker.dir }}"
   become: true
 
-- name: Run the docker containers using docker-compose
-  community.docker.docker_compose_v2:
-    project_src: "{{ docker.dir }}"
-    project_name: "{{ compose_project }}"
-    state: present
+- name: Build the containers using docker compose
+  ansible.builtin.shell:
+    cmd: "docker compose -p {{ compose_project }} build"
+    chdir: "{{ docker.dir }}"
+  become: true
+
+- name: Run the containers using docker compose
+  ansible.builtin.shell:
+    cmd: "docker compose -p {{ compose_project }} up -d"
+    chdir: "{{ docker.dir }}"
   become: true
 
 - name: Wait for the certificate to settle
