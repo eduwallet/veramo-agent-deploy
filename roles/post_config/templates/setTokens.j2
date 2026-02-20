@@ -1,0 +1,62 @@
+<?php
+
+function setTokens($groups) {
+    $groups['ptdev']['issuers']['mbob']['token'] = '{{ tokens.mbob.admin }}';
+    $groups['ptdev']['issuers']['tun']['token'] = '{{ tokens.tun.admin }}';
+    $groups['ptdev']['issuers']['uvh']['token'] = '{{ tokens.uvh.admin }}';
+    $groups['ptdev']['issuers']['hbot']['token'] = '{{ tokens.hbot.admin }}';
+    $groups['ptdev']['issuers']['epi']['token'] = '{{ tokens.epi.admin }}';
+    $groups['ptdev']['issuers']['nlgov']['token'] = '{{ tokens.nlgov.admin }}';
+    $groups['ptdev']['issuers']['nbgov']['token'] = '{{ tokens.nbgov.admin }}';
+    $groups['ptdev']['issuers']['sandbox']['token'] = '{{ tokens.sandbox.admin }}';
+    $groups['ptdev']['issuers']['sandboxver']['token'] = '{{ tokens.sandbox.verAdmin }}';
+
+    $groups['pttest']['issuers']['mbob']['token'] = '{{ tokens.mbob.playground }}';
+    $groups['pttest']['issuers']['tun']['token'] = '{{ tokens.tun.playground }}';
+    $groups['pttest']['issuers']['uvh']['token'] = '{{ tokens.uvh.playground }}';
+    $groups['pttest']['issuers']['hbot']['token'] = '{{ tokens.hbot.playground }}';
+    $groups['pttest']['issuers']['epi']['token'] = '{{ tokens.epi.playground }}';
+    $groups['pttest']['issuers']['nlgov']['token'] = '{{ tokens.nlgov.playground }}';
+    $groups['pttest']['issuers']['nbgov']['token'] = '{{ tokens.nbgov.playground }}';
+    $groups['pttest']['issuers']['sandbox']['token'] = '{{ tokens.sandbox.playground }}';
+    $groups['pttest']['issuers']['sandboxver']['token'] = '{{ tokens.sandbox.verPlayground }}';
+
+    $groups['ptstage']['issuers']['mbob']['token'] = '{{ tokens.mbob.staging }}';
+    $groups['ptstage']['issuers']['tun']['token'] = '{{ tokens.tun.staging }}';
+    $groups['ptstage']['issuers']['uvh']['token'] = '{{ tokens.uvh.staging }}';
+    $groups['ptstage']['issuers']['hbot']['token'] = '{{ tokens.hbot.staging }}';
+    $groups['ptstage']['issuers']['epi']['token'] = '{{ tokens.epi.staging }}';
+    $groups['ptstage']['issuers']['nlgov']['token'] = '{{ tokens.nlgov.staging }}';
+    $groups['ptstage']['issuers']['nbgov']['token'] = '{{ tokens.nbgov.staging }}';
+    $groups['ptstage']['issuers']['sandbox']['token'] = '{{ tokens.sandbox.staging }}';
+    $groups['ptstage']['issuers']['sandboxver']['token'] = '{{ tokens.sandbox.verStaging }}';
+
+    $groups['ptprod']['issuers']['mbob']['token'] = '{{ tokens.mbob.production }}';
+    $groups['ptprod']['issuers']['tun']['token'] = '{{ tokens.tun.production }}';
+    $groups['ptprod']['issuers']['uvh']['token'] = '{{ tokens.uvh.production }}';
+    $groups['ptprod']['issuers']['hbot']['token'] = '{{ tokens.hbot.production }}';
+    $groups['ptprod']['issuers']['epi']['token'] = '{{ tokens.epi.production }}';
+    $groups['ptprod']['issuers']['nlgov']['token'] = '{{ tokens.nlgov.production }}';
+    $groups['ptprod']['issuers']['nbgov']['token'] = '{{ tokens.nbgov.production }}';
+    $groups['ptprod']['issuers']['sandbox']['token'] = '{{ tokens.sandbox.production }}';
+    $groups['ptprod']['issuers']['sandboxver']['token'] = '{{ tokens.sandbox.verProduction }}';
+
+    $groups['pdev']['issuers']['eduid']['token'] = '{{ tokens.eduid.admin }}';
+    $groups['pdev']['issuers']['eduidver']['token'] = '{{ tokens.eduid.verAdmin }}';
+
+    $groups['ptest']['issuers']['eduid']['token'] = '{{ tokens.eduid.playground }}';
+    $groups['ptest']['issuers']['eduidver']['token'] = '{{ tokens.eduid.verPlayground }}';
+
+    $groups['pstage']['issuers']['eduid']['token'] = '{{ tokens.eduid.staging }}';
+    $groups['pstage']['issuers']['eduidver']['token'] = '{{ tokens.eduid.verStaging }}';
+
+    $groups['pprod']['issuers']['eduid']['token'] = '{{ tokens.eduid.production }}';
+    $groups['pprod']['issuers']['eduidver']['token'] = '{{ tokens.eduid.verProduction }}';
+
+    $groups['edev']['issuers']['edubadges']['token'] = '{{ tokens.edubadges.admin }}';
+    $groups['etest']['issuers']['edubadges']['token'] = '{{ tokens.edubadges.playground }}';
+    $groups['estage']['issuers']['edubadges']['token'] = '{{ tokens.edubadges.staging }}';
+    $groups['eprod']['issuers']['edubadges']['token'] = '{{ tokens.edubadges.production }}';
+
+    return $groups;
+}

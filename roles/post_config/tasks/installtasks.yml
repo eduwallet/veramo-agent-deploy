@@ -10,22 +10,34 @@
     cmd:  "docker run -v .:/var/www/html --entrypoint /usr/local/bin/php {{ compose_project }}-{{ deploy.name }} -r 'copy(\"https://getcomposer.org/installer\", \"composer-setup.php\");'"
     chdir: "{{ verifierdeploy.dir }}/{{ deploy.path }}/app"
   become: true
+  when: deploy.hasComposer is defined
 
 - name: Configure composer
   ansible.builtin.shell:
     cmd:  "docker run -v .:/var/www/html --entrypoint /usr/local/bin/php {{ compose_project }}-{{ deploy.name }} composer-setup.php"
     chdir: "{{ verifierdeploy.dir }}/{{ deploy.path }}/app"
   become: true
+  when: deploy.hasComposer is defined
 
 - name: Install composer requirements
   ansible.builtin.shell:
     cmd:  "docker run -v .:/var/www/html --entrypoint /usr/local/bin/php {{ compose_project }}-{{ deploy.name }} composer.phar install"
     chdir: "{{ verifierdeploy.dir }}/{{ deploy.path }}/app"
   become: true
+  when: deploy.hasComposer is defined
 
 - name: Push environment file
   template:
     src: "{{ deploy.envtemplate }}"
     dest: "{{ verifierdeploy.dir }}/{{ deploy.path }}/app/.env"
   become: true
+  when: deploy.envtemplate is defined
+
+- name: Push templates
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ verifierdeploy.dir }}/{{deploy.path}}/{{ item.dest }}"
+  become: true
+  loop: "{{ deploy.templates }}"
+  when: deploy.templates is defined
 

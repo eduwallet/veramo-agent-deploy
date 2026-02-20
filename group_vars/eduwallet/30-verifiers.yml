@@ -1,10 +1,5 @@
 # key refers to the alias of the verifier configured did keys
 verifiers:
-  - name: demovp
-    path: "/demovp"
-    testPresentation: PID
-    token: "{{ tokens.demovp.admin }}"
-
   - name: proxy
     path: "/proxy"
     testPresentation: ABC

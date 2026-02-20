@@ -6,7 +6,8 @@ verifierdeploy:
       port: 8001
       domain: "demo-cv.verifier.{{ deploydomain }}"
       path: demo-cv
-      envtemplate: democv.env.j2
       verifier: demovp
       presentations: ABC,PID
-      token: "{{ tokens.demovp.admin }}"
+      templates:
+        - src: setTokens.j2
+          dest: "app/html/setTokens.php"
