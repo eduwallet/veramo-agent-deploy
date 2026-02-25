@@ -26,17 +26,11 @@
   become: true
   when: deploy.hasComposer is defined
 
-- name: Push environment file
-  template:
-    src: "{{ deploy.envtemplate }}"
-    dest: "{{ verifierdeploy.dir }}/{{ deploy.path }}/app/.env"
-  become: true
-  when: deploy.envtemplate is defined
-
 - name: Push templates
   template:
     src: "{{ item.src }}"
     dest: "{{ verifierdeploy.dir }}/{{deploy.path}}/{{ item.dest }}"
+    mode: "{{ item.mode }}"
   become: true
   loop: "{{ deploy.templates }}"
   when: deploy.templates is defined

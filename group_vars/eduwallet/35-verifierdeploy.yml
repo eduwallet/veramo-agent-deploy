@@ -9,5 +9,6 @@ verifierdeploy:
       verifier: demovp
       presentations: ABC,PID
       templates:
-        - src: setTokens.j2
-          dest: "app/html/setTokens.php"
+        - src: env.test.j2
+          dest: "app/html/.env"
+          mode: 0664
