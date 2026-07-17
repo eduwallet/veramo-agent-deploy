@@ -129,13 +129,3 @@ installations:
         nationality: "example"
     adminToken: "{{ tokens.sandbox.admin }}"
     hasTokenEndpoint: true
-
-  - name: auth
-    test:
-      preauthcode: bffy0TXajRTnoujKCIhfOnIUYjqmucRa
-      credential: GenericCredential
-      object:
-        given_name: "test"
-        family_name: "janssen"
-    adminToken: "{{ tokens.auth.admin }}"
-    hasTokenEndpoint: false

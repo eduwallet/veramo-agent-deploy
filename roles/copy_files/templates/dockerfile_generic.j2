@@ -3,9 +3,11 @@ SHELL ["/bin/bash", "-c"]
 RUN yarn add typescript tslib
 WORKDIR /app
 
+COPY ./conf/ /conf/
 COPY ./app/ /app/
 
 RUN yarn install
+RUN chmod a+x /conf/docker-entrypoint.sh
 
 ENV DEBUG=*:*
-CMD yarn start
+ENTRYPOINT ["/conf/docker-entrypoint.sh"]

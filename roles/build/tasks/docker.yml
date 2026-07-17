@@ -10,13 +10,6 @@
     chdir: "{{ docker.dir }}/verifier"
   become: true
 
-- name: Build the StatusList docker container
-  ansible.builtin.shell:
-    cmd: "docker build -t {{ compose_project }}-statuslist ."
-    chdir: "{{ docker.dir }}/statuslists"
-  become: true
-  when: statuslists.enabled
-
 - name: Build the ITB docker container
   ansible.builtin.shell:
     cmd: "docker build -t {{ compose_project }}-itb ."

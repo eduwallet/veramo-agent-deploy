@@ -11,18 +11,31 @@
     dest: "{{ docker.dir }}/issuer/Dockerfile"
   become: yes
 
+- name: Remove Issuer configuration
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ docker.dir }}/issuer/conf"
+  become: yes
+
+- name: Copy Issuer configuration
+  ansible.builtin.shell:
+    cmd: "/usr/bin/cp -fr {{ configuration.dir }} {{ docker.dir }}/issuer/conf"
+  become: yes
+
 - name: Copy generic Dockerfile for verifier
   ansible.builtin.template:
     src: dockerfile_generic.j2
     dest: "{{ docker.dir }}/verifier/Dockerfile"
   become: yes
 
-- name: Copy generic Dockerfile for statuslist
-  ansible.builtin.template:
-    src: dockerfile_generic.j2
-    dest: "{{ docker.dir }}/statuslists/Dockerfile"
+- name: Remove Verifier configuration
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ docker.dir }}/verifier/conf"
   become: yes
-  when: statuslists.enabled
+
+- name: Copy Verifier configuration
+  ansible.builtin.shell:
+    cmd: "/usr/bin/cp -fr {{ configuration.dir }} {{ docker.dir }}/verifier/conf"
+  become: yes
 
 - name: Remove ITB configuration
   ansible.builtin.shell:

@@ -43,6 +43,22 @@
     chdir: "{{ docker.dir }}"
   become: true
 
+- name: Clear the issuer database configurations
+  ansible.builtin.shell:
+    cmd: "docker compose -p {{ compose_project }} exec -T agent yarn cli clear"
+    chdir: "{{ docker.dir }}"
+  become: true
+  register: _clear_result
+  until: _clear_result.rc == 0
+  retries: 30
+  delay: 2
+
+- name: Restart the containers so configurations are reloaded into the cleared database
+  ansible.builtin.shell:
+    cmd: "docker compose -p {{ compose_project }} restart"
+    chdir: "{{ docker.dir }}"
+  become: true
+
 - name: Wait for the certificate to settle
   ansible.builtin.uri:
     url: "{{ protocol }}://{{ basedomain }}/mbob/.well-known/openid-credential-issuer"
