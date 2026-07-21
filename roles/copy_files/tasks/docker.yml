@@ -49,17 +49,6 @@
     cmd: "/usr/bin/cp -fr {{ configuration.dir }} {{ docker.dir }}/verifier/conf"
   become: yes
 
-- name: Remove Statuslist configuration
-  ansible.builtin.shell:
-    cmd: "rm -rf {{ docker.dir }}/statuslists/conf"
-  become: yes
-  when: itb.enabled
-
-- name: Copy configuration
-  ansible.builtin.shell:
-    cmd: "/usr/bin/cp -fr {{ configuration.dir }} {{ docker.dir }}/statuslists/conf"
-  become: yes
-
 - name: Ensure ITB directory exists
   file:
     state: directory

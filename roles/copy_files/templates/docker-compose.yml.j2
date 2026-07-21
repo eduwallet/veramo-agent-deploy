@@ -61,6 +61,9 @@ services:
     restart: unless-stopped
     networks:
       - {{ compose_project }}
+    depends_on:
+      - traefik
+      - db
     links:
       - "db:db"
 {% if traefik.enabled %}
@@ -91,6 +94,9 @@ services:
       - TOOL=verifier
     networks:
       - {{ compose_project }}
+    depends_on:
+      - traefik
+      - db
     links:
       - "db:db"
 {% if traefik.enabled %}
@@ -148,6 +154,9 @@ services:
       - {{ itb.port }}:80
     environment:
       - TOOL=itb
+    depends_on:
+      - traefik
+      - db
     networks:
       - {{ compose_project }}
 {% if traefik.enabled %}
@@ -174,6 +183,9 @@ services:
       - {{ manager.port }}:80
     networks:
       - {{ compose_project }}
+    depends_on:
+      - traefik
+      - db
 {% if traefik.enabled %}
     labels:
       - "traefik.enable=true"

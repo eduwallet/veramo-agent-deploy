@@ -4,8 +4,18 @@ verifiers:
     path: "/proxy"
     testPresentation: ABC
     token: "{{ tokens.proxy.admin }}"
+    oidfed:
+      key: oidfed
+      auth: https://intermediary.poc2.dev.oidf.lab.surfconext.nl
+      ta: https://ta.poc2.dev.oidf.lab.surfconext.nl
+      contact: info@eduwallet.nl
 
   - name: sandbox
     path: "/sandbox"
     testPresentation: ABC
     token: "{{ tokens.sandbox.verAdmin }}"
+    oidfed:
+      key: oidfed
+      auth: https://intermediary.poc2.dev.oidf.lab.surfconext.nl
+      ta: https://ta.poc2.dev.oidf.lab.surfconext.nl
+      contact: info@eduwallet.nl

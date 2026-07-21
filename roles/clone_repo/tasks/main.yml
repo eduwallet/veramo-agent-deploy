@@ -25,15 +25,6 @@
   become: true
   when: itb.enabled
 
-- name: Clone the StatusList agent repository
-  ansible.builtin.git:
-    repo: "{{ sources.statuslist.repo }}"
-    dest: "{{ statuslists.dir }}"
-    version: "{{ sources.statuslist.version }}"
-    force: yes
-  become: true
-  when: statuslists.enabled
-
 - name: Clone the Configuration Service repository
   ansible.builtin.git:
     repo: "{{ sources.configurations.repo }}"
