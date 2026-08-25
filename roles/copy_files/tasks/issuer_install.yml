@@ -29,3 +29,13 @@
   ansible.builtin.shell:
     cmd: "cp -fr {{ configuration.dir }}/issuer/{{ installation.name }} {{ docker.dir }}/issuer/{{ installation.name }}/conf"
   become: yes
+
+- name: "{{ installation.name }}: Remove Issuer app source"
+  ansible.builtin.shell:
+    cmd: "rm -rf {{ docker.dir }}/issuer/{{ installation.name }}/app"
+  become: yes
+
+- name: "{{ installation.name }}: Copy Issuer app source"
+  ansible.builtin.shell:
+    cmd: "cp -fr {{ agent.dir }} {{ docker.dir }}/issuer/{{ installation.name }}/app"
+  become: yes
