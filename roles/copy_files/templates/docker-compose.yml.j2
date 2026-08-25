@@ -39,10 +39,15 @@ services:
 
 {% for installation in installations %}
   issuer_{{ installation.name }}:
+{% if loop.first %}
     build:
-      context: "{{ docker.dir }}/issuer/{{ installation.name }}"
-      dockerfile: "{{ docker.dir }}/issuer/{{ installation.name }}/Dockerfile"
+      context: "{{ docker.dir }}/issuer"
+      dockerfile: "{{ docker.dir }}/issuer/Dockerfile"
+{% endif %}
+    image: "{{ compose_project }}_issuer"
     hostname: issuer_{{ installation.name }}
+    volumes:
+      - "{{ configuration.dir }}/issuer/{{ installation.name }}:/conf:ro"
     environment:
       - CONF_PATH=conf
       - DB_TYPE=postgres

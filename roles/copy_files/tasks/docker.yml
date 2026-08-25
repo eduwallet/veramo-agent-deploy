@@ -5,11 +5,27 @@
     mode: 0755
   become: true
 
-- name: Set up per-installation Issuer directories
-  include_tasks: issuer_install.yml
-  loop: "{{ installations }}"
-  loop_control:
-    loop_var: installation
+- name: Ensure Issuer directory exists
+  file:
+    state: directory
+    path: "{{ docker.dir }}/issuer"
+    mode: 0755
+  become: true
+
+- name: Copy issuer Dockerfile
+  ansible.builtin.shell:
+    cmd: "cp {{ configuration.dir }}/Dockerfile.issuer {{ docker.dir }}/issuer/Dockerfile"
+  become: yes
+
+- name: Copy generate.py for issuer
+  ansible.builtin.shell:
+    cmd: "cp {{ configuration.dir }}/generate.py {{ docker.dir }}/issuer/"
+  become: yes
+
+- name: Copy issuer docker-entrypoint.sh
+  ansible.builtin.shell:
+    cmd: "cp {{ configuration.dir }}/docker-entrypoint-issuer.sh {{ docker.dir }}/issuer/docker-entrypoint.sh"
+  become: yes
 
 - name: Ensure Verifier directory exists
   file:
