@@ -37,27 +37,28 @@ services:
       - {{ compose_project }}
 {% endif %}
 
-  agent:
+{% for installation in installations %}
+  issuer_{{ installation.name }}:
     build:
-      context: "{{ docker.dir }}/issuer"
-      dockerfile: "{{ docker.dir }}/issuer/Dockerfile"
-    hostname: agent
+      context: "{{ docker.dir }}/issuer/{{ installation.name }}"
+      dockerfile: "{{ docker.dir }}/issuer/{{ installation.name }}/Dockerfile"
+    hostname: issuer_{{ installation.name }}
     environment:
       - CONF_PATH=conf
       - DB_TYPE=postgres
       - DB_HOST=db
       - DB_USER={{ database.user }}
-      - DB_PASSWORD={{ database.password }}
+      - DB_PASSWORD={{ database.password | trim}}
       - DB_NAME={{ database.name }}
-      - DB_SCHEMA={{ agent.schema }}
+      - DB_SCHEMA={{ installation.name }}
       - DB_ENCRYPTION_KEY={{ agent.dbkey }}
       - PORT={{ agent.port }}
       - LISTEN_ADDRESS=0.0.0.0
-      - BASEURL={{ protocol }}://{{ agent.hostname }}
+      - BASEURL={{ protocol }}://{{ installation.name }}.{{ basedomain }}
       - DEBUG=issuer:*
       - TOOL=issuer
     ports:
-      - {{ agent.port }}:5000
+      - {{ 5100 + loop.index0 }}:{{ agent.port }}
     restart: unless-stopped
     networks:
       - {{ compose_project }}
@@ -69,17 +70,18 @@ services:
 {% if traefik.enabled %}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.agent.rule=Host(`{{ basedomain }}`)"
+      - "traefik.http.routers.issuer_{{ installation.name }}.rule=Host(`{{ installation.name }}.{{ basedomain }}`)"
 {% if traefik.secure == 'true' %}
-      - "traefik.http.routers.agent.entrypoints=websecure"
-      - "traefik.http.routers.agent.tls.certresolver=myresolver"
+      - "traefik.http.routers.issuer_{{ installation.name }}.entrypoints=websecure"
+      - "traefik.http.routers.issuer_{{ installation.name }}.tls.certresolver=myresolver"
 {% else %}
-      - "traefik.http.routers.agent.entrypoints=web"
+      - "traefik.http.routers.issuer_{{ installation.name }}.entrypoints=web"
 {% endif %}
 {% for tag in agent.extra_docker_compose_labels %}
       - "{{ tag }}"
 {% endfor %}
 {% endif %}
+{% endfor %}
 
 {% if enableverifier %}
   verifier:

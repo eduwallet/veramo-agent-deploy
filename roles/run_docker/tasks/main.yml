@@ -30,6 +30,31 @@
     chdir: "{{ docker.dir }}"
   become: true
 
+- name: Start the database container using docker compose
+  ansible.builtin.shell:
+    cmd: "docker compose -p {{ compose_project }} up -d db"
+    chdir: "{{ docker.dir }}"
+  become: true
+
+- name: Wait for the database to accept connections
+  ansible.builtin.shell:
+    cmd: "docker compose -p {{ compose_project }} exec -T db pg_isready -U {{ database.user }} -d {{ database.name }}"
+    chdir: "{{ docker.dir }}"
+  become: true
+  register: _pgready_result
+  until: _pgready_result.rc == 0
+  retries: 30
+  delay: 2
+
+- name: Ensure the database schema exists for each installation
+  ansible.builtin.shell:
+    cmd: "docker compose -p {{ compose_project }} exec -T db psql -U {{ database.user }} -d {{ database.name }} -c 'CREATE SCHEMA IF NOT EXISTS \"{{ installation.name }}\";'"
+    chdir: "{{ docker.dir }}"
+  loop: "{{ installations }}"
+  loop_control:
+    loop_var: installation
+  become: true
+
 - name: Run the containers using docker compose
   ansible.builtin.shell:
     cmd: "docker compose -p {{ compose_project }} up -d"
@@ -38,8 +63,11 @@
 
 - name: Clear the issuer database configurations
   ansible.builtin.shell:
-    cmd: "docker compose -p {{ compose_project }} exec -T agent yarn cli clear"
+    cmd: "docker compose -p {{ compose_project }} exec -T issuer_{{ installation.name }} yarn cli clear"
     chdir: "{{ docker.dir }}"
+  loop: "{{ installations }}"
+  loop_control:
+    loop_var: installation
   become: true
   register: _clear_result
   until: _clear_result.rc == 0
@@ -54,7 +82,7 @@
 
 - name: Wait for the certificate to settle
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ basedomain }}/mbob/.well-known/openid-credential-issuer"
+    url: "{{ protocol }}://mbob.{{ basedomain }}/.well-known/openid-credential-issuer"
     follow_redirects: none
     method: GET
   register: _result

@@ -5,27 +5,11 @@
     mode: 0755
   become: true
 
-- name: Ensure Issuer directory exists
-  file:
-    state: directory
-    path: "{{ docker.dir }}/issuer"
-    mode: 0755
-  become: true
-
-- name: Copy generic Dockerfile for issuer
-  ansible.builtin.shell:
-    cmd: "cp {{ configuration.dir }}/Dockerfile {{ docker.dir }}/issuer/"
-  become: yes
-
-- name: Remove Issuer configuration
-  ansible.builtin.shell:
-    cmd: "rm -rf {{ docker.dir }}/issuer/conf"
-  become: yes
-
-- name: Copy Issuer configuration
-  ansible.builtin.shell:
-    cmd: "/usr/bin/cp -fr {{ configuration.dir }} {{ docker.dir }}/issuer/conf"
-  become: yes
+- name: Set up per-installation Issuer directories
+  include_tasks: issuer_install.yml
+  loop: "{{ installations }}"
+  loop_control:
+    loop_var: installation
 
 - name: Ensure Verifier directory exists
   file:

@@ -1,5 +1,5 @@
 deploydomain: "dev.eduwallet.nl"
-basedomain: "agent.{{ deploydomain }}"
+basedomain: "issuer.{{ deploydomain }}"
 verifierdomain: "verifier.{{deploydomain }}"
 logdomain: "logs.{{ deploydomain }}"
 enablehttps: "true"
