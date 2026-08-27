@@ -62,6 +62,9 @@ services:
       - BASEURL={{ protocol }}://{{ installation.name }}.{{ basedomain }}
       - DEBUG=issuer:*
       - TOOL=issuer
+      - DOMAIN={{ deploydomain }}
+      - ISSUER_DOMAIN={{ basedomain }}
+      - ISSUER_{{ installation.name | upper }}_TOKEN={{ tokens[installation.name].admin }}
     ports:
       - {{ 5100 + loop.index0 }}:{{ agent.port }}
     restart: unless-stopped

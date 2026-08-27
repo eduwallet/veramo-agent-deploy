@@ -31,7 +31,7 @@
     body: "{\"credentials\":[\"{{ installation.test.credential }}\"],\"grants\":{\"urn:ietf:params:oauth:grant-type:pre-authorized_code\":{\"pre-authorized_code\":\"{{ installation.test.preauthcode }}\",\"user_pin_required\":false}},\"credentialDataSupplierInput\":{{ installation.test.object | to_json }}}"
     method: POST
     return_content: true
-  when: installation.test.as is not defined
+  when: installation.test is defined and installation.test.as is not defined
   register: createoffer_pre
 
 - name: "{{ installation.name }}: Testing create offer"
@@ -44,17 +44,19 @@
     body: "{\"credentials\":[\"{{ installation.test.credential }}\"],\"grants\":{\"authorization_code\":{\"issuer_state\":\"{{ installation.test.preauthcode }}\"}},\"credentialDataSupplierInput\":{{ installation.test.object | to_json }}}"
     method: POST
     return_content: true
-  when: installation.test.as is defined
+  when: installation.test is defined and installation.test.as is defined
   register: createoffer_as
 
 - name: "{{ installation.name }}: unify registered var"
   set_fact:
     createoffer: "{{ createoffer_pre.content if not createoffer_pre.skipped is defined else createoffer_as.content | from_json }}"
+  when: installation.test is defined
 
 - name: "{{ installation.name }}: Testing get offer"
   ansible.builtin.uri:
     url: "{{ protocol }}://{{ installation.name }}.{{ basedomain }}/get-credential-offer/{{ createoffer.id }}"
     method: GET
+  when: installation.test is defined
 
 - name: "{{ installation.name }}: Testing check offer"
   ansible.builtin.uri:
@@ -65,4 +67,5 @@
       Authorization: "Bearer {{ installation.adminToken }}"
     body: "{\"id\":\"{{ createoffer.id }}\"}"
     method: POST
+  when: installation.test is defined
 

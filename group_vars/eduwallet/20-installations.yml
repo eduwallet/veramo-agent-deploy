@@ -4,7 +4,7 @@ installations:
   - name: mbob
     test:
       preauthcode: 9slAxx0AgJjHtS2hChULnPvExeYsLLpu
-      credential: AcademicBaseCredential
+      credential: SupportCredential
       object:
         sub:
           - "12"
@@ -20,27 +20,27 @@ installations:
     hasTokenEndpoint: true
 
   - name: tun
-    test:
-      preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
-      credential: AcademicBaseCredential
-      object:
-        sub:
-          - "12"
-        eduperson_unique_id:
-          - "abracadabra"
-        given_name:
-          - "test"
-        family_name:
-          - "janssen"
-        email:
-          - "test@example.org"
+#    test:
+#      preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
+#      credential: AcademicEnrollmentCredential
+#      object:
+#        sub:
+#          - "12"
+#        eduperson_unique_id:
+#          - "abracadabra"
+#        given_name:
+#          - "test"
+#        family_name:
+#          - "janssen"
+#        email:
+#          - "test@example.org"
     adminToken: "{{ tokens.tun.admin }}"
     hasTokenEndpoint: true
 
   - name: uvh
     test:
       preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
-      credential: AcademicBaseCredential
+      credential: SupportCredential
       object:
         sub:
           - "12"
@@ -58,7 +58,7 @@ installations:
   - name: hbot
     test:
       preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
-      credential: AcademicBaseCredential
+      credential: SupportCredential
       object:
         sub:
           - "12"
@@ -102,7 +102,7 @@ installations:
   - name: epi
     test:
       preauthcode: 4GOmhdYyDWfGXT7R21iQ0qB8aBFhYAc9
-      credential: AcademicBaseCredential
+      credential: eduID
       object:
         sub:
           - "12"
