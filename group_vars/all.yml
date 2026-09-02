@@ -70,7 +70,7 @@ agent:
          38343065623530646162336236656339663564663131
   oidfed:
     key: oidfed
-    auth: https://intermediary.poc2.dev.oidf.lab.surfconext.nl
+    auth: https://eduwallet.poc2.dev.oidf.lab.surfconext.nl
     ta: https://ta.poc2.dev.oidf.lab.surfconext.nl
     contact: info@eduwallet.nl
 
