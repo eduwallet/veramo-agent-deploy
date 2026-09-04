@@ -59,7 +59,7 @@ services:
       - DB_ENCRYPTION_KEY={{ agent.dbkey }}
       - PORT={{ agent.port }}
       - LISTEN_ADDRESS=0.0.0.0
-      - BASEURL={{ protocol }}://{{ installation.name }}.{{ basedomain }}
+      - BASEURL={{ protocol }}://{{ installation.hostname }}.{{ basedomain }}
       - DEBUG=issuer:*
       - TOOL=issuer
       - DOMAIN={{ deploydomain }}
@@ -78,7 +78,7 @@ services:
 {% if traefik.enabled %}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.issuer_{{ installation.name }}.rule=Host(`{{ installation.name }}.{{ basedomain }}`)"
+      - "traefik.http.routers.issuer_{{ installation.name }}.rule=Host(`{{ installation.hostname }}.{{ basedomain }}`)"
 {% if traefik.secure == 'true' %}
       - "traefik.http.routers.issuer_{{ installation.name }}.entrypoints=websecure"
       - "traefik.http.routers.issuer_{{ installation.name }}.tls.certresolver=myresolver"

@@ -1,29 +1,29 @@
 ---
 - name: "{{ installation.name }}: Testing well knowns - openid-credential-issuer"
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ installation.name }}.{{ basedomain }}/.well-known/openid-credential-issuer"
+    url: "{{ protocol }}://{{ installation.hostname }}.{{ basedomain }}/.well-known/openid-credential-issuer"
     method: GET
 
 - name: "{{ installation.name }}: Testing well knowns - did:web"
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ installation.name }}.{{ basedomain }}/.well-known/did.json"
+    url: "{{ protocol }}://{{ installation.hostname }}.{{ basedomain }}/.well-known/did.json"
     method: GET
 
 - name: "{{ installation.name }}: Testing well knowns - openid-configuration"
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ installation.name }}.{{ basedomain }}/.well-known/openid-configuration"
+    url: "{{ protocol }}://{{ installation.hostname }}.{{ basedomain }}/.well-known/openid-configuration"
     method: GET
   when: installation.hasTokenEndpoint
 
 - name: "{{ installation.name }}: Testing well knowns - oauth-authorization-server"
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ installation.name }}.{{ basedomain }}/.well-known/oauth-authorization-server"
+    url: "{{ protocol }}://{{ installation.hostname }}.{{ basedomain }}/.well-known/oauth-authorization-server"
     method: GET
   when: installation.hasTokenEndpoint
 
 - name: "{{ installation.name }}: Testing create offer"
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ installation.name }}.{{ basedomain }}//api/create-offer"
+    url: "{{ protocol }}://{{ installation.hostname }}.{{ basedomain }}//api/create-offer"
     body_format: json
     headers:
       Content-type: 'application/json'
@@ -36,7 +36,7 @@
 
 - name: "{{ installation.name }}: Testing create offer"
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ installation.name }}.{{ basedomain }}/api/create-offer"
+    url: "{{ protocol }}://{{ installation.hostname }}.{{ basedomain }}/api/create-offer"
     body_format: json
     headers:
       Content-type: 'application/json'
@@ -54,13 +54,13 @@
 
 - name: "{{ installation.name }}: Testing get offer"
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ installation.name }}.{{ basedomain }}/get-credential-offer/{{ createoffer.id }}"
+    url: "{{ protocol }}://{{ installation.hostname }}.{{ basedomain }}/get-credential-offer/{{ createoffer.id }}"
     method: GET
   when: installation.test is defined
 
 - name: "{{ installation.name }}: Testing check offer"
   ansible.builtin.uri:
-    url: "{{ protocol }}://{{ installation.name }}.{{ basedomain }}/api/check-offer"
+    url: "{{ protocol }}://{{ installation.hostname }}.{{ basedomain }}/api/check-offer"
     body_format: json
     headers:
       Content-type: 'application/json'

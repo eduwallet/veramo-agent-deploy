@@ -2,6 +2,7 @@
 # The configuration for these installations is now maintained in an external repository
 installations:
   - name: mbob
+    hostname: mbob
     test:
       preauthcode: 9slAxx0AgJjHtS2hChULnPvExeYsLLpu
       credential: SupportCredential
@@ -20,6 +21,7 @@ installations:
     hasTokenEndpoint: true
 
   - name: tun
+    hostname: tun
 #    test:
 #      preauthcode: vG8T2WNVFGs0TSzx135XHDzNRWO3FFKM
 #      credential: AcademicEnrollmentCredential
@@ -38,6 +40,7 @@ installations:
     hasTokenEndpoint: true
 
   - name: uvh
+    hostname: uvh
     test:
       preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
       credential: SupportCredential
@@ -56,6 +59,7 @@ installations:
     hasTokenEndpoint: true
 
   - name: hbot
+    hostname: hbot
     test:
       preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
       credential: SupportCredential
@@ -74,6 +78,7 @@ installations:
     hasTokenEndpoint: true
 
   - name: nlgov
+    hostname: nl.gov
     test:
       preauthcode: G0WAuJwHxtv2dqAMfoDsopRBjTpavttJ
       credential: PID
@@ -87,6 +92,7 @@ installations:
     hasTokenEndpoint: true
 
   - name: nbgov
+    hostname: nb.gov
     test:
       preauthcode: WrBAlTNCBfUHDWHtYF0nkV9aJqBVIP5z
       credential: PID
@@ -100,6 +106,7 @@ installations:
     hasTokenEndpoint: true
 
   - name: epi
+    hostname: epi
     test:
       preauthcode: 4GOmhdYyDWfGXT7R21iQ0qB8aBFhYAc9
       credential: eduID
@@ -118,6 +125,7 @@ installations:
     hasTokenEndpoint: true
 
   - name: sandbox
+    hostname: sandbox
     test:
       preauthcode: bffy0TXajRTnoujKCIhfOnIUYjqmucRa
       credential: PID_JWT
