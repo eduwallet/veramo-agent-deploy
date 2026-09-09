@@ -4,7 +4,6 @@ installations:
   - name: mbob
     hostname: mbob
     test:
-      preauthcode: 9slAxx0AgJjHtS2hChULnPvExeYsLLpu
       credential: SupportCredential
       object:
         sub:
@@ -18,6 +17,21 @@ installations:
         email:
           - "test@example.org"
     adminToken: "{{ tokens.mbob.admin }}"
+    hasTokenEndpoint: true
+
+  - name: mbobauth
+    hostname: mbobauth
+    test:
+      as: true
+      credential: InstitutionCardCredential
+      object:
+        given_name:
+          - "test"
+        family_name:
+          - "janssen"
+        email:
+          - "test@example.org"
+    adminToken: "{{ tokens.mbobauth.admin }}"
     hasTokenEndpoint: true
 
   - name: tun
@@ -42,7 +56,6 @@ installations:
   - name: uvh
     hostname: uvh
     test:
-      preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
       credential: SupportCredential
       object:
         sub:
@@ -58,10 +71,24 @@ installations:
     adminToken: "{{ tokens.uvh.admin }}"
     hasTokenEndpoint: true
 
+  - name: uvhauth
+    hostname: uvhauth
+    test:
+      as: true
+      credential: InstitutionCardCredential
+      object:
+        given_name:
+          - "test"
+        family_name:
+          - "janssen"
+        email:
+          - "test@example.org"
+    adminToken: "{{ tokens.uvhauth.admin }}"
+    hasTokenEndpoint: true
+
   - name: hbot
     hostname: hbot
     test:
-      preauthcode: Maefv4wHYigySVRQWyTgml52wWLUHH5d
       credential: SupportCredential
       object:
         sub:
@@ -77,10 +104,25 @@ installations:
     adminToken: "{{ tokens.hbot.admin }}"
     hasTokenEndpoint: true
 
+  - name: hbotauth
+    hostname: hbotauth
+    test:
+      as: true
+      credential: InstitutionCardCredential
+      object:
+        given_name:
+          - "test"
+        family_name:
+          - "janssen"
+        email:
+          - "test@example.org"
+    adminToken: "{{ tokens.hbotauth.admin }}"
+    hasTokenEndpoint: true
+
   - name: nlgov
     hostname: nl.gov
     test:
-      preauthcode: G0WAuJwHxtv2dqAMfoDsopRBjTpavttJ
+      as: true
       credential: PID
       object:
         personal_administrative_number: "42"
@@ -94,7 +136,7 @@ installations:
   - name: nbgov
     hostname: nb.gov
     test:
-      preauthcode: WrBAlTNCBfUHDWHtYF0nkV9aJqBVIP5z
+      as: true
       credential: PID
       object:
         personal_administrative_number: "42"
@@ -108,7 +150,7 @@ installations:
   - name: epi
     hostname: epi
     test:
-      preauthcode: 4GOmhdYyDWfGXT7R21iQ0qB8aBFhYAc9
+      as: true
       credential: eduID
       object:
         sub:
@@ -127,7 +169,6 @@ installations:
   - name: sandbox
     hostname: sandbox
     test:
-      preauthcode: bffy0TXajRTnoujKCIhfOnIUYjqmucRa
       credential: PID_JWT
       object:
         personal_administrative_number: "42"

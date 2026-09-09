@@ -28,7 +28,7 @@
     headers:
       Content-type: 'application/json'
       Authorization: "Bearer {{ installation.adminToken }}"
-    body: "{\"credentials\":[\"{{ installation.test.credential }}\"],\"grants\":{\"urn:ietf:params:oauth:grant-type:pre-authorized_code\":{\"pre-authorized_code\":\"{{ installation.test.preauthcode }}\",\"user_pin_required\":false}},\"credentialDataSupplierInput\":{{ installation.test.object | to_json }}}"
+    body: "{\"credentials\":[\"{{ installation.test.credential }}\"],\"grants\":{\"urn:ietf:params:oauth:grant-type:pre-authorized_code\":{\"pre-authorized_code\":\"generate\",\"user_pin_required\":false}},\"credentialDataSupplierInput\":{{ installation.test.object | to_json }}}"
     method: POST
     return_content: true
   when: installation.test is defined and installation.test.as is not defined
@@ -41,7 +41,7 @@
     headers:
       Content-type: 'application/json'
       Authorization: "Bearer {{ installation.adminToken }}"
-    body: "{\"credentials\":[\"{{ installation.test.credential }}\"],\"grants\":{\"authorization_code\":{\"issuer_state\":\"{{ installation.test.preauthcode }}\"}},\"credentialDataSupplierInput\":{{ installation.test.object | to_json }}}"
+    body: "{\"credentials\":[\"{{ installation.test.credential }}\"],\"grants\":{\"authorization_code\":{\"issuer_state\":\"generate\"}},\"credentialDataSupplierInput\":{{ installation.test.object | to_json }}}"
     method: POST
     return_content: true
   when: installation.test is defined and installation.test.as is defined
