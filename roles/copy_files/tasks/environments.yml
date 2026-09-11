@@ -23,3 +23,23 @@
     src: env.configuration.j2
     dest: "{{ configuration.dir }}/.env"
   become: yes
+
+- name: Ensure static directory exists
+  file:
+    state: directory
+    path: "{{ static.dir }}/vct"
+    mode: 0755
+  become: true
+  when: static.enabled
+
+- name: Run configuration generator to apply replacements
+  ansible.builtin.command:
+    cmd: "python3 {{ configuration.dir }}/generate.py --input {{ configuration.dir }} --output {{ configuration.dir }}/dist"
+  become: yes
+  when: static.enabled
+
+- name: Copy Institution Card Credential vct
+  ansible.builtin.shell:
+    cmd: "cp {{ configuration.dir }}/dist/issuer/mbobauth/vct/InstitutionCardCredential.json {{ static.dir }}/vct/institutioncardcredential"
+  become: yes
+  when: static.enabled

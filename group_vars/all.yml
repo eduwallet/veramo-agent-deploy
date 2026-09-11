@@ -145,3 +145,9 @@ manager:
   dir: "{{ docker.dir }}/manager/app"
   domain: manager.dev.eduwallet.nl
   port: 5004
+
+static:
+  enabled: true
+  dir: "{{ basedir }}/static"
+  domain: "static.{{ basedomain }}"
+  port: 5005

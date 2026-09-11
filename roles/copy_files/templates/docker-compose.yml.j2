@@ -210,6 +210,33 @@ services:
 {% endif %}
 {% endif %}
 
+{% if static.enabled %}
+  static:
+    image: nginx:stable
+    hostname: static
+    restart: unless-stopped
+    ports:
+      - {{ static.port }}:80
+    volumes:
+      - type: bind
+        source: {{ static.dir }}
+        target: /usr/share/nginx/html
+        read_only: true
+    networks:
+      - {{ compose_project }}
+{% if traefik.enabled %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.static.rule=Host(`{{ static.domain }}`)"
+{% if traefik.secure == 'true' %}
+      - "traefik.http.routers.static.entrypoints=websecure"
+      - "traefik.http.routers.static.tls.certresolver=myresolver"
+{% else %}
+      - "traefik.http.routers.static.entrypoints=web"
+{% endif %}
+{% endif %}
+{% endif %}
+
   db:
     image: postgres:16-bookworm
     hostname: db
