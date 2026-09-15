@@ -40,6 +40,6 @@
 
 - name: Copy Institution Card Credential vct
   ansible.builtin.shell:
-    cmd: "cp {{ configuration.dir }}/dist/issuer/mbobauth/vct/InstitutionCardCredential.json {{ static.dir }}/vct/institutioncardcredential"
+    cmd: "cp {{ configuration.dir }}/dist/issuer/static/vct/InstitutionCardCredential.json {{ static.dir }}/vct/institutioncardcredential"
   become: yes
   when: static.enabled
