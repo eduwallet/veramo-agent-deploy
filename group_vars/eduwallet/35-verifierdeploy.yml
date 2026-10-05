@@ -10,5 +10,5 @@ verifierdeploy:
       presentations: ABC,PID
       templates:
         - src: env.test.j2
-          dest: "app/html/.env"
+          dest: "app/private/.env"
           mode: 0664
