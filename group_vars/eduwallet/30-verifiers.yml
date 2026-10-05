@@ -1,15 +1,5 @@
 # key refers to the alias of the verifier configured did keys
 verifiers:
-  - name: proxy
-    path: "/proxy"
-    testPresentation: ABC
-    token: "{{ tokens.proxy.admin }}"
-    oidfed:
-      key: oidfed
-      auth: https://intermediary.poc2.dev.oidf.lab.surfconext.nl
-      ta: https://ta.poc2.dev.oidf.lab.surfconext.nl
-      contact: info@eduwallet.nl
-
   - name: sandbox
     path: "/sandbox"
     testPresentation: ABC
