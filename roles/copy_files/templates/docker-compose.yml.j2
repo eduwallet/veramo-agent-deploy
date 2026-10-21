@@ -59,6 +59,7 @@ services:
       - DB_ENCRYPTION_KEY={{ agent.dbkey }}
       - PORT={{ agent.port }}
       - LISTEN_ADDRESS=0.0.0.0
+      - TRUST_PROXY={{ agent.trust_proxy | default(1 if traefik.enabled else 0) }}
       - BASEURL={{ protocol }}://{{ installation.hostname }}.{{ basedomain }}
       - DEBUG=issuer:*
       - TOOL=issuer

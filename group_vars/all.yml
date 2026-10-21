@@ -61,6 +61,9 @@ agent:
   host: "{{ protocol }}://agent.{{ basedomain }}"
   schema: agent
   extra_docker_compose_labels: [] # To add o.o additional traefik configuration in docker compose
+  # Number of reverse proxies in front of the agent (TRUST_PROXY), needed for correct client IPs in rate
+  # limiting. Traefik is one hop; raise it when another proxy (e.g. Apache) sits in front of traefik.
+  trust_proxy: "{{ 1 if traefik.enabled else 0 }}"
   dbkey: !vault |
          $ANSIBLE_VAULT;1.1;AES256
          613138333438633365356562313765626263373936373561623332333236353735343636633062376463623231353365386632
