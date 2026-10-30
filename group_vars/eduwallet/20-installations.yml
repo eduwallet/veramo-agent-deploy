@@ -166,6 +166,11 @@ installations:
     adminToken: "{{ tokens.epi.admin }}"
     hasTokenEndpoint: true
 
+  - name: epiauth
+    hostname: epiauth
+    adminToken: "{{ tokens.epiauth.admin }}"
+    hasTokenEndpoint: true
+
   - name: sandbox
     hostname: sandbox
     test:
