@@ -24,4 +24,4 @@ verifierdeploy:
       templates:
         - src: env.demo.j2
           dest: "app/private/.env"
-          mode: 0664
+          mode: "0664"
