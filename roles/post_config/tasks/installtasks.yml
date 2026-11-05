@@ -21,10 +21,17 @@
 
 - name: Install composer requirements
   ansible.builtin.shell:
-    cmd:  "docker run -v .:/var/www/html --entrypoint /usr/local/bin/php {{ compose_project }}-{{ deploy.name }} composer.phar install"
+    cmd:  "docker run -v .:/var/www/html --entrypoint /usr/local/bin/php {{ compose_project }}-{{ deploy.name }} composer.phar install {{ deploy.composerArgs | default('') }}"
     chdir: "{{ verifierdeploy.dir }}/{{ deploy.path }}/app"
   become: true
   when: deploy.hasComposer is defined
+
+- name: Build the front-end
+  ansible.builtin.shell:
+    # the build writes into <path>/app/html, next to the PHP files, so the whole installation is mounted
+    cmd: "docker run --rm -v {{ verifierdeploy.dir }}/{{ deploy.path }}:/work -w /work/frontend {{ deploy.nodeImage | default('node:22-alpine') }} sh -c 'npm ci && npm run build'"
+  become: true
+  when: deploy.hasFrontend is defined
 
 - name: Push templates
   template:

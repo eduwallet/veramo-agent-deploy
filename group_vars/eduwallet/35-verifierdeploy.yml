@@ -12,3 +12,16 @@ verifierdeploy:
         - src: env.test.j2
           dest: "app/private/.env"
           mode: 0664
+    - name: demo
+      port: 8002
+      domain: "demo.{{ deploydomain }}"
+      path: demo
+      # PHP back-end without the development dependencies
+      hasComposer: true
+      composerArgs: "--no-dev --optimize-autoloader"
+      # Vue front-end, built in a one-off node container into app/html
+      hasFrontend: true
+      templates:
+        - src: env.demo.j2
+          dest: "app/private/.env"
+          mode: 0664
