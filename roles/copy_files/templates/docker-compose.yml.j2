@@ -67,6 +67,8 @@ services:
       - ISSUER_DOMAIN={{ basedomain }}
       - ISSUER_{{ installation.name | upper }}_TOKEN={{ tokens[installation.name].admin }}
       - {{ installation.name | upper }}_CLIENT_SECRET={{ tokens[installation.name].as.dev | default('')}}
+      # the token of the verifier with the same name, for the embedded authorization server (presentation during issuance)
+      - VERIFIER_{{ installation.name | upper }}_TOKEN={{ tokens[installation.name].verAdmin | default('') }}
     ports:
       - {{ 5100 + loop.index0 }}:{{ agent.port }}
     restart: unless-stopped
